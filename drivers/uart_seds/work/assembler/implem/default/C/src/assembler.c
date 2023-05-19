@@ -13,13 +13,10 @@
 #include <semphr.h>
 
 #include <Escaper.h>
+#include <Broker.h>
 
 __attribute__((section(".sdramMemorySection")))
 static uart_seds_asn1SccUartHwas uart;
-__attribute__((section(".sdramMemorySection")))
-static uint8_t buffer[500] = {0};
-__attribute__((section(".sdramMemorySection")))
-static uint8_t index = 0;
 
 __attribute__((section(".sdramMemorySection")))
 static uint64_t sentBytes = 0;
@@ -53,6 +50,12 @@ void assembler_PI_Init
    config.mInstance = UartHwas_Instance_uartHwas_Instance_3;
    config.mBaudrate = UartHwas_Baudrate_uartHwas_Baudrate9600;
    assembler_RI_UartHwas_InitUartCmd_Pi(&uart, &config);
+
+   /* We need to call Pi interface to enable Read interrupts. Otherwise
+   ** we will not get any byte from the interface. */
+   uart_seds_asn1SccUartHwasInterfaceType_ReadByteAsyncCmd_Type readByte;
+   readByte.uart = uart;
+   assembler_RI_UartHwas_ReadByteAsyncCmd_Pi(&readByte);
 }
 
 void assembler_send_single_byte_to_uarthwas()
@@ -77,19 +80,10 @@ void assembler_PI_Deliver
 {
    uint64_t length = (uint64_t) IN_deliverreqseq->length;
    uint8_t *data = IN_deliverreqseq->data;
+   size_t index = 0;
 
    Escaper_start_encoder(&escaper);
-   size_t index = 0;
-   //size_t packetLength = 0;
-
-   //while(index < length) {
    bytesToSend = Escaper_encode_packet(&escaper, data, length, &index);
-   //    int count = write(m_serialFd, encodedPacketBuffer, packetLength);
-   //    if(count < 0) {
-   //          std::cerr << "Serial write error\n\r";
-   //    }
-   // }
-
    assembler_send_single_byte_to_uarthwas();
 }
 
@@ -97,16 +91,7 @@ void assembler_PI_UartHwas_ReadByteAsyncCmd_Ri
       (const uart_seds_asn1SccUartHwasInterfaceType_ReadByteAsyncCmd_TypeNotify *IN_inputparam)
 
 {
-   //Escaper_decode_packet(&escaper, &IN_inputparam->byteToRead, 1, Broker_receive_packet);
-
-   // uart_seds_asn1SccByte byte = IN_inputparam->byteToRead;
-   // buffer[index++] = IN_inputparam->byteToRead;
-   // if (IN_inputparam->byteToRead == 0xC0) {
-   //    uart_seds_asn1SccReceivedRequestData data;
-   //    data.private_data = buffer;
-   //    assembler_RI_Receive(&data);
-   // }
-   // index = 0;
+   Escaper_decode_packet(&escaper, 1, &IN_inputparam->byteToRead, 1, Broker_receive_packet);
 }
 
 void assembler_PI_UartHwas_SendByteAsyncCmd_Ri
@@ -119,5 +104,4 @@ void assembler_PI_UartHwas_SendByteAsyncCmd_Ri
 void assembler_PI_UartErrorReporting_OverrunError_Ri
       ( void )
 {
-   //Write your code here
 }
