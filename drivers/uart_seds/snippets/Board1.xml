@@ -18,11 +18,11 @@ Generated XML element <Port> shall be put into <Board> named SAM V71 FreeRTOS N7
         <Port name="port_uart_seds"
               namespace="ocarina_drivers"
               bus_namespace="ocarina_buses"
-              extends="ocarina_drivers::uart_seds_samv71"
-              impl_extends="ocarina_drivers::uart_seds_samv71.samv71"
-              asn1file="/home/taste/workspace/uart_seds/uart_sedsconfiguration.asn"
-              asn1module="UART_SEDS-DRIVER-CONFIGURATION"
-              asn1type="UART_SEDS-Conf-T"
+              extends="ocarina_drivers::device_uart_seds"
+              impl_extends="ocarina_drivers::device_uart_seds.samv71"
+              asn1file="/home/taste/tool-inst/include/TASTE-SAMV71-Drivers/configurations/uart_sedsconfiguration.asn"
+              asn1module="UART-SEDS-DRIVER-CONFIGURATION"
+              asn1type="UART-SEDS-Conf-T"
               requiresBusAccess="ocarina_buses::serial.ccsds"/>
         <!-- COPY TILL HERE -->
     </Board>

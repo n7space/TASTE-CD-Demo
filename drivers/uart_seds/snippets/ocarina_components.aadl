@@ -12,10 +12,10 @@
 
 data configuration_type_uart_seds
 properties
-  Type_Source_Name => "UART_SEDS-Conf-T";
-  Deployment::ASN1_Module_Name => "UART_SEDS-DRIVER-CONFIGURATION";
+  Type_Source_Name => "UART-SEDS-Conf-T";
+  Deployment::ASN1_Module_Name => "UART-SEDS-DRIVER-CONFIGURATION";
   Source_Language => (ASN1);
-  Source_Text => ("/home/taste/workspace/uart_seds/uart_sedsconfiguration.asn");
+  Source_Text => ("/home/taste/tool-inst/include/TASTE-SAMV71-Drivers/configurations/uart_sedsconfiguration.asn");
 end configuration_type_uart_seds;
 
 -- ############################################################################
@@ -55,25 +55,25 @@ public
   subprogram driver_uart_seds_poll
   properties
     Source_Language => (C);
-    Source_Name => "DriverPoll";
-    Source_Text => ("driver_interface.c",
-                    "driver_interface.h");
+    Source_Name => "uart_seds_DriverPoll";
+    Source_Text => ("uart_seds.c",
+                    "uart_seds.h");
   end driver_uart_seds_poll;
 
   subprogram driver_uart_seds_send
   properties
     Source_Language => (C);
-    Source_Name => "DriverSend";
-    Source_Text => ("driver_interface.c",
-                    "driver_interface.h");
+    Source_Name => "uart_seds_DriverSend";
+    Source_Text => ("uart_seds.c",
+                    "uart_seds.h");
   end driver_uart_seds_send;
 
   subprogram driver_uart_seds_init
   properties
     Source_Language => (C);
-    Source_Name => "DriverInit";
-    Source_Text => ("driver_interface.c",
-                    "driver_interface.h");
+    Source_Name => "uart_seds_DriverInit";
+    Source_Text => ("uart_seds.c",
+                    "uart_seds.h");
   end driver_uart_seds_init;
 
   thread driver_uart_seds_poller
