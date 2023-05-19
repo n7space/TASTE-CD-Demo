@@ -1,4 +1,4 @@
-<InterfaceView version="1.1" asn1file="uart_sedsconfiguration.acn">
+<InterfaceView projectName="uart_seds" version="1.1" asn1file="uart_sedsconfiguration.acn">
 <Function id="{2218ddab-c7f8-4a83-996a-95ab1a350319}" name="HWAS" is_type="NO" language="C" default_implementation="default" fixed_system_element="NO" required_system_element="NO" startup_priority="1" instances_min="1" instances_max="1">
     <Property name="Taste::coordinates" value="82200 -900 93600 19200"/>
 <Provided_Interface id="{f4467f1e-880d-47e9-be77-3f9ff520104c}" name="InterruptSubscriptionManagement_SubscribeToInterrupt_Pi" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
