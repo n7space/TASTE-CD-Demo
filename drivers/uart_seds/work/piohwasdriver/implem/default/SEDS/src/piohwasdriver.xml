@@ -399,7 +399,7 @@
                     </Conditional>
                   </OnConditionFalse>
                 </Conditional>
-                <SendCommandPrimitive shortDescription="Enable proper PIO PORT clock" interface="RawMemoryAccess" command="WriteWord">
+                <SendCommandPrimitive shortDescription="Enable proper PIO PORT clock" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="destinationAddressVar" />
                   </ArgumentValue>
@@ -438,7 +438,7 @@
                       <LongDescription>Assign destination address for register write</LongDescription>
                       <VariableRef variableRef="pioVar.mPortOdrAddress" />
                     </Assignment>
-                    <SendCommandPrimitive interface="RawMemoryAccess" command="WriteWord">
+                    <SendCommandPrimitive interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                       <ArgumentValue name="address">
                         <VariableRef variableRef="destinationAddressVar" />
                       </ArgumentValue>
@@ -465,7 +465,7 @@
                           <LongDescription>Assign destination address for register write</LongDescription>
                           <VariableRef variableRef="pioVar.mPortOerAddress" />
                         </Assignment>
-                        <SendCommandPrimitive interface="RawMemoryAccess" command="WriteWord">
+                        <SendCommandPrimitive interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                           <ArgumentValue name="address">
                             <VariableRef variableRef="destinationAddressVar" />
                           </ArgumentValue>
@@ -484,7 +484,7 @@
                   <LongDescription>Assign destination address for register write</LongDescription>
                   <VariableRef variableRef="pioVar.mPortOwdrAddress" />
                 </Assignment>
-                <SendCommandPrimitive interface="RawMemoryAccess" command="WriteWord" shortDescription="Disables writing PIO_ODSR for the I/O line.">
+                <SendCommandPrimitive interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi" shortDescription="Disables writing PIO_ODSR for the I/O line.">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="destinationAddressVar" />
                   </ArgumentValue>
@@ -499,7 +499,7 @@
                   <LongDescription>Assign destination address for register write</LongDescription>
                   <VariableRef variableRef="pioVar.mPortPuerAddress" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Set pull up. PUeR register" interface="RawMemoryAccess" command="WriteWord">
+                <SendCommandPrimitive shortDescription="Set pull up. PUeR register" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="destinationAddressVar" />
                   </ArgumentValue>
@@ -514,7 +514,7 @@
                   <LongDescription>Assign destination address for register write</LongDescription>
                   <VariableRef variableRef="pioVar.mPortPpddrAddress" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Set pull up. PPDDR register" interface="RawMemoryAccess" command="WriteWord">
+                <SendCommandPrimitive shortDescription="Set pull up. PPDDR register" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="destinationAddressVar" />
                   </ArgumentValue>
@@ -529,7 +529,7 @@
                   <LongDescription>Assign destination address for register write</LongDescription>
                   <VariableRef variableRef="pioVar.mPortIfdrAddress" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Set no filter. Ifdr register" interface="RawMemoryAccess" command="WriteWord">
+                <SendCommandPrimitive shortDescription="Set no filter. Ifdr register" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="destinationAddressVar" />
                   </ArgumentValue>
@@ -544,7 +544,7 @@
                   <LongDescription>Assign destination address for register write</LongDescription>
                   <VariableRef variableRef="pioVar.mPortIfscdrAddress" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Set no filter. Ifscdr register" interface="RawMemoryAccess" command="WriteWord">
+                <SendCommandPrimitive shortDescription="Set no filter. Ifscdr register" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="destinationAddressVar" />
                   </ArgumentValue>
@@ -569,7 +569,7 @@
                       <LongDescription>Assign destination address for register write</LongDescription>
                       <VariableRef variableRef="pioVar.mPortPerAddress" />
                     </Assignment>
-                    <SendCommandPrimitive shortDescription="Enable Pio" interface="RawMemoryAccess" command="WriteWord">
+                    <SendCommandPrimitive shortDescription="Enable Pio" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                       <ArgumentValue name="address">
                         <VariableRef variableRef="destinationAddressVar" />
                       </ArgumentValue>
@@ -586,7 +586,7 @@
                       <LongDescription>Assign destination address for register write</LongDescription>
                       <VariableRef variableRef="pioVar.mPortPdrAddress" />
                     </Assignment>
-                    <SendCommandPrimitive shortDescription="Disable Pio" interface="RawMemoryAccess" command="WriteWord">
+                    <SendCommandPrimitive shortDescription="Disable Pio" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                       <ArgumentValue name="address">
                         <VariableRef variableRef="destinationAddressVar" />
                       </ArgumentValue>
@@ -620,7 +620,7 @@
                             <Assignment outputVariableRef="destinationAddressVar">
                               <VariableRef variableRef="pioVar.mPortAbcdsr0Address" />
                             </Assignment>
-                            <SendCommandPrimitive shortDescription="Assign the I/O line to the Peripheral B" interface="RawMemoryAccess" command="WriteWord">
+                            <SendCommandPrimitive shortDescription="Assign the I/O line to the Peripheral B" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                               <ArgumentValue name="address">
                                 <VariableRef variableRef="destinationAddressVar" />
                               </ArgumentValue>
@@ -636,7 +636,7 @@
                             <Assignment outputVariableRef="destinationAddressVar">
                               <VariableRef variableRef="pioVar.mPortAbcdsr1Address" />
                             </Assignment>
-                            <SendCommandPrimitive shortDescription="Make is possible to assign the I/O line to the Peripheral C or D" interface="RawMemoryAccess" command="WriteWord">
+                            <SendCommandPrimitive shortDescription="Make is possible to assign the I/O line to the Peripheral C or D" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                               <ArgumentValue name="address">
                                 <VariableRef variableRef="destinationAddressVar" />
                               </ArgumentValue>
@@ -670,7 +670,7 @@
                                     <Assignment outputVariableRef="destinationAddressVar">
                                       <VariableRef variableRef="pioVar.mPortAbcdsr0Address" />
                                     </Assignment>
-                                    <SendCommandPrimitive shortDescription="Assign the I/O line to the Peripheral D" interface="RawMemoryAccess" command="WriteWord">
+                                    <SendCommandPrimitive shortDescription="Assign the I/O line to the Peripheral D" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                                       <ArgumentValue name="address">
                                         <VariableRef variableRef="destinationAddressVar" />
                                       </ArgumentValue>
@@ -695,7 +695,7 @@
                   <LongDescription>Assign destination address for register write</LongDescription>
                   <VariableRef variableRef="pioVar.mPortSchmittAddress" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Set no schmitt trigger. Ifscdr register" interface="RawMemoryAccess" command="WriteWord">
+                <SendCommandPrimitive shortDescription="Set no schmitt trigger. Ifscdr register" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="destinationAddressVar" />
                   </ArgumentValue>
@@ -710,7 +710,7 @@
                   <LongDescription>Assign destination address for register write</LongDescription>
                   <VariableRef variableRef="pioVar.mPortMddrAddress" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Set no opendrain. Ifscdr register" interface="RawMemoryAccess" command="WriteWord">
+                <SendCommandPrimitive shortDescription="Set no opendrain. Ifscdr register" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="destinationAddressVar" />
                   </ArgumentValue>
@@ -721,7 +721,7 @@
                     <VariableRef variableRef="pinValueVar" />
                   </ArgumentValue>
                 </SendCommandPrimitive>
-                <SendCommandPrimitive interface="PioHwas" command="InitPin">
+                <SendCommandPrimitive interface="PioHwas_InitPin_PiPi" command="PioHwas_InitPin_PiPi">
                   <ArgumentValue name="pio">
                     <VariableRef variableRef="pioVar" />
                   </ArgumentValue>
@@ -743,7 +743,7 @@
                   <LongDescription>Assign register value to set to the variable</LongDescription>
                   <VariableRef variableRef="pio.mPin" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Set pin" interface="RawMemoryAccess" command="WriteWord">
+                <SendCommandPrimitive shortDescription="Set pin" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="destinationAddressVar" />
                   </ArgumentValue>
@@ -771,7 +771,7 @@
                   <LongDescription>Assign register value to variable</LongDescription>
                   <VariableRef variableRef="pio.mPin" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Resets pin value" interface="RawMemoryAccess" command="WriteWord">
+                <SendCommandPrimitive shortDescription="Resets pin value" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="destinationAddressVar" />
                   </ArgumentValue>
@@ -795,7 +795,7 @@
                   <LongDescription>Assign mask to variable</LongDescription>
                   <VariableRef variableRef="pio.mPin" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Gets pin value" interface="RawMemoryAccess" command="ReadWord">
+                <SendCommandPrimitive shortDescription="Gets pin value" interface="RawMemoryAccess_ReadWord_RiRi" command="RawMemoryAccess_ReadWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="sourceAddressVar" />
                   </ArgumentValue>
@@ -806,7 +806,7 @@
                     <VariableRef variableRef="pinValueVar" />
                   </ArgumentValue>
                 </SendCommandPrimitive>
-                <SendCommandPrimitive interface="PioHwas" command="GetPin">
+                <SendCommandPrimitive interface="PioHwas_GetPin_PiPi" command="PioHwas_GetPin_PiPi">
                   <ArgumentValue name="pinValue">
                     <VariableRef variableRef="pinValueVar" />
                   </ArgumentValue>
@@ -819,7 +819,7 @@
               <EntryState name="Off" />
               <State name="Idle" />
               <Transition fromState="Off" toState="Idle" name="Init">
-                <OnCommandPrimitive command="InitPin" interface="PioHwas">
+                <OnCommandPrimitive command="PioHwas_InitPin_PiPi" interface="PioHwas_InitPin_PiPi">
                   <ArgumentValue name="config" outputVariableRef="configVar"></ArgumentValue>
                 </OnCommandPrimitive>
                 <Do activity="InitializePin">
@@ -829,7 +829,7 @@
                 </Do>
               </Transition>
               <Transition fromState="Idle" toState="Idle" name="Set">
-                <OnCommandPrimitive command="SetPin" interface="PioHwas">
+                <OnCommandPrimitive command="PioHwas_SetPin_PiPi" interface="PioHwas_SetPin_PiPi">
                   <ArgumentValue name="pio" outputVariableRef="pioVar" />
                 </OnCommandPrimitive>
                 <Do activity="SetPin">
@@ -839,7 +839,7 @@
                 </Do>
               </Transition>
               <Transition fromState="Idle" toState="Idle" name="Reset">
-                <OnCommandPrimitive command="ResetPin" interface="PioHwas">
+                <OnCommandPrimitive command="PioHwas_ResetPin_PiPi" interface="PioHwas_ResetPin_PiPi">
                   <ArgumentValue name="pio" outputVariableRef="pioVar" />
                 </OnCommandPrimitive>
                 <Do activity="ResetPin">
@@ -849,7 +849,7 @@
                 </Do>
               </Transition>
               <Transition fromState="Idle" toState="Idle" name="Get">
-                <OnCommandPrimitive command="GetPin" interface="PioHwas">
+                <OnCommandPrimitive command="PioHwas_GetPin_PiPi" interface="PioHwas_GetPin_PiPi">
                   <ArgumentValue name="pio" outputVariableRef="pioVar" />
                 </OnCommandPrimitive>
                 <Do activity="GetPinValue">
