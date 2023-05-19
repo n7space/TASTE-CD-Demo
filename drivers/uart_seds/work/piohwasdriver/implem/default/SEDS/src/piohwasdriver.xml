@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageFile
+  xmlns="http://www.ccsds.org/schema/sois/seds"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.ccsds.org/schema/sois/seds seds.xsd">
+  <Package name="piohwasdriver">
+    <!-- Include all data types from asn models - generated code -->
+    <xi:include href="system_structure_types.xml" parse="xml" xpointer="element(/1/1/1)"/>
+    <ComponentSet>
+      <Component name="piohwasdriver">
+        <!-- Include all components for PioHwasDriver - generated code -->
+        <xi:include href="system_structure.xml" parse="xml" xpointer="element(/1/1/1/1/1)"/>
+        <xi:include href="system_structure.xml" parse="xml" xpointer="element(/1/1/1/1/2)"/>
+        <xi:include href="system_structure.xml" parse="xml" xpointer="element(/1/1/1/1/3)"/>
+        <!-- user code - put your SEDS PioHwasDriver code here -->
+        <Implementation>
+          <StateMachineSet>
+            <StateMachine name="StateMachine">
+              <EntryState name="dummy" />
+            </StateMachine>
+          </StateMachineSet>
+        </Implementation>
+      </Component>
+    </ComponentSet>
+  </Package>
+  <!-- user code -->
+</PackageFile>
