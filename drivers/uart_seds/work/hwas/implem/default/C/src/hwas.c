@@ -1,5 +1,5 @@
 #include "hwas.h"
-#include "Hal/Hal.h"
+#include "SAMV71-Runtime/Hal/Hal.h"
 
 #include <Nvic/Nvic.h>
 
