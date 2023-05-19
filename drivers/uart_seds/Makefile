@@ -10,6 +10,13 @@ ASN1_DRV_CONFIG=uart_sedsconfiguration.asn
 ASN1_DRV_PRIVATE=uart_sedsprivatedata.asn
 ASN1_DRIVER_EXPLICIT_CONFIG=$(ASN1_DRV_CONFIG) $(ASN1_DRV_PRIVATE)
 
+PARTITION_NAME=demo
+
+CD_INSTALLATION_DIRECTORY=$(COMMUNICATION_DEVICE_PATH)/SAMV71/port_uart_seds
+COMMUNICATION_DEVICE_INSTALLATOR=install_communication_devices.py
+TASTE_DRIVER_REPO=$(shell taste-config --prefix)/include/$(subst X86,,TASTE-SAMV71-Drivers)
+SOURCE_INSTALLATION_DIRECTORY=$(shell find $(TASTE_DRIVER_REPO) -name "uart_seds")
+
 all:	release
 
 release:	work/glue_release
@@ -24,6 +31,22 @@ debug:	work/glue_debug
 
 run:
 	@echo "run Hello World!"
+
+install:
+	chmod 755 install.sh
+	./install.sh
+	$(COMMUNICATION_DEVICE_INSTALLATOR) -c ${COMMUNICATION_DEVICE_PATH}
+
+uninstall:
+	rm -r $(CD_INSTALLATION_DIRECTORY)
+	rm $(TASTE_DRIVER_REPO)/configurations/uart_sedsconfiguration.asn
+	rm $(TASTE_DRIVER_REPO)/configurations/uart_sedsconfiguration.acn
+	rm -r $(SOURCE_INSTALLATION_DIRECTORY)
+	$(COMMUNICATION_DEVICE_INSTALLATOR) -c ${COMMUNICATION_DEVICE_PATH}
+
+uninstall-all:
+	rm -r $(COMMUNICATION_DEVICE_PATH)/*
+	$(COMMUNICATION_DEVICE_INSTALLATOR) -c ${COMMUNICATION_DEVICE_PATH}
 
 skeletons:
 	$(MAKE) work/skeletons_built
@@ -54,7 +77,7 @@ InterfaceView.aadl:	interfaceview.xml
 
 Default_Deployment.aadl:	interfaceview.xml
 	# Create/update a default deployment view for Linux target, if none other is provided
-	$(SPACECREATOR) --aadlconverter  -o $^ -t $(shell taste-config --prefix)/share/xml2dv/interfaceview.tmplt -x $@ || exit 1
+	$(SPACECREATOR) --aadlconverter  -o $^ -t $(shell taste-config --prefix)/share/xml2dv/interfaceview-SAMV71.tmplt -x $@ || exit 1
 	rsync --checksum $@ DeploymentView.aadl
 
 DeploymentView.aadl:	Default_Deployment.aadl
