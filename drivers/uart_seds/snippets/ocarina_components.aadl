@@ -32,7 +32,7 @@ end configuration_type_uart_seds;
 
   device implementation device_uart_seds.samv71
   properties
-    Deployment::Driver_Name       => "driver_uart_seds";
+    Deployment::Driver_Name       => "uart_seds";
     Device_Driver                 => classifier (ocarina_drivers_uart_seds::uart_seds_samv71.samv71);
     Initialize_Entrypoint         => classifier (ocarina_drivers_uart_seds::driver_uart_seds_init);
     Provided_Virtual_Bus_Class    => (classifier (ocarina_buses::generic.samv71));
