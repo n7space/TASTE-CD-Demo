@@ -16,7 +16,7 @@
 #include <Broker.h>
 
 __attribute__((section(".sdramMemorySection")))
-static uart_seds_asn1SccUartHwas uart;
+static asn1SccUartHwas uart;
 
 __attribute__((section(".sdramMemorySection")))
 static uint64_t sentBytes = 0;
@@ -37,7 +37,7 @@ void assembler_startup(void)
 }
 
 void assembler_PI_Init
-      (const uart_seds_asn1SccInitRequestData *IN_initreqseq)
+      (const asn1SccInitRequestData *IN_initreqseq)
 
 {
    Escaper_init(&escaper,
@@ -46,14 +46,14 @@ void assembler_PI_Init
                 decodedPacketBuffer,
                 DECODED_PACKET_BUFFER_SIZE);
 
-   uart_seds_asn1SccUartHwasConfig config;
+   asn1SccUartHwasConfig config;
    config.mInstance = UartHwas_Instance_uartHwas_Instance_3;
    config.mBaudrate = UartHwas_Baudrate_uartHwas_Baudrate9600;
    assembler_RI_UartHwas_InitUartCmd_Pi(&uart, &config);
 
    /* We need to call Pi interface to enable Read interrupts. Otherwise
    ** we will not get any byte from the interface. */
-   uart_seds_asn1SccUartHwasInterfaceType_ReadByteAsyncCmd_Type readByte;
+   asn1SccUartHwasInterfaceType_ReadByteAsyncCmd_Type readByte;
    readByte.uart = uart;
    assembler_RI_UartHwas_ReadByteAsyncCmd_Pi(&readByte);
 }
@@ -61,9 +61,9 @@ void assembler_PI_Init
 void assembler_send_single_byte_to_uarthwas()
 {
    if(sentBytes < bytesToSend) {
-      uart_seds_asn1SccUartHwasInterfaceType_SendByteAsyncCmd_Type sendByteStructure = {
+      asn1SccUartHwasInterfaceType_SendByteAsyncCmd_Type sendByteStructure = {
          .uart = uart,
-         .byteToSend = (uart_seds_asn1SccByte) encodedPacketBuffer[sentBytes]
+         .byteToSend = (asn1SccByte) encodedPacketBuffer[sentBytes]
       };
 
       sentBytes++;
@@ -75,11 +75,11 @@ void assembler_send_single_byte_to_uarthwas()
 }
 
 void assembler_PI_Deliver
-      (const uart_seds_asn1SccDeliveredRequestData *IN_deliverreqseq)
+      (const asn1SccDeliveredRequestData *IN_deliverreqseq)
 
 {
    uint64_t length = (uint64_t) IN_deliverreqseq->length;
-   uint8_t *data = IN_deliverreqseq->data;
+   uint8_t *data = IN_deliverreqseq->message_data;
    size_t index = 0;
 
    Escaper_start_encoder(&escaper);
@@ -88,14 +88,14 @@ void assembler_PI_Deliver
 }
 
 void assembler_PI_UartHwas_ReadByteAsyncCmd_Ri
-      (const uart_seds_asn1SccUartHwasInterfaceType_ReadByteAsyncCmd_TypeNotify *IN_inputparam)
+      (const asn1SccUartHwasInterfaceType_ReadByteAsyncCmd_TypeNotify *IN_inputparam)
 
 {
    Escaper_decode_packet(&escaper, 1, &IN_inputparam->byteToRead, 1, Broker_receive_packet);
 }
 
 void assembler_PI_UartHwas_SendByteAsyncCmd_Ri
-      (const uart_seds_asn1SccUartHwasInterfaceType_SendByteAsyncCmd_TypeNotify *IN_inputparam)
+      (const asn1SccUartHwasInterfaceType_SendByteAsyncCmd_TypeNotify *IN_inputparam)
 
 {
    assembler_send_single_byte_to_uarthwas();
