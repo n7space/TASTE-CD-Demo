@@ -1,0 +1,25 @@
+<DeploymentView version="1.1">
+    <Node id="{06d4e94d-4e08-4ff2-b460-6f13166c48f4}" name="SAM V71 FreeRTOS N7S_1" type="ocarina_processors_arm::samv71.freertos" node_label="Node_2" namespace="ocarina_processors_arm">
+        <Property name="Taste::coordinates" value="60100 44100 76100 60100"/>
+        <Partition id="{dd5b8583-0bba-4ba7-a0fc-ed4746130989}" name="Partition_2">
+            <Property name="Taste::coordinates" value="64500 48500 72500 56500"/>
+            <Function id="{a2ac6286-3316-4a52-8980-d836a091f456}" name="f2" path="f2"/>
+        </Partition>
+        <Device id="{0098f763-1c11-4b4f-8f70-46398802706b}" name="port_uart_seds" requires_bus_access="ocarina_buses::serial.ccsds" config="{ devname  uart3, speed  b9600 }" port="port_uart_seds" asn1file="/home/taste/workspace/uart_seds/uart_sedsconfiguration.asn" asn1type="UART-SEDS-Conf-T" asn1module="UART-SEDS-DRIVER-CONFIGURATION" extends="ocarina_drivers::device_uart_seds" bus_namespace="ocarina_buses" impl_extends="ocarina_drivers::device_uart_seds.samv71" namespace="ocarina_drivers">
+            <Property name="Taste::coordinates" value="60100 49900"/>
+        </Device>
+    </Node>
+    <Node id="{ea45c35d-fc55-4aa0-83dd-53856ff4c58b}" name="x86 Linux C++_1" type="ocarina_processors_x86::x86.generic_linux" node_label="Node_1" namespace="ocarina_processors_x86">
+        <Property name="Taste::coordinates" value="25500 44200 41500 60200"/>
+        <Partition id="{99ee90b7-a2e6-4377-bc18-373777fcec03}" name="Partition_1">
+            <Function id="{04c4dea5-dd35-4be4-a971-a471361a2ad1}" name="f1" path="f1"/>
+        </Partition>
+        <Device id="{ad148455-34fd-4eb6-aaa2-27594e6f3153}" name="uart0" requires_bus_access="ocarina_buses::serial.ccsds" config="{ devname  &quot;uart0&quot;, speed  b9600, parity  even, bits  8, use-paritybit  FALSE }" port="uart0" asn1file="/home/taste/tool-inst/include/TASTE-Linux-Drivers/configurations/linux-serial-ccsds-driver.asn" asn1type="Serial-CCSDS-Linux-Conf-T" asn1module="LINUX-SERIAL-CCSDS-DRIVER" extends="ocarina_drivers::serial_ccsds" bus_namespace="ocarina_buses" impl_extends="ocarina_drivers::serial_ccsds.linux" namespace="ocarina_drivers">
+        </Device>
+    </Node>
+    <Connection id="{b92e02d0-edd4-460e-86d2-f7347d91ae27}" name="Connection_1" from_node="x86 Linux C++_1" from_port="uart0" to_bus="ocarina_buses::serial.ccsds" to_node="SAM V71 FreeRTOS N7S_1" to_port="port_uart_seds">
+            <Property name="Taste::coordinates" value="30100 44000 59800 50000"/>
+            <Message id="{404aa6df-6dc8-497e-b877-4591f8886830}" name="Message_1" from_function="f1" from_interface="query" to_function="f2" to_interface="query"/>
+            <Message id="{ee4b6852-5eba-4d50-96f4-8a27f1eb6fb6}" name="Message_2" from_function="f2" from_interface="response" to_function="f1" to_interface="response"/>
+    </Connection>
+</DeploymentView>

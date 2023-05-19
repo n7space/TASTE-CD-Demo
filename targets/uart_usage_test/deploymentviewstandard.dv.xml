@@ -1,0 +1,20 @@
+<DeploymentView version="1.2" UiFile="deploymentviewstandard.ui.xml">
+    <Node id="{7520c1db-3052-4b3f-b26b-be22801b9814}" name="x86 Linux C++_1" type="ocarina_processors_x86::x86.generic_linux" node_label="Node_1" namespace="ocarina_processors_x86">
+        <Partition id="{af4f8cb3-4825-40e8-a437-96748fa8400c}" name="Partition_1">
+            <Function id="{8811105d-3382-4deb-995e-42341089027d}" name="f1" path="f1"/>
+        </Partition>
+        <Device id="{ec5aadf8-e979-4a22-a69a-19e8d420f4bb}" name="uart0" requires_bus_access="ocarina_buses::serial.ccsds" config="{ devname  &quot;uart0&quot;, speed  b9600, parity  even, bits  8, use-paritybit  FALSE }" port="uart0" asn1file="/home/taste/tool-inst/include/TASTE-Linux-Drivers/configurations/linux-serial-ccsds-driver.asn" asn1type="Serial-CCSDS-Linux-Conf-T" asn1module="LINUX-SERIAL-CCSDS-DRIVER" impl_extends="ocarina_drivers::serial_ccsds.linux" namespace="ocarina_drivers" extends="ocarina_drivers::serial_ccsds" bus_namespace="ocarina_buses">
+        </Device>
+    </Node>
+    <Node id="{71e8a882-8101-4e04-853a-6aca6ca1c14f}" name="SAM V71 FreeRTOS N7S_1" type="ocarina_processors_arm::samv71.freertos" node_label="Node_2" namespace="ocarina_processors_arm">
+        <Partition id="{d79ecb5c-f86f-4f2f-b3da-0e5a46c53721}" name="Partition_2">
+            <Function id="{4c1f32e8-bf8f-43b1-8859-5d4d4063f62e}" name="f2" path="f2"/>
+        </Partition>
+        <Device id="{e0d46c8e-1d4e-45a3-a47b-31152e47e237}" name="uart0" requires_bus_access="ocarina_buses::serial.ccsds" config="{ devname  uart3, speed  b9600, parity  even, bits  8, use-paritybit  FALSE }" port="uart0" asn1file="/home/taste/tool-inst/include/TASTE-SAMV71-Drivers/configurations/samv71-serial-ccsds-driver.asn" asn1type="Serial-CCSDS-SamV71-Conf-T" asn1module="SAMV71-SERIAL-CCSDS-DRIVER" impl_extends="ocarina_drivers::serial_ccsds.samv71" namespace="ocarina_drivers" extends="ocarina_drivers::serial_ccsds" bus_namespace="ocarina_buses">
+        </Device>
+    </Node>
+    <Connection id="{a2b5578d-f4a3-484f-a8e7-fc14c2aec42b}" name="Connection_1" from_node="x86 Linux C++_1" from_port="uart0" to_bus="ocarina_buses::serial.ccsds" to_node="SAM V71 FreeRTOS N7S_1" to_port="uart0">
+            <Message id="{7d4fbe7b-2d78-4b1f-b4f1-28e8a9c9220e}" name="Message_1" from_function="f1" from_interface="query" to_function="f2" to_interface="query"/>
+            <Message id="{1cfbd73b-2721-4a8e-a380-79ab6eaddbcf}" name="Message_2" from_function="f2" from_interface="response" to_function="f1" to_interface="response"/>
+    </Connection>
+</DeploymentView>
