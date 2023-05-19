@@ -10,6 +10,7 @@
 #include "assembler.h"
 //#include <stdio.h>
 
+asn1SccUartHwas uart;
 
 void assembler_startup(void)
 {
@@ -22,23 +23,44 @@ void assembler_PI_Deliver
       (const asn1SccDeliveredRequestData *IN_deliverreqseq)
 
 {
-   // Write your code here
-}
+   uint64_t length = (uint64_t) IN_deliverreqseq->length;
+   uint8_t *data = (uint8_t *) IN_deliverreqseq->data;
 
+   asn1SccUartHwasInterfaceType_SendByteAsyncCmd_Type sendData;
+   sendData.uart = uart;
+   for (uint64_t i = 0; i < length; ++i) {
+      sendData.byteToSend = (asn1SccByte) data[i];
+      assembler_RI_UartHwas_SendByteAsyncCmd_Pi(&sendData);
+   }
+}
 
 void assembler_PI_Init
       (const asn1SccInitRequestData *IN_initreqseq)
 
 {
-   // Write your code here
-}
+   //asn1SccUART_SEDS_Conf_T *device_configuration = (asn1SccUART_SEDS_Conf_T *) IN_initreqseq->device_configuration;
 
+
+   asn1SccUartHwasConfig config;
+   config.mInstance = UartHwas_Instance_uartHwas_Instance_3;
+   config.mBaudrate = UartHwas_Baudrate_uartHwas_Baudrate9600;
+   assembler_RI_UartHwas_InitUartCmd_Pi(&uart, &config);
+}
 
 void assembler_PI_UartHwas_ReadByteAsyncCmd_Ri
       (const asn1SccUartHwasInterfaceType_ReadByteAsyncCmd_TypeNotify *IN_inputparam)
 
 {
-   // Write your code here
+   asn1SccReceivedRequestData data;
+   assembler_RI_Receive(&data);
 }
+
+
+//void assembler_PI_UartHwas_SendByteAsyncCmd_Ri
+//      (const asn1SccUartHwasInterfaceType_SendByteAsyncCmd_TypeNotify *IN_inputparam)
+//
+//{
+   // Write your code here
+//}
 
 
