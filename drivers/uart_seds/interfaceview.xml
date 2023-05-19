@@ -2,36 +2,36 @@
 <Function id="{2218ddab-c7f8-4a83-996a-95ab1a350319}" name="HWAS" is_type="NO" language="C" default_implementation="default" fixed_system_element="NO" required_system_element="NO" startup_priority="1" instances_min="1" instances_max="1">
     <Property name="Taste::coordinates" value="82200 -900 93600 19200"/>
 <Provided_Interface id="{f4467f1e-880d-47e9-be77-3f9ff520104c}" name="InterruptSubscriptionManagement_SubscribeToInterrupt_Pi" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="interrupt" type="InterruptNumber" encoding="ACN"/>
+    <Input_Parameter name="interrupt" type="InterruptNumber" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="82200 10900"/>
 </Provided_Interface>
 
 <Provided_Interface id="{9d739388-fd24-4dd7-98ce-24ef5864c4fb}" name="InterruptManagement_EnableInterrupt_Pi" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="interrupt" type="InterruptNumber" encoding="ACN"/>
+    <Input_Parameter name="interrupt" type="InterruptNumber" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="82200 7100"/>
 </Provided_Interface>
 
 <Provided_Interface id="{14263882-5659-4760-8c52-cbf228553fa0}" name="InterruptManagement_DisableInterrupt_Pi" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="interrupt" type="InterruptNumber" encoding="ACN"/>
+    <Input_Parameter name="interrupt" type="InterruptNumber" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="82200 4100"/>
 </Provided_Interface>
 
 <Provided_Interface id="{151034b4-8564-4f47-b069-0ba59131bdef}" name="RawMemoryAccess_ReadWord_Pi" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="address" type="SourceAddress" encoding="ACN"/>
-    <Input_Parameter name="mask" type="WordMask" encoding="ACN"/>
-    <Output_Parameter name="outputValue" type="Word" encoding="ACN"/>
+    <Input_Parameter name="address" type="SourceAddress" encoding="NATIVE"/>
+    <Input_Parameter name="mask" type="WordMask" encoding="NATIVE"/>
+    <Output_Parameter name="outputValue" type="Word" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="82200 17300"/>
 </Provided_Interface>
 
 <Provided_Interface id="{705183ad-8eb0-4c66-8003-7e769a2fecbc}" name="RawMemoryAccess_WriteWord_Pi" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="address" type="DestinationAddress" encoding="ACN"/>
-    <Input_Parameter name="mask" type="WordMask" encoding="ACN"/>
-    <Input_Parameter name="inputValue" type="Word" encoding="ACN"/>
+    <Input_Parameter name="address" type="DestinationAddress" encoding="NATIVE"/>
+    <Input_Parameter name="mask" type="WordMask" encoding="NATIVE"/>
+    <Input_Parameter name="inputValue" type="Word" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="82200 14600"/>
 </Provided_Interface>
 
 <Required_Interface id="{b8a0be67-e8f5-4cff-ba8a-697594c7c183}" name="InterruptSubscription_Interrupt_Ri" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="interrupt" type="InterruptNumber" encoding="ACN"/>
+    <Input_Parameter name="interrupt" type="InterruptNumber" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="82200 900"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="false"/>
@@ -45,40 +45,40 @@
 <Function id="{f22b3fe4-f4aa-4da8-88a7-84cccf16344f}" name="PioHwasDriver" is_type="NO" language="SEDS" default_implementation="default" fixed_system_element="NO" required_system_element="NO" startup_priority="1" instances_min="1" instances_max="1">
     <Property name="Taste::coordinates" value="39500 24400 53500 40900"/>
 <Provided_Interface id="{ad61a9f0-4746-479e-aac1-7c0802bd27c4}" name="PioHwas_InitPin_Pi" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Output_Parameter name="pio" type="PioHwas" encoding="ACN"/>
-    <Input_Parameter name="config" type="PioHwasPinConfig" encoding="ACN"/>
+    <Output_Parameter name="pio" type="PioHwas" encoding="NATIVE"/>
+    <Input_Parameter name="config" type="PioHwasPinConfig" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="39500 38100"/>
 </Provided_Interface>
 
 <Provided_Interface id="{ed1da845-8332-43e1-bbdc-ef914be2efa5}" name="PioHwas_SetPin_Pi" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="pio" type="PioHwas" encoding="ACN"/>
+    <Input_Parameter name="pio" type="PioHwas" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="39500 34700"/>
 </Provided_Interface>
 
 <Provided_Interface id="{07b64620-de0e-4177-931a-b822e5428bbd}" name="PioHwas_ResetPin_Pi" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="pio" type="PioHwas" encoding="ACN"/>
+    <Input_Parameter name="pio" type="PioHwas" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="39500 27800"/>
 </Provided_Interface>
 
 <Provided_Interface id="{36088ce0-099d-46d0-b503-e1bb4c1790a0}" name="PioHwas_GetPin_Pi" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="pio" type="PioHwas" encoding="ACN"/>
-    <Output_Parameter name="pinValue" type="Word" encoding="ACN"/>
+    <Input_Parameter name="pio" type="PioHwas" encoding="NATIVE"/>
+    <Output_Parameter name="pinValue" type="Word" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="39500 31300"/>
 </Provided_Interface>
 
 <Required_Interface id="{ee42a666-7cf5-4ce9-8821-86522e3b20dc}" name="RawMemoryAccess_ReadWord_Ri" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="address" type="SourceAddress" encoding="ACN"/>
-    <Input_Parameter name="mask" type="WordMask" encoding="ACN"/>
-    <Output_Parameter name="outputValue" type="Word" encoding="ACN"/>
+    <Input_Parameter name="address" type="SourceAddress" encoding="NATIVE"/>
+    <Input_Parameter name="mask" type="WordMask" encoding="NATIVE"/>
+    <Output_Parameter name="outputValue" type="Word" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="53500 35000"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="false"/>
 </Required_Interface>
 
 <Required_Interface id="{cd7246b8-365f-46ba-b66f-285d20d1bf44}" name="RawMemoryAccess_WriteWord_Ri" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="address" type="DestinationAddress" encoding="ACN"/>
-    <Input_Parameter name="mask" type="WordMask" encoding="ACN"/>
-    <Input_Parameter name="inputValue" type="Word" encoding="ACN"/>
+    <Input_Parameter name="address" type="DestinationAddress" encoding="NATIVE"/>
+    <Input_Parameter name="mask" type="WordMask" encoding="NATIVE"/>
+    <Input_Parameter name="inputValue" type="Word" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="53500 29900"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="false"/>
@@ -92,104 +92,104 @@
 <Function id="{0ed0dd95-4892-485f-b383-4db41a82fb60}" name="UartHwasDriver" is_type="NO" language="SEDS" default_implementation="default" fixed_system_element="NO" required_system_element="NO" startup_priority="1" instances_min="1" instances_max="1">
     <Property name="Taste::coordinates" value="-7700 -900 9200 31100"/>
 <Provided_Interface id="{74c02fb6-f4d1-4cb0-b61e-8fbd3afca35c}" name="UartHwas_InitUartCmd_Pi" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Output_Parameter name="uart" type="UartHwas" encoding="ACN"/>
-    <Input_Parameter name="config" type="UartHwasConfig" encoding="ACN"/>
+    <Output_Parameter name="uart" type="UartHwas" encoding="NATIVE"/>
+    <Input_Parameter name="config" type="UartHwasConfig" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="-7700 26900"/>
 </Provided_Interface>
 
-<Provided_Interface id="{eb6ce129-0b7c-4915-bab1-83d1b6a51aea}" name="UartHwas_ReadByteAsyncCmd_Pi" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" queue_size="1" stack_size="1024">
-    <Input_Parameter name="InputParam" type="UartHwasInterfaceType-ReadByteAsyncCmd-Type" encoding="ACN"/>
+<Provided_Interface id="{eb6ce129-0b7c-4915-bab1-83d1b6a51aea}" name="UartHwas_ReadByteAsyncCmd_Pi" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" queue_size="1" stack_size="16384">
+    <Input_Parameter name="InputParam" type="UartHwasInterfaceType-ReadByteAsyncCmd-Type" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="-7700 20300"/>
 </Provided_Interface>
 
-<Provided_Interface id="{3659c0e6-1bac-45bc-b147-c1be4e141078}" name="UartHwas_SendByteAsyncCmd_Pi" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" queue_size="1" stack_size="1024">
-    <Input_Parameter name="InputParam" type="UartHwasInterfaceType-SendByteAsyncCmd-Type" encoding="ACN"/>
+<Provided_Interface id="{3659c0e6-1bac-45bc-b147-c1be4e141078}" name="UartHwas_SendByteAsyncCmd_Pi" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" queue_size="1" stack_size="16384">
+    <Input_Parameter name="InputParam" type="UartHwasInterfaceType-SendByteAsyncCmd-Type" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="-7700 10800"/>
 </Provided_Interface>
 
 <Provided_Interface id="{c8980ed0-4849-420e-801a-64c7d724ebc8}" name="InterruptSubscription_Interrupt_Pi" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="interrupt" type="InterruptNumber" encoding="ACN"/>
+    <Input_Parameter name="interrupt" type="InterruptNumber" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="9200 900"/>
 </Provided_Interface>
 
-<Required_Interface id="{4d5835bb-154c-4026-a093-0b5bc81b562d}" name="UartHwas_ReadByteAsyncCmd_Ri" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" queue_size="1" stack_size="1024">
-    <Input_Parameter name="InputParam" type="UartHwasInterfaceType-ReadByteAsyncCmd-TypeNotify" encoding="ACN"/>
+<Required_Interface id="{4d5835bb-154c-4026-a093-0b5bc81b562d}" name="UartHwas_ReadByteAsyncCmd_Ri" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" queue_size="1" stack_size="16384">
+    <Input_Parameter name="InputParam" type="UartHwasInterfaceType-ReadByteAsyncCmd-TypeNotify" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="-7700 13700"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="true"/>
 </Required_Interface>
 
-<Required_Interface id="{85224ba8-6789-4441-a6fb-72bec57bfdf7}" name="UartHwas_SendByteAsyncCmd_Ri" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" queue_size="1" stack_size="1024">
-    <Input_Parameter name="InputParam" type="UartHwasInterfaceType-SendByteAsyncCmd-TypeNotify" encoding="ACN"/>
+<Required_Interface id="{85224ba8-6789-4441-a6fb-72bec57bfdf7}" name="UartHwas_SendByteAsyncCmd_Ri" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" queue_size="1" stack_size="16384">
+    <Input_Parameter name="InputParam" type="UartHwasInterfaceType-SendByteAsyncCmd-TypeNotify" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="-7700 17400"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="true"/>
 </Required_Interface>
 
 <Required_Interface id="{670454bd-f5ad-4405-84f6-eecf72a5dd85}" name="PioHwas_InitPin_Ri" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Output_Parameter name="pio" type="PioHwas" encoding="ACN"/>
-    <Input_Parameter name="config" type="PioHwasPinConfig" encoding="ACN"/>
+    <Output_Parameter name="pio" type="PioHwas" encoding="NATIVE"/>
+    <Input_Parameter name="config" type="PioHwasPinConfig" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="9200 29400"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="false"/>
 </Required_Interface>
 
 <Required_Interface id="{cc7462af-7e3f-4198-8d1c-5e043b4f7f37}" name="PioHwas_SetPin_Ri" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="pio" type="PioHwas" encoding="ACN"/>
+    <Input_Parameter name="pio" type="PioHwas" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="9200 26600"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="false"/>
 </Required_Interface>
 
 <Required_Interface id="{eb7e3718-da40-4b9d-ad8f-49d6704d14dc}" name="PioHwas_ResetPin_Ri" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="pio" type="PioHwas" encoding="ACN"/>
+    <Input_Parameter name="pio" type="PioHwas" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="9200 20400"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="false"/>
 </Required_Interface>
 
 <Required_Interface id="{157ea403-3747-4310-94da-e85518e885da}" name="PioHwas_GetPin_Ri" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="pio" type="PioHwas" encoding="ACN"/>
-    <Output_Parameter name="pinValue" type="Word" encoding="ACN"/>
+    <Input_Parameter name="pio" type="PioHwas" encoding="NATIVE"/>
+    <Output_Parameter name="pinValue" type="Word" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="9200 23700"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="false"/>
 </Required_Interface>
 
 <Required_Interface id="{b5aefb5f-98e8-4f48-b15f-43eb277aac6b}" name="InterruptSubscriptionManagement_SubscribeToInterrupt_Ri" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="interrupt" type="InterruptNumber" encoding="ACN"/>
+    <Input_Parameter name="interrupt" type="InterruptNumber" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="9200 10600"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="false"/>
 </Required_Interface>
 
 <Required_Interface id="{5bb36d31-97cf-4ecb-b7e3-c53893410e6a}" name="InterruptManagement_EnableInterrupt_Ri" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="interrupt" type="InterruptNumber" encoding="ACN"/>
+    <Input_Parameter name="interrupt" type="InterruptNumber" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="9200 6600"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="false"/>
 </Required_Interface>
 
 <Required_Interface id="{6225092c-cbe9-4ca9-9577-155398497255}" name="InterruptManagement_DisableInterrupt_Ri" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="interrupt" type="InterruptNumber" encoding="ACN"/>
+    <Input_Parameter name="interrupt" type="InterruptNumber" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="9200 3700"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="false"/>
 </Required_Interface>
 
 <Required_Interface id="{ec58af95-a3d1-4e5c-b8b9-ac7b05e95638}" name="RawMemoryAccess_ReadWord_Ri" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="address" type="SourceAddress" encoding="ACN"/>
-    <Input_Parameter name="mask" type="WordMask" encoding="ACN"/>
-    <Output_Parameter name="outputValue" type="Word" encoding="ACN"/>
+    <Input_Parameter name="address" type="SourceAddress" encoding="NATIVE"/>
+    <Input_Parameter name="mask" type="WordMask" encoding="NATIVE"/>
+    <Output_Parameter name="outputValue" type="Word" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="9200 17100"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="false"/>
 </Required_Interface>
 
 <Required_Interface id="{37111fbf-4691-4849-bd5a-79f10e383d01}" name="RawMemoryAccess_WriteWord_Ri" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Input_Parameter name="address" type="DestinationAddress" encoding="ACN"/>
-    <Input_Parameter name="mask" type="WordMask" encoding="ACN"/>
-    <Input_Parameter name="inputValue" type="Word" encoding="ACN"/>
+    <Input_Parameter name="address" type="DestinationAddress" encoding="NATIVE"/>
+    <Input_Parameter name="mask" type="WordMask" encoding="NATIVE"/>
+    <Input_Parameter name="inputValue" type="Word" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="9200 14200"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="false"/>
@@ -208,7 +208,7 @@
 
 <Function id="{f205bf48-7938-4a33-ae7a-97209e308236}" name="Assembler" is_type="NO" language="C" default_implementation="default" fixed_system_element="NO" required_system_element="NO" startup_priority="1" instances_min="1" instances_max="1">
     <Property name="Taste::coordinates" value="-66000 8600 -52100 28400"/>
-<Provided_Interface id="{f7d62a92-d422-4cef-956a-9ae462da801f}" name="Deliver" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" queue_size="1" stack_size="1024">
+<Provided_Interface id="{f7d62a92-d422-4cef-956a-9ae462da801f}" name="Deliver" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" queue_size="1" stack_size="16384">
     <Input_Parameter name="deliverReqSeq" type="DeliveredRequestData" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="-66000 12600"/>
 </Provided_Interface>
@@ -218,13 +218,13 @@
     <Property name="Taste::coordinates" value="-66000 10100"/>
 </Provided_Interface>
 
-<Provided_Interface id="{beab5b96-a49d-4fe8-8251-430d12cfa624}" name="UartHwas_ReadByteAsyncCmd_Ri" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" queue_size="1" stack_size="1024">
-    <Input_Parameter name="InputParam" type="UartHwasInterfaceType-ReadByteAsyncCmd-TypeNotify" encoding="ACN"/>
+<Provided_Interface id="{beab5b96-a49d-4fe8-8251-430d12cfa624}" name="UartHwas_ReadByteAsyncCmd_Ri" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" queue_size="1" stack_size="16384">
+    <Input_Parameter name="InputParam" type="UartHwasInterfaceType-ReadByteAsyncCmd-TypeNotify" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="-52100 13900"/>
 </Provided_Interface>
 
-<Provided_Interface id="{ba2d2570-6137-4752-8bae-b21cf4c3d59d}" name="UartHwas_SendByteAsyncCmd_Ri" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" queue_size="1" stack_size="1024">
-    <Input_Parameter name="InputParam" type="UartHwasInterfaceType-SendByteAsyncCmd-TypeNotify" encoding="ACN"/>
+<Provided_Interface id="{ba2d2570-6137-4752-8bae-b21cf4c3d59d}" name="UartHwas_SendByteAsyncCmd_Ri" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" queue_size="1" stack_size="16384">
+    <Input_Parameter name="InputParam" type="UartHwasInterfaceType-SendByteAsyncCmd-TypeNotify" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="-52100 17300"/>
 </Provided_Interface>
 
@@ -232,30 +232,30 @@
     <Property name="Taste::coordinates" value="-52100 23600"/>
 </Provided_Interface>
 
-<Required_Interface id="{1ada0dd6-cb17-4703-8624-3f8495cc9e5a}" name="Receive" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" queue_size="1" stack_size="1024">
+<Required_Interface id="{1ada0dd6-cb17-4703-8624-3f8495cc9e5a}" name="Receive" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" queue_size="1" stack_size="16384">
     <Input_Parameter name="receiveReqSeq" type="ReceivedRequestData" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="-66000 15100"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="true"/>
 </Required_Interface>
 
-<Required_Interface id="{e4dfd6f5-a61e-412c-8da0-20139ad017ab}" name="UartHwas_SendByteAsyncCmd_Pi" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" queue_size="1" stack_size="1024">
-    <Input_Parameter name="InputParam" type="UartHwasInterfaceType-SendByteAsyncCmd-Type" encoding="ACN"/>
+<Required_Interface id="{e4dfd6f5-a61e-412c-8da0-20139ad017ab}" name="UartHwas_SendByteAsyncCmd_Pi" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" queue_size="1" stack_size="16384">
+    <Input_Parameter name="InputParam" type="UartHwasInterfaceType-SendByteAsyncCmd-Type" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="-52100 11000"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="true"/>
 </Required_Interface>
 
-<Required_Interface id="{e093ce39-de03-4836-822b-c02187e15b92}" name="UartHwas_ReadByteAsyncCmd_Pi" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" queue_size="1" stack_size="1024">
-    <Input_Parameter name="InputParam" type="UartHwasInterfaceType-ReadByteAsyncCmd-Type" encoding="ACN"/>
+<Required_Interface id="{e093ce39-de03-4836-822b-c02187e15b92}" name="UartHwas_ReadByteAsyncCmd_Pi" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" queue_size="1" stack_size="16384">
+    <Input_Parameter name="InputParam" type="UartHwasInterfaceType-ReadByteAsyncCmd-Type" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="-52100 20300"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="true"/>
 </Required_Interface>
 
 <Required_Interface id="{48873e9e-cc42-4cf4-ba99-03a46433d35d}" name="UartHwas_InitUartCmd_Pi" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" dispatch_offset="0" stack_size="1024">
-    <Output_Parameter name="uart" type="UartHwas" encoding="ACN"/>
-    <Input_Parameter name="config" type="UartHwasConfig" encoding="ACN"/>
+    <Output_Parameter name="uart" type="UartHwas" encoding="NATIVE"/>
+    <Input_Parameter name="config" type="UartHwasConfig" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="-52100 26900"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="true"/>
@@ -268,7 +268,7 @@
 
 <Function id="{0bae5a1e-db6d-4710-9c4d-92489abd852a}" name="Broker" is_type="NO" instance_of="" language="C" default_implementation="default" fixed_system_element="YES" required_system_element="NO" FPGA_Configurations="" startup_priority="1" instances_min="1" instances_max="1">
     <Property name="Taste::coordinates" value="-93700 7900 -81000 16700"/>
-<Provided_Interface id="{1cf181ed-564e-4998-98b9-e7d850bfd0c7}" name="Receive" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" queue_size="1" stack_size="1024">
+<Provided_Interface id="{1cf181ed-564e-4998-98b9-e7d850bfd0c7}" name="Receive" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" queue_size="1" stack_size="16384">
     <Input_Parameter name="receiveReqSeq" type="ReceivedRequestData" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="-81000 15100"/>
     <Property name="Taste::InheritPI" value="true"/>
@@ -282,7 +282,7 @@
     <Property name="Taste::Autonamed" value="true"/>
 </Required_Interface>
 
-<Required_Interface id="{e40c9a65-78c2-49d8-a327-e9fd9fb06234}" name="Deliver" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" queue_size="1" stack_size="1024">
+<Required_Interface id="{e40c9a65-78c2-49d8-a327-e9fd9fb06234}" name="Deliver" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" queue_size="1" stack_size="16384">
     <Input_Parameter name="deliverReqSeq" type="DeliveredRequestData" encoding="NATIVE"/>
     <Property name="Taste::coordinates" value="-81000 12600"/>
     <Property name="Taste::InheritPI" value="true"/>
