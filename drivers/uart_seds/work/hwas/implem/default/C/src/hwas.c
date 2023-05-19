@@ -252,14 +252,14 @@ hwas_startup(void)
                                                   hwasInterruptQueueStorageBuffer,
                                                   &hwasInterruptQueueBuffer);
     assert(hwasInterruptQueueHandle != NULL);
-    assert(xTaskCreateStatic(HwasInterruptHandlerTask,
-                             "HwasInterruptHandlerTask",
-                             HWAS_INTERRUPT_STACK_SIZE,
-                             NULL,
-                             HWAS_INTERRUPT_PRIORITY,
-                             hwasTaskStackBuffer,
-                             &hwasTaskBuffer)
-           != NULL);
+    TaskHandle_t taskHandle = xTaskCreateStatic(HwasInterruptHandlerTask,
+                                                "HwasInterruptHandlerTask",
+                                                HWAS_INTERRUPT_STACK_SIZE,
+                                                NULL,
+                                                HWAS_INTERRUPT_PRIORITY,
+                                                hwasTaskStackBuffer,
+                                                &hwasTaskBuffer);
+    assert(taskHandle != NULL);
 }
 
 void
