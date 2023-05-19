@@ -8,59 +8,116 @@
     !! file. The up-to-date signatures can be found in the .ads file.   !!
 */
 #include "assembler.h"
-//#include <stdio.h>
 
-asn1SccUartHwas uart;
+#include <FreeRTOS.h>
+#include <semphr.h>
+
+#include <Escaper.h>
+
+__attribute__((section(".sdramMemorySection")))
+static uart_seds_asn1SccUartHwas uart;
+__attribute__((section(".sdramMemorySection")))
+static uint8_t buffer[500] = {0};
+__attribute__((section(".sdramMemorySection")))
+static uint8_t index = 0;
+
+__attribute__((section(".sdramMemorySection")))
+static uint64_t sentBytes = 0;
+__attribute__((section(".sdramMemorySection")))
+static uint64_t bytesToSend = 0;
+
+__attribute__((section(".sdramMemorySection")))
+static Escaper escaper;
+#define ENCODED_PACKET_BUFFER_SIZE 100
+__attribute__((section(".sdramMemorySection")))
+static uint8_t encodedPacketBuffer[ENCODED_PACKET_BUFFER_SIZE] = {""};
+#define DECODED_PACKET_BUFFER_SIZE 100
+__attribute__((section(".sdramMemorySection")))
+static uint8_t decodedPacketBuffer[DECODED_PACKET_BUFFER_SIZE] = {""};
 
 void assembler_startup(void)
 {
-   // Write your initialisation code
-   // You may call sporadic required interfaces and start timers
-   // puts ("[Assembler] Startup");
-}
-
-void assembler_PI_Deliver
-      (const asn1SccDeliveredRequestData *IN_deliverreqseq)
-
-{
-   uint64_t length = (uint64_t) IN_deliverreqseq->length;
-   uint8_t *data = (uint8_t *) IN_deliverreqseq->data;
-
-   asn1SccUartHwasInterfaceType_SendByteAsyncCmd_Type sendData;
-   sendData.uart = uart;
-   for (uint64_t i = 0; i < length; ++i) {
-      sendData.byteToSend = (asn1SccByte) data[i];
-      assembler_RI_UartHwas_SendByteAsyncCmd_Pi(&sendData);
-   }
 }
 
 void assembler_PI_Init
-      (const asn1SccInitRequestData *IN_initreqseq)
+      (const uart_seds_asn1SccInitRequestData *IN_initreqseq)
 
 {
-   //asn1SccUART_SEDS_Conf_T *device_configuration = (asn1SccUART_SEDS_Conf_T *) IN_initreqseq->device_configuration;
+   Escaper_init(&escaper,
+                encodedPacketBuffer,
+                ENCODED_PACKET_BUFFER_SIZE,
+                decodedPacketBuffer,
+                DECODED_PACKET_BUFFER_SIZE);
 
-
-   asn1SccUartHwasConfig config;
+   uart_seds_asn1SccUartHwasConfig config;
    config.mInstance = UartHwas_Instance_uartHwas_Instance_3;
    config.mBaudrate = UartHwas_Baudrate_uartHwas_Baudrate9600;
    assembler_RI_UartHwas_InitUartCmd_Pi(&uart, &config);
 }
 
-void assembler_PI_UartHwas_ReadByteAsyncCmd_Ri
-      (const asn1SccUartHwasInterfaceType_ReadByteAsyncCmd_TypeNotify *IN_inputparam)
-
+void assembler_send_single_byte_to_uarthwas()
 {
-   asn1SccReceivedRequestData data;
-   assembler_RI_Receive(&data);
+   if(sentBytes < bytesToSend) {
+      uart_seds_asn1SccUartHwasInterfaceType_SendByteAsyncCmd_Type sendByteStructure = {
+         .uart = uart,
+         .byteToSend = (uart_seds_asn1SccByte) encodedPacketBuffer[sentBytes]
+      };
+
+      sentBytes++;
+      assembler_RI_UartHwas_SendByteAsyncCmd_Pi(&sendByteStructure);
+   } else {
+      sentBytes = 0;
+      bytesToSend = 0;
+   }
 }
 
+void assembler_PI_Deliver
+      (const uart_seds_asn1SccDeliveredRequestData *IN_deliverreqseq)
 
-//void assembler_PI_UartHwas_SendByteAsyncCmd_Ri
-//      (const asn1SccUartHwasInterfaceType_SendByteAsyncCmd_TypeNotify *IN_inputparam)
-//
-//{
-   // Write your code here
-//}
+{
+   uint64_t length = (uint64_t) IN_deliverreqseq->length;
+   uint8_t *data = IN_deliverreqseq->data;
 
+   Escaper_start_encoder(&escaper);
+   size_t index = 0;
+   //size_t packetLength = 0;
 
+   //while(index < length) {
+   bytesToSend = Escaper_encode_packet(&escaper, data, length, &index);
+   //    int count = write(m_serialFd, encodedPacketBuffer, packetLength);
+   //    if(count < 0) {
+   //          std::cerr << "Serial write error\n\r";
+   //    }
+   // }
+
+   assembler_send_single_byte_to_uarthwas();
+}
+
+void assembler_PI_UartHwas_ReadByteAsyncCmd_Ri
+      (const uart_seds_asn1SccUartHwasInterfaceType_ReadByteAsyncCmd_TypeNotify *IN_inputparam)
+
+{
+   //Escaper_decode_packet(&escaper, &IN_inputparam->byteToRead, 1, Broker_receive_packet);
+
+   // uart_seds_asn1SccByte byte = IN_inputparam->byteToRead;
+   // buffer[index++] = IN_inputparam->byteToRead;
+   // if (IN_inputparam->byteToRead == 0xC0) {
+   //    uart_seds_asn1SccReceivedRequestData data;
+   //    data.private_data = buffer;
+   //    assembler_RI_Receive(&data);
+   // }
+   // index = 0;
+}
+
+void assembler_PI_UartHwas_SendByteAsyncCmd_Ri
+      (const uart_seds_asn1SccUartHwasInterfaceType_SendByteAsyncCmd_TypeNotify *IN_inputparam)
+
+{
+   assembler_send_single_byte_to_uarthwas();
+}
+
+void assembler_PI_UartErrorReporting_OverrunError_Ri
+      ( void )
+{
+   //Write your code here
+}
