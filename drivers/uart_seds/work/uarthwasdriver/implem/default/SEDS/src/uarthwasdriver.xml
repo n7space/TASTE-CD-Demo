@@ -32,6 +32,10 @@
             <Variable name="irqNumberVar" type="com/n7space/Hwas/InterruptNumber"></Variable>
             <Variable name="pioConfigVar" type="com/n7space/PioHwas/PioHwasPinConfig"></Variable>
             <Variable name="pioVar" type="com/n7space/PioHwas/PioHwas"></Variable>
+            <Variable name="readWrapperVar" type="DataviewUniqTypes/UartHwasInterfaceType_ReadByteAsyncCmd_Type"></Variable>
+            <Variable name="sendWrapperVar" type="DataviewUniqTypes/UartHwasInterfaceType_SendByteAsyncCmd_Type"></Variable>
+            <Variable name="readWrapperNotifyVar" type="DataviewUniqTypes/UartHwasInterfaceType_ReadByteAsyncCmd_TypeNotify"></Variable>
+            <Variable name="sendWrapperNotifyVar" type="DataviewUniqTypes/UartHwasInterfaceType_SendByteAsyncCmd_TypeNotify"></Variable>
           </VariableSet>
           <ActivitySet>
             <Activity name="UpdateLocalUart">
@@ -260,7 +264,7 @@
                     <Assignment outputVariableRef="pioConfigVar.mControlConfig">
                       <Value value="PioHwas_Control_PeripheralA" />
                     </Assignment>
-                    <SendCommandPrimitive interface="PioHwas" command="InitPin">
+                    <SendCommandPrimitive interface="PioHwas_InitPin_RiRi" command="PioHwas_InitPin_RiRi">
                       <LongDescription>Init uart Rx pin</LongDescription>
                       <ArgumentValue name="pio">
                         <VariableRef variableRef="pioVar"></VariableRef>
@@ -275,7 +279,7 @@
                     <Assignment outputVariableRef="pioConfigVar.mDirectionConfig">
                       <Value value="PioHwas_Direction_Output" />
                     </Assignment>
-                    <SendCommandPrimitive interface="PioHwas" command="InitPin">
+                    <SendCommandPrimitive interface="PioHwas_InitPin_RiRi" command="PioHwas_InitPin_RiRi">
                       <LongDescription>Init uart Tx pin</LongDescription>
                       <ArgumentValue name="pio">
                         <VariableRef variableRef="pioVar"></VariableRef>
@@ -308,7 +312,7 @@
                         <Assignment outputVariableRef="pioConfigVar.mControlConfig">
                           <Value value="PioHwas_Control_PeripheralC" />
                         </Assignment>
-                        <SendCommandPrimitive interface="PioHwas" command="InitPin">
+                        <SendCommandPrimitive interface="PioHwas_InitPin_RiRi" command="PioHwas_InitPin_RiRi">
                           <LongDescription>Init uart Rx pin</LongDescription>
                           <ArgumentValue name="pio">
                             <VariableRef variableRef="pioVar"></VariableRef>
@@ -323,7 +327,7 @@
                         <Assignment outputVariableRef="pioConfigVar.mDirectionConfig">
                           <Value value="PioHwas_Direction_Output" />
                         </Assignment>
-                        <SendCommandPrimitive interface="PioHwas" command="InitPin">
+                        <SendCommandPrimitive interface="PioHwas_InitPin_RiRi" command="PioHwas_InitPin_RiRi">
                           <LongDescription>Init uart Tx pin</LongDescription>
                           <ArgumentValue name="pio">
                             <VariableRef variableRef="pioVar"></VariableRef>
@@ -356,7 +360,7 @@
                             <Assignment outputVariableRef="pioConfigVar.mControlConfig">
                               <Value value="PioHwas_Control_PeripheralC" />
                             </Assignment>
-                            <SendCommandPrimitive interface="PioHwas" command="InitPin">
+                            <SendCommandPrimitive interface="PioHwas_InitPin_RiRi" command="PioHwas_InitPin_RiRi">
                               <LongDescription>Init uart Rx pin</LongDescription>
                               <ArgumentValue name="pio">
                                 <VariableRef variableRef="pioVar"></VariableRef>
@@ -371,7 +375,7 @@
                             <Assignment outputVariableRef="pioConfigVar.mDirectionConfig">
                               <Value value="PioHwas_Direction_Output" />
                             </Assignment>
-                            <SendCommandPrimitive interface="PioHwas" command="InitPin">
+                            <SendCommandPrimitive interface="PioHwas_InitPin_RiRi" command="PioHwas_InitPin_RiRi">
                               <LongDescription>Init uart Tx pin</LongDescription>
                               <ArgumentValue name="pio">
                                 <VariableRef variableRef="pioVar"></VariableRef>
@@ -404,7 +408,7 @@
                                 <Assignment outputVariableRef="pioConfigVar.mControlConfig">
                                   <Value value="PioHwas_Control_PeripheralA" />
                                 </Assignment>
-                                <SendCommandPrimitive interface="PioHwas" command="InitPin">
+                                <SendCommandPrimitive interface="PioHwas_InitPin_RiRi" command="PioHwas_InitPin_RiRi">
                                   <LongDescription>Init uart Rx pin</LongDescription>
                                   <ArgumentValue name="pio">
                                     <VariableRef variableRef="pioVar"></VariableRef>
@@ -419,7 +423,7 @@
                                 <Assignment outputVariableRef="pioConfigVar.mDirectionConfig">
                                   <Value value="PioHwas_Direction_Output" />
                                 </Assignment>
-                                <SendCommandPrimitive interface="PioHwas" command="InitPin">
+                                <SendCommandPrimitive interface="PioHwas_InitPin_RiRi" command="PioHwas_InitPin_RiRi">
                                   <LongDescription>Init uart Tx pin</LongDescription>
                                   <ArgumentValue name="pio">
                                     <VariableRef variableRef="pioVar"></VariableRef>
@@ -452,7 +456,7 @@
                                     <Assignment outputVariableRef="pioConfigVar.mControlConfig">
                                       <Value value="PioHwas_Control_PeripheralC" />
                                     </Assignment>
-                                    <SendCommandPrimitive interface="PioHwas" command="InitPin">
+                                    <SendCommandPrimitive interface="PioHwas_InitPin_RiRi" command="PioHwas_InitPin_RiRi">
                                       <LongDescription>Init uart Rx pin</LongDescription>
                                       <ArgumentValue name="pio">
                                         <VariableRef variableRef="pioVar"></VariableRef>
@@ -467,7 +471,7 @@
                                     <Assignment outputVariableRef="pioConfigVar.mDirectionConfig">
                                       <Value value="PioHwas_Direction_Output" />
                                     </Assignment>
-                                    <SendCommandPrimitive interface="PioHwas" command="InitPin">
+                                    <SendCommandPrimitive interface="PioHwas_InitPin_RiRi" command="PioHwas_InitPin_RiRi">
                                       <LongDescription>Init uart Tx pin</LongDescription>
                                       <ArgumentValue name="pio">
                                         <VariableRef variableRef="pioVar"></VariableRef>
@@ -769,7 +773,7 @@
                     </Conditional>
                   </OnConditionFalse>
                 </Conditional>
-                <SendCommandPrimitive shortDescription="Enable proper UART instance clock" interface="RawMemoryAccess" command="WriteWord">
+                <SendCommandPrimitive shortDescription="Enable proper UART instance clock" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="destinationAddressVar" />
                   </ArgumentValue>
@@ -789,7 +793,7 @@
                 <Assignment outputVariableRef="destinationAddressVar">
                   <VariableRef variableRef="uartVar.mUartCrAddress" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Enable Rx and Tx" interface="RawMemoryAccess" command="WriteWord">
+                <SendCommandPrimitive shortDescription="Enable Rx and Tx" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="destinationAddressVar" />
                   </ArgumentValue>
@@ -803,7 +807,7 @@
                 <Assignment outputVariableRef="destinationAddressVar">
                   <VariableRef variableRef="uartVar.mUartMrAddress" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Set no parity mode and clear chmode bits (set normal mode)" interface="RawMemoryAccess" command="WriteWord">
+                <SendCommandPrimitive shortDescription="Set no parity mode and clear chmode bits (set normal mode)" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="destinationAddressVar" />
                   </ArgumentValue>
@@ -855,7 +859,7 @@
                     </Conditional>
                   </OnConditionFalse>
                 </Conditional>
-                <SendCommandPrimitive shortDescription="Set no parity mode and clear chmode bits (set normal mode)" interface="RawMemoryAccess" command="WriteWord">
+                <SendCommandPrimitive shortDescription="Set no parity mode and clear chmode bits (set normal mode)" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="destinationAddressVar" />
                   </ArgumentValue>
@@ -961,7 +965,7 @@
                     <VariableRef variableRef="configVar" />
                   </ArgumentValue>
                 </Call>
-                <SendCommandPrimitive shortDescription="Return set uart container" interface="UartHwas" command="InitUartCmd">
+                <SendCommandPrimitive shortDescription="Return set uart container" interface="UartHwas_InitUartCmd_PiPi" command="UartHwas_InitUartCmd_PiPi">
                   <ArgumentValue name="uart">
                     <VariableRef variableRef="uartVar" />
                   </ArgumentValue>
@@ -974,7 +978,7 @@
                 <Assignment outputVariableRef="destinationAddressVar">
                   <VariableRef variableRef="uart.mUartIerAddress" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Enable Rx ready interrupt" interface="RawMemoryAccess" command="WriteWord">
+                <SendCommandPrimitive shortDescription="Enable Rx ready interrupt" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="destinationAddressVar" />
                   </ArgumentValue>
@@ -988,12 +992,12 @@
                 <Assignment outputVariableRef="irqNumberVar">
                   <VariableRef variableRef="uartVar.mIrqNumber" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Subscribe to Uart interrupt" interface="InterruptSubscriptionManagement" command="SubscribeToInterrupt">
+                <SendCommandPrimitive shortDescription="Subscribe to Uart interrupt" interface="InterruptSubscriptionManagement_SubscribeToInterrupt_RiRi" command="InterruptSubscriptionManagement_SubscribeToInterrupt_RiRi">
                   <ArgumentValue name="interrupt">
                     <VariableRef variableRef="irqNumberVar" />
                   </ArgumentValue>
                 </SendCommandPrimitive>
-                <SendCommandPrimitive shortDescription="Enable Uart interrupt" interface="InterruptManagement" command="EnableInterrupt">
+                <SendCommandPrimitive shortDescription="Enable Uart interrupt" interface="InterruptManagement_EnableInterrupt_RiRi" command="InterruptManagement_EnableInterrupt_RiRi">
                   <ArgumentValue name="interrupt">
                     <VariableRef variableRef="irqNumberVar" />
                   </ArgumentValue>
@@ -1007,12 +1011,12 @@
                 <Assignment outputVariableRef="irqNumberVar">
                   <VariableRef variableRef="uartVar.mIrqNumber" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Subscribe to Uart interrupt" interface="InterruptSubscriptionManagement" command="SubscribeToInterrupt">
+                <SendCommandPrimitive shortDescription="Subscribe to Uart interrupt" interface="InterruptSubscriptionManagement_SubscribeToInterrupt_RiRi" command="InterruptSubscriptionManagement_SubscribeToInterrupt_RiRi">
                   <ArgumentValue name="interrupt">
                     <VariableRef variableRef="irqNumberVar" />
                   </ArgumentValue>
                 </SendCommandPrimitive>
-                <SendCommandPrimitive shortDescription="Enable Uart interrupt" interface="InterruptManagement" command="EnableInterrupt">
+                <SendCommandPrimitive shortDescription="Enable Uart interrupt" interface="InterruptManagement_EnableInterrupt_RiRi" command="InterruptManagement_EnableInterrupt_RiRi">
                   <ArgumentValue name="interrupt">
                     <VariableRef variableRef="irqNumberVar" />
                   </ArgumentValue>
@@ -1026,7 +1030,7 @@
                 <Assignment outputVariableRef="bitsValueVar">
                   <VariableRef variableRef="byte" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Write byte to Thr " interface="RawMemoryAccess" command="WriteWord">
+                <SendCommandPrimitive shortDescription="Write byte to Thr " interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="destinationAddressVar" />
                   </ArgumentValue>
@@ -1041,7 +1045,7 @@
                   <LongDescription>Assign source address to variable</LongDescription>
                   <VariableRef variableRef="uart.mUartIerAddress" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Enable Tx empty interrupt" interface="RawMemoryAccess" command="WriteWord">
+                <SendCommandPrimitive shortDescription="Enable Tx empty interrupt" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="destinationAddressVar" />
                   </ArgumentValue>
@@ -1060,7 +1064,7 @@
                 <Assignment outputVariableRef="sourceAddressVar">
                   <VariableRef variableRef="uartVar.mUartImrAddress" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Read interrupt mask for RXRDY(IMR)" interface="RawMemoryAccess" command="ReadWord">
+                <SendCommandPrimitive shortDescription="Read interrupt mask for RXRDY(IMR)" interface="RawMemoryAccess_ReadWord_RiRi" command="RawMemoryAccess_ReadWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="sourceAddressVar" />
                   </ArgumentValue>
@@ -1074,7 +1078,7 @@
                 <Assignment outputVariableRef="sourceAddressVar">
                   <VariableRef variableRef="uartVar.mUartSrAddress" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Read OVRE bit from UART_SR" interface="RawMemoryAccess" command="ReadWord">
+                <SendCommandPrimitive shortDescription="Read OVRE bit from UART_SR" interface="RawMemoryAccess_ReadWord_RiRi" command="RawMemoryAccess_ReadWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="sourceAddressVar" />
                   </ArgumentValue>
@@ -1095,10 +1099,10 @@
                     </Condition>
                   </Condition>
                   <OnConditionTrue>
-                    <SendCommandPrimitive interface="UartErrorReporting" command="OverrunError"></SendCommandPrimitive>
+                    <SendCommandPrimitive interface="UartErrorReporting_OverrunError_RiRi" command="UartErrorReporting_OverrunError_RiRi"></SendCommandPrimitive>
                   </OnConditionTrue>
                 </Conditional>
-                <SendCommandPrimitive shortDescription="Read RXRDY bit from UART_SR" interface="RawMemoryAccess" command="ReadWord">
+                <SendCommandPrimitive shortDescription="Read RXRDY bit from UART_SR" interface="RawMemoryAccess_ReadWord_RiRi" command="RawMemoryAccess_ReadWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="sourceAddressVar" />
                   </ArgumentValue>
@@ -1122,7 +1126,7 @@
                     <Assignment outputVariableRef="sourceAddressVar">
                       <VariableRef variableRef="uartVar.mUartRhrAddress" />
                     </Assignment>
-                    <SendCommandPrimitive shortDescription="Read byte" interface="RawMemoryAccess" command="ReadWord">
+                    <SendCommandPrimitive shortDescription="Read byte" interface="RawMemoryAccess_ReadWord_RiRi" command="RawMemoryAccess_ReadWord_RiRi">
                       <ArgumentValue name="address">
                         <VariableRef variableRef="sourceAddressVar" />
                       </ArgumentValue>
@@ -1133,12 +1137,12 @@
                         <VariableRef variableRef="bitsValueVar" />
                       </ArgumentValue>
                     </SendCommandPrimitive>
-                    <Assignment outputVariableRef="byteVar">
+                    <Assignment outputVariableRef="readWrapperNotifyVar.byteToRead">
                       <VariableRef variableRef="bitsValueVar" />
                     </Assignment>
-                    <SendCommandPrimitive interface="UartHwas" command="ReadByteAsyncCmd">
-                      <ArgumentValue name="byteToRead">
-                        <VariableRef variableRef="byteVar" />
+                    <SendCommandPrimitive interface="UartHwas_ReadByteAsyncCmd_RiRi" command="UartHwas_ReadByteAsyncCmd_RiRi">
+                      <ArgumentValue name="InputParam">
+                        <VariableRef variableRef="readWrapperNotifyVar" />
                       </ArgumentValue>
                     </SendCommandPrimitive>
                   </OnConditionTrue>
@@ -1146,7 +1150,7 @@
                 <Assignment outputVariableRef="sourceAddressVar">
                   <VariableRef variableRef="uartVar.mUartImrAddress" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Read interrupt mask for TXEMPTY(IMR)" interface="RawMemoryAccess" command="ReadWord">
+                <SendCommandPrimitive shortDescription="Read interrupt mask for TXEMPTY(IMR)" interface="RawMemoryAccess_ReadWord_RiRi" command="RawMemoryAccess_ReadWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="sourceAddressVar" />
                   </ArgumentValue>
@@ -1160,7 +1164,7 @@
                 <Assignment outputVariableRef="sourceAddressVar">
                   <VariableRef variableRef="uartVar.mUartSrAddress" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Read uartVar status of RXRDY masked taking value from IMR" interface="RawMemoryAccess" command="ReadWord">
+                <SendCommandPrimitive shortDescription="Read uartVar status of RXRDY masked taking value from IMR" interface="RawMemoryAccess_ReadWord_RiRi" command="RawMemoryAccess_ReadWord_RiRi">
                   <ArgumentValue name="address">
                     <VariableRef variableRef="sourceAddressVar" />
                   </ArgumentValue>
@@ -1184,7 +1188,7 @@
                     <Assignment outputVariableRef="destinationAddressVar">
                       <VariableRef variableRef="uartVar.mUartIdrAddress" />
                     </Assignment>
-                    <SendCommandPrimitive shortDescription="Disable uartVar TXEmpty interrupt" interface="RawMemoryAccess" command="WriteWord">
+                    <SendCommandPrimitive shortDescription="Disable uartVar TXEmpty interrupt" interface="RawMemoryAccess_WriteWord_RiRi" command="RawMemoryAccess_WriteWord_RiRi">
                       <ArgumentValue name="address">
                         <VariableRef variableRef="destinationAddressVar" />
                       </ArgumentValue>
@@ -1195,9 +1199,12 @@
                         <Value value="512" />
                       </ArgumentValue>
                     </SendCommandPrimitive>
-                    <SendCommandPrimitive shortDescription="Notify that byte was received" interface="UartHwas" command="SendByteAsyncCmd">
-                      <ArgumentValue name="byteSentFlag">
-                        <Value value="1" />
+                    <Assignment outputVariableRef="sendWrapperNotifyVar.byteSentFlag">
+                      <Value value="1" />
+                    </Assignment>
+                    <SendCommandPrimitive shortDescription="Notify that byte was received" interface="UartHwas_SendByteAsyncCmd_RiRi" command="UartHwas_SendByteAsyncCmd_RiRi">
+                      <ArgumentValue name="InputParam">
+                        <VariableRef variableRef="sendWrapperNotifyVar" />
                       </ArgumentValue>
                     </SendCommandPrimitive>
                   </OnConditionTrue>
@@ -1205,7 +1212,7 @@
                 <Assignment outputVariableRef="irqNumberVar">
                   <VariableRef variableRef="uartVar.mIrqNumber" />
                 </Assignment>
-                <SendCommandPrimitive shortDescription="Enable uartVar interrupt" interface="InterruptManagement" command="EnableInterrupt">
+                <SendCommandPrimitive shortDescription="Enable uartVar interrupt" interface="InterruptManagement_EnableInterrupt_RiRi" command="InterruptManagement_EnableInterrupt_RiRi">
                   <ArgumentValue name="interrupt">
                     <VariableRef variableRef="irqNumberVar" />
                   </ArgumentValue>
@@ -1218,7 +1225,7 @@
               <EntryState name="Off" />
               <State name="Idle" />
               <Transition fromState="Off" toState="Idle" name="Init">
-                <OnCommandPrimitive command="InitUartCmd" interface="UartHwas">
+                <OnCommandPrimitive command="UartHwas_InitUartCmd_PiPi" interface="UartHwas_InitUartCmd_PiPi">
                   <ArgumentValue name="config" outputVariableRef="configVar"></ArgumentValue>
                 </OnCommandPrimitive>
                 <Do activity="InitUart">
@@ -1228,31 +1235,30 @@
                 </Do>
               </Transition>
               <Transition fromState="Idle" toState="Idle" name="ReadByte">
-                <OnCommandPrimitive command="ReadByteAsyncCmd" interface="UartHwas">
-                  <ArgumentValue name="uart" outputVariableRef="uartVar" />
+                <OnCommandPrimitive command="UartHwas_ReadByteAsyncCmd_PiPi" interface="UartHwas_ReadByteAsyncCmd_PiPi">
+                  <ArgumentValue name="InputParam" outputVariableRef="readWrapperVar" />
                 </OnCommandPrimitive>
                 <Do activity="ReadByteAsync">
                   <ArgumentValue name="uart">
-                    <VariableRef variableRef="uartVar" />
+                    <VariableRef variableRef="readWrapperVar.uart" />
                   </ArgumentValue>
                 </Do>
               </Transition>
               <Transition fromState="Idle" toState="Idle" name="SendByte">
-                <OnCommandPrimitive command="SendByteAsyncCmd" interface="UartHwas">
-                  <ArgumentValue name="uart" outputVariableRef="uartVar" />
-                  <ArgumentValue name="byteToSend" outputVariableRef="bitsValueVar" />
+                <OnCommandPrimitive command="UartHwas_SendByteAsyncCmd_PiPi" interface="UartHwas_SendByteAsyncCmd_PiPi">
+                  <ArgumentValue name="InputParam" outputVariableRef="sendWrapperVar" />
                 </OnCommandPrimitive>
                 <Do activity="SendByteAsync">
                   <ArgumentValue name="uart">
-                    <VariableRef variableRef="uartVar" />
+                    <VariableRef variableRef="sendWrapperVar.uart" />
                   </ArgumentValue>
                   <ArgumentValue name="byteToSend">
-                    <VariableRef variableRef="bitsValueVar" />
+                    <VariableRef variableRef="sendWrapperVar.byteToSend" />
                   </ArgumentValue>
                 </Do>
               </Transition>
               <Transition fromState="Idle" toState="Idle" name="IRQHandling">
-                <OnCommandPrimitive command="Interrupt" interface="InterruptSubscription">
+                <OnCommandPrimitive command="InterruptSubscription_Interrupt_PiPi" interface="InterruptSubscription_Interrupt_PiPi">
                   <ArgumentValue name="interrupt" outputVariableRef="irqNumberVar" />
                 </OnCommandPrimitive>
                 <Do activity="IRQHandler"></Do>
