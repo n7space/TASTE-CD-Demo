@@ -22,8 +22,8 @@ ASN1_TYPES_C_FILES=$(find work -name "C_ASN1_Types.c" -not -path 'work/build/*' 
 H_FILES=$(find work -name "*.h" ! -name "*C_ASN1_Types.h" -not -path 'work/build/*' -a -not -path 'work/dataview/*' -a -not -path 'work/broker/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*')
 C_FILES=$(find work -name "*.c" ! -name "*C_ASN1_Types.c" -not -path 'work/build/*' -a -not -path 'work/dataview/*' -a -not -path 'work/broker/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*')
 CC_FILES=$(find work -name "*.cc" ! -name "*C_ASN1_Types.c" -not -path 'work/build/*' -a -not -path 'work/dataview/*' -a -not -path 'work/broker/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*')
-ADS_FILES=$(find work -name "*.ads" -not -path 'work/build/*' -a -not -path 'work/dataview/*' -a -not -path 'work/broker/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*')
-ADB_FILES=$(find work -name "*.adb" -not -path 'work/build/*' -a -not -path 'work/dataview/*' -a -not -path 'work/broker/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*')
+ADS_FILES=$(find work -name "*.ads" -not -path 'work/build/*' -a -not -path 'work/broker/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*')
+ADB_FILES=$(find work -name "*.adb" -not -path 'work/build/*' -a -not -path 'work/broker/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*')
 DRIVER_INTERFACE_FILES=$(find work/build/**/${PARTITION_NAME} -name "${PARTITION_NAME}.*")
 THREAD_FILES=$(find work/build/**/${PARTITION_NAME} -name "thread_*" -a -not -name "thread_broker_receive.*" -a -not -name "thread_packetizer_trigger.*")
 INTERFACE_FILES=$(find work/build/**/${PARTITION_NAME} -name "${PARTITION_NAME}_interface.h" -o -name "${PARTITION_NAME}_shared_interface.c")
@@ -48,7 +48,7 @@ asn1scc --xml-ast ${ASN1_CONFIG_XML} uart_sedsconfiguration.asn
 ASN1_CONFIG_DATA_TYPES=$(xmllint --xpath "//ExportedType/@Name" ${ASN1_CONFIG_XML} | sed -e "s/Name=//g" | sed -e "s/\"//g" | sed -e "s/-/_/g")
 cat ${ASN1_FILES_WITHOUT_CONFIG} ${TOOL_INST}/share/taste-types/taste-types.asn work/system.asn > ${CD_DATAVIEW_DIR}/dataview-uniq.asn
 sed -i "s/END/END\n/g" ${CD_DATAVIEW_DIR}/dataview-uniq.asn
-asn1scc -o ${CD_DATAVIEW_DIR} -typePrefix asn1Scc -renamePolicy 3 -equal -fp AUTO -c ${CD_DATAVIEW_DIR}/dataview-uniq.asn
+asn1scc -o ${CD_DATAVIEW_DIR} -typePrefix asn1Scc -renamePolicy 3 -equal -fp AUTO -c -ACN ${CD_DATAVIEW_DIR}/dataview-uniq.asn
 cp ${CD_DATAVIEW_DIR}/dataview-uniq.h $CD_INSTALLATION_DIRECTORY/uart_seds
 cp ${CD_DATAVIEW_DIR}/dataview-uniq.c $CD_INSTALLATION_DIRECTORY/uart_seds
 rm -r ${CD_DATAVIEW_DIR}
@@ -56,7 +56,7 @@ rm -r ${CD_DATAVIEW_DIR}
 for ASN1_CONFIG_DATA_TYPE in $ASN1_CONFIG_DATA_TYPES; do
     find $CD_INSTALLATION_DIRECTORY/uart_seds -type f | xargs sed -i "s/asn1Scc${ASN1_CONFIG_DATA_TYPE}/${ASN1_CONFIG_DATA_TYPE}/g"
 done
-find $CD_INSTALLATION_DIRECTORY/uart_seds -type f | xargs sed -i "s/asn1Scc/${PARTITION_NAME}_asn1Scc/g"
+find $CD_INSTALLATION_DIRECTORY/uart_seds -type f | xargs sed -i "s/asn1Scc/${PARTITION_NAME}_asn1Scc/gi"
 find $CD_INSTALLATION_DIRECTORY/uart_seds -type f | xargs sed -i "s/request_size.h/${PARTITION_NAME}_request_size.h/g"
 find $CD_INSTALLATION_DIRECTORY/uart_seds -type f | xargs sed -i "s/routing.h/${PARTITION_NAME}_routing.h/g"
 sed -i "s/GENERIC_PARTITION_BUFFER_SIZE/${PARTITION_NAME}_GENERIC_PARTITION_BUFFER_SIZE/g" $CD_INSTALLATION_DIRECTORY/uart_seds/request_size.h
