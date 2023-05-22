@@ -79,9 +79,6 @@ void assembler_PI_Init
                 decodedPacketBuffer,
                 DECODED_PACKET_BUFFER_SIZE);
 
-   sentBytes = 0;
-   bytesToSend = 0;
-
    asn1SccUartHwasConfig config;
    asn1SccUART_SEDS_Conf_T *conf = (asn1SccUART_SEDS_Conf_T *) IN_initreqseq->device_configuration;
    config.mInstance = assembler_convert_conf_asn_devname_to_hwas(conf->devname);
@@ -120,6 +117,7 @@ void assembler_PI_Deliver
    size_t index = 0;
 
    Escaper_start_encoder(&escaper);
+   sentBytes = 0;
    bytesToSend = Escaper_encode_packet(&escaper, data, length, &index);
    assembler_send_single_byte_to_uarthwas();
 }
