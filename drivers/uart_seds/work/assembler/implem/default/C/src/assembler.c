@@ -9,6 +9,8 @@
 */
 #include "assembler.h"
 
+#include <assert.h>
+
 #include <FreeRTOS.h>
 #include <semphr.h>
 
@@ -19,9 +21,9 @@ __attribute__((section(".sdramMemorySection")))
 static asn1SccUartHwas uart;
 
 __attribute__((section(".sdramMemorySection")))
-static uint64_t sentBytes = 0;
+static uint64_t sentBytes;
 __attribute__((section(".sdramMemorySection")))
-static uint64_t bytesToSend = 0;
+static uint64_t bytesToSend;
 
 __attribute__((section(".sdramMemorySection")))
 static Escaper escaper;
@@ -36,19 +38,54 @@ void assembler_startup(void)
 {
 }
 
+asn1SccUartHwas_Instance assembler_convert_conf_asn_devname_to_hwas
+      (asn1SccUART_SEDS_Device_T devname)
+{
+   switch (devname) {
+   case asn1SccUART_SEDS_Device_T_uart4:
+      return UartHwas_Instance_uartHwas_Instance_4;
+   case asn1SccUART_SEDS_Device_T_uart3:
+      return UartHwas_Instance_uartHwas_Instance_3;
+   case asn1SccUART_SEDS_Device_T_uart2:
+      return UartHwas_Instance_uartHwas_Instance_2;
+   case asn1SccUART_SEDS_Device_T_uart1:
+      return UartHwas_Instance_uartHwas_Instance_1;
+   case asn1SccUART_SEDS_Device_T_uart0:
+   default:
+      return UartHwas_Instance_uartHwas_Instance_0;
+   }
+}
+
+asn1SccUartHwas_Instance assembler_convert_conf_asn_baudrate_to_hwas
+      (asn1SccUART_SEDS_Baudrate_T baudrate)
+{
+   switch (baudrate) {
+   case asn1SccUART_SEDS_Baudrate_T_b115200:
+      return UartHwas_Baudrate_uartHwas_Baudrate115200;
+   case asn1SccUART_SEDS_Baudrate_T_b9600:
+   default:
+      return UartHwas_Baudrate_uartHwas_Baudrate9600;
+   }
+}
+
 void assembler_PI_Init
       (const asn1SccInitRequestData *IN_initreqseq)
 
 {
+   assert(IN_initreqseq);
    Escaper_init(&escaper,
                 encodedPacketBuffer,
                 ENCODED_PACKET_BUFFER_SIZE,
                 decodedPacketBuffer,
                 DECODED_PACKET_BUFFER_SIZE);
 
+   sentBytes = 0;
+   bytesToSend = 0;
+
    asn1SccUartHwasConfig config;
-   config.mInstance = UartHwas_Instance_uartHwas_Instance_3;
-   config.mBaudrate = UartHwas_Baudrate_uartHwas_Baudrate9600;
+   asn1SccUART_SEDS_Conf_T *conf = (asn1SccUART_SEDS_Conf_T *) IN_initreqseq->device_configuration;
+   config.mInstance = assembler_convert_conf_asn_devname_to_hwas(conf->devname);
+   config.mBaudrate = assembler_convert_conf_asn_baudrate_to_hwas(conf->speed);
    assembler_RI_UartHwas_InitUartCmd_Pi(&uart, &config);
 
    /* We need to call Pi interface to enable Read interrupts. Otherwise

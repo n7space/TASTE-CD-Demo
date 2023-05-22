@@ -5,7 +5,7 @@ UART-SEDS-DRIVER-CONFIGURATION DEFINITIONS ::= BEGIN
 
     UART-SEDS-Device-T    ::= ENUMERATED {uart0, uart1, uart2, uart3, uart4}
 
-    UART-SEDS-Baudrate-T  ::= ENUMERATED {b9600, b19200, b38400, b57600, b115200, b230400}
+    UART-SEDS-Baudrate-T  ::= ENUMERATED {b9600, b115200}
 
     UART-SEDS-Conf-T ::= SEQUENCE {
         devname        UART-SEDS-Device-T,
