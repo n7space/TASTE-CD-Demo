@@ -17,15 +17,15 @@ cp uart_sedsconfiguration.asn $CD_INSTALLATION_DIRECTORY
 cp uart_sedsconfiguration.acn $CD_INSTALLATION_DIRECTORY
 mkdir -p $CD_INSTALLATION_DIRECTORY/uart_seds
 
-ASN1_TYPES_H_FILES=$(find work -name "C_ASN1_Types.h" -not -path 'work/build/*' -a -not -path 'work/dataview/*' -a -not -path 'work/broker/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*' | head -n 1)
-ASN1_TYPES_C_FILES=$(find work -name "C_ASN1_Types.c" -not -path 'work/build/*' -a -not -path 'work/dataview/*' -a -not -path 'work/broker/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*' | head -n 1)
-H_FILES=$(find work -name "*.h" ! -name "*C_ASN1_Types.h" -not -path 'work/build/*' -a -not -path 'work/dataview/*' -a -not -path 'work/broker/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*')
-C_FILES=$(find work -name "*.c" ! -name "*C_ASN1_Types.c" -not -path 'work/build/*' -a -not -path 'work/dataview/*' -a -not -path 'work/broker/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*')
-CC_FILES=$(find work -name "*.cc" ! -name "*C_ASN1_Types.c" -not -path 'work/build/*' -a -not -path 'work/dataview/*' -a -not -path 'work/broker/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*')
-ADS_FILES=$(find work -name "*.ads" -not -path 'work/build/*' -a -not -path 'work/broker/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*')
-ADB_FILES=$(find work -name "*.adb" -not -path 'work/build/*' -a -not -path 'work/broker/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*')
+ASN1_TYPES_H_FILES=$(find work -name "C_ASN1_Types.h" -not -path 'work/build/*' -a -not -path 'work/dataview/*' -a -not -path 'work/uart_seds_broker_adapter/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*' | head -n 1)
+ASN1_TYPES_C_FILES=$(find work -name "C_ASN1_Types.c" -not -path 'work/build/*' -a -not -path 'work/dataview/*' -a -not -path 'work/uart_seds_broker_adapter/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*' | head -n 1)
+H_FILES=$(find work -name "*.h" ! -name "*C_ASN1_Types.h" -not -path 'work/build/*' -a -not -path 'work/dataview/*' -a -not -path 'work/uart_seds_broker_adapter/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*')
+C_FILES=$(find work -name "*.c" ! -name "*C_ASN1_Types.c" -not -path 'work/build/*' -a -not -path 'work/dataview/*' -a -not -path 'work/uart_seds_broker_adapter/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*')
+CC_FILES=$(find work -name "*.cc" ! -name "*C_ASN1_Types.c" -not -path 'work/build/*' -a -not -path 'work/dataview/*' -a -not -path 'work/uart_seds_broker_adapter/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*')
+ADS_FILES=$(find work -name "*.ads" -not -path 'work/build/*' -a -not -path 'work/uart_seds_broker_adapter/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*')
+ADB_FILES=$(find work -name "*.adb" -not -path 'work/build/*' -a -not -path 'work/uart_seds_broker_adapter/*' -a -not -path 'work/packetizer/*' -a -not -path 'work/binaries/*' -a -not -path 'work/Debug/*' -a -not -path 'work/Dump/*')
 DRIVER_INTERFACE_FILES=$(find work/build/**/${PARTITION_NAME} -name "${PARTITION_NAME}.*")
-THREAD_FILES=$(find work/build/**/${PARTITION_NAME} -name "thread_*" -a -not -name "thread_broker_receive.*" -a -not -name "thread_packetizer_trigger.*")
+THREAD_FILES=$(find work/build/**/${PARTITION_NAME} -name "thread_*" -a -not -name "thread_uart_seds_broker_adapter_receive.*" -a -not -name "thread_packetizer_trigger.*")
 INTERFACE_FILES=$(find work/build/**/${PARTITION_NAME} -name "${PARTITION_NAME}_interface.h" -o -name "${PARTITION_NAME}_shared_interface.c")
 TRANSPORT_FILES=$(find work/build/**/${PARTITION_NAME} -name "driver_transport.*")
 ROUTING_FILES=$(find work/build/**/${PARTITION_NAME} -name "routing.*")

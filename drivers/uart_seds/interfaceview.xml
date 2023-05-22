@@ -266,7 +266,7 @@
     </Implementations>
 </Function>
 
-<Function id="{0bae5a1e-db6d-4710-9c4d-92489abd852a}" name="Broker" is_type="NO" instance_of="" language="C" default_implementation="default" fixed_system_element="YES" required_system_element="NO" FPGA_Configurations="" startup_priority="1" instances_min="1" instances_max="1">
+<Function id="{0bae5a1e-db6d-4710-9c4d-92489abd852a}" name="uart_seds_Broker_Adapter" is_type="NO" instance_of="" language="C" default_implementation="default" fixed_system_element="YES" required_system_element="NO" FPGA_Configurations="" startup_priority="1" instances_min="1" instances_max="1">
     <Property name="Taste::coordinates" value="-93700 7900 -81000 16700"/>
 <Provided_Interface id="{1cf181ed-564e-4998-98b9-e7d850bfd0c7}" name="Receive" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" wcet="0" miat="0" priority="1" is_simulink_interface="false" simulink_full_interface_ref="" queue_size="1" stack_size="16384">
     <Input_Parameter name="receiveReqSeq" type="ReceivedRequestData" encoding="NATIVE"/>
@@ -296,7 +296,7 @@
 
 <Connection id="{ccbb21ba-bd13-4797-afe8-8f6109f0c73b}" required_system_element="NO">
     <Source func_name="Assembler" ri_name="Receive"/>
-    <Target func_name="Broker" pi_name="Receive"/>
+    <Target func_name="uart_seds_Broker_Adapter" pi_name="Receive"/>
     <Property name="Taste::coordinates" value="-66600 15100 -80700 15100"/>
 </Connection>
 
@@ -337,7 +337,7 @@
 </Connection>
 
 <Connection id="{8136c39e-3096-4e3b-a444-59a88fb0e83f}" required_system_element="NO">
-    <Source func_name="Broker" ri_name="Deliver"/>
+    <Source func_name="uart_seds_Broker_Adapter" ri_name="Deliver"/>
     <Target func_name="Assembler" pi_name="Deliver"/>
     <Property name="Taste::coordinates" value="-80400 12600 -66300 12600"/>
 </Connection>
@@ -403,7 +403,7 @@
 </Connection>
 
 <Connection id="{92e95124-174d-4e82-8123-05635120c61a}" required_system_element="NO">
-    <Source func_name="Broker" ri_name="Init"/>
+    <Source func_name="uart_seds_Broker_Adapter" ri_name="Init"/>
     <Target func_name="Assembler" pi_name="Init"/>
     <Property name="Taste::coordinates" value="-80400 10100 -66300 10100"/>
 </Connection>
