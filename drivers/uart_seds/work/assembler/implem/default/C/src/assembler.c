@@ -34,6 +34,9 @@ static uint8_t encodedPacketBuffer[ENCODED_PACKET_BUFFER_SIZE] = {""};
 __attribute__((section(".sdramMemorySection")))
 static uint8_t decodedPacketBuffer[DECODED_PACKET_BUFFER_SIZE] = {""};
 
+__attribute__((section(".sdramMemorySection")))
+static asn1SccSystemBus bus_id;
+
 void assembler_startup(void)
 {
 }
@@ -78,6 +81,8 @@ void assembler_PI_Init
                 ENCODED_PACKET_BUFFER_SIZE,
                 decodedPacketBuffer,
                 DECODED_PACKET_BUFFER_SIZE);
+
+   bus_id = IN_initreqseq->bus_id;
 
    asn1SccUartHwasConfig config;
    asn1SccUART_SEDS_Conf_T *conf = (asn1SccUART_SEDS_Conf_T *) IN_initreqseq->device_configuration;
@@ -126,7 +131,7 @@ void assembler_PI_UartHwas_ReadByteAsyncCmd_Ri
       (const asn1SccUartHwasInterfaceType_ReadByteAsyncCmd_TypeNotify *IN_inputparam)
 
 {
-   Escaper_decode_packet(&escaper, 1, &IN_inputparam->byteToRead, 1, Broker_receive_packet);
+   Escaper_decode_packet(&escaper, bus_id, &IN_inputparam->byteToRead, 1, Broker_receive_packet);
 }
 
 void assembler_PI_UartHwas_SendByteAsyncCmd_Ri
