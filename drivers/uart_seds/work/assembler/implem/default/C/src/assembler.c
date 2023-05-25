@@ -15,7 +15,6 @@
 #include <semphr.h>
 
 #include <Escaper.h>
-#include <Broker.h>
 
 __attribute__((section(".sdramMemorySection")))
 static asn1SccUartHwas uart;
@@ -69,6 +68,16 @@ asn1SccUartHwas_Instance assembler_convert_conf_asn_baudrate_to_hwas
    default:
       return UartHwas_Baudrate_uartHwas_Baudrate9600;
    }
+}
+
+void assembler_invoke_broker_receive_packet
+      (enum SystemBus bus_id, uint8_t* const data, const size_t data_size)
+{
+   asn1SccReceivedRequestData request_data;
+   request_data.bus_id = bus_id;
+   request_data.message_data = (asn1SccPlatformSpecificPointer) data;
+   request_data.length = data_size;
+   assembler_RI_Receive(&request_data);
 }
 
 void assembler_PI_Init
@@ -131,7 +140,7 @@ void assembler_PI_UartHwas_ReadByteAsyncCmd_Ri
       (const asn1SccUartHwasInterfaceType_ReadByteAsyncCmd_TypeNotify *IN_inputparam)
 
 {
-   Escaper_decode_packet(&escaper, bus_id, &IN_inputparam->byteToRead, 1, Broker_receive_packet);
+   Escaper_decode_packet(&escaper, bus_id, &IN_inputparam->byteToRead, 1, &assembler_invoke_broker_receive_packet);
 }
 
 void assembler_PI_UartHwas_SendByteAsyncCmd_Ri
