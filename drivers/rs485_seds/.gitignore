@@ -27,6 +27,19 @@ work/assembler/implem/default/C/*
 work/assembler/implem/default/C/src/*
 !work/assembler/implem/default/C/src/assembler.c
 
+# Except arbiter source
+!work/arbiter/
+work/arbiter/*
+!work/arbiter/C
+!work/arbiter/implem
+!work/arbiter/implem/default
+work/arbiter/implem/default/*
+!work/arbiter/implem/default/C
+work/arbiter/implem/default/C/*
+!work/arbiter/implem/default/C/src
+work/arbiter/implem/default/C/src/*
+!work/arbiter/implem/default/C/src/arbiter.c
+
 # Except hwas source
 !work/hwas/
 work/hwas/*
