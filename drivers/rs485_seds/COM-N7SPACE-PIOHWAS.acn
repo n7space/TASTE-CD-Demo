@@ -1,0 +1,46 @@
+COM-N7SPACE-PIOHWAS DEFINITIONS ::= BEGIN
+PinNumber [size 8, encoding pos-int]
+PioHwas-Port [size 8, encoding pos-int, encode-values]
+PioHwas-Direction [size 8, encoding pos-int, encode-values]
+PioHwas-Control [size 8, encoding pos-int, encode-values]
+PioHwas []
+{
+    mPortAddress [],
+    mPin [],
+    mPortPerAddress [],
+    mPortPdrAddress [],
+    mPortOerAddress [],
+    mPortOdrAddress [],
+    mPortIfdrAddress [],
+    mPortSodrAddress [],
+    mPortCodrAddress [],
+    mPortPdsrAddress [],
+    mPortMddrAddress [],
+    mPortPuerAddress [],
+    mPortPudrAddress [],
+    mPortOwerAddress [],
+    mPortOwdrAddress [],
+    mPortIfscdrAddress [],
+    mPortAbcdsr0Address [],
+    mPortAbcdsr1Address [],
+    mPortPpddrAddress [],
+    mPortSchmittAddress []
+}
+PioHwasPinConfig []
+{
+    mPortConfig [],
+    mPinConfig [],
+    mDirectionConfig [],
+    mControlConfig []
+}
+PmcHwas []
+{
+    pMC-PCER0-OFFSET [],
+    pMC-PCxR0-PID10-PIOA-MASK [],
+    pMC-PCxR0-PID11-PIOB-MASK [],
+    pMC-PCxR0-PID12-PIOC-MASK [],
+    pMC-PCxR0-PID16-PIOD-MASK [],
+    pMC-PCxR0-PID17-PIOE-MASK []
+}
+END
+

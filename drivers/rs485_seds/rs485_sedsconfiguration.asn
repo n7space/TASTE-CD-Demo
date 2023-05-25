@@ -1,0 +1,15 @@
+-- DRIVER CONFIGURATION MODEL [user-editable]
+-- Shall contain definition of Driver Configuration.
+-- This file will be used by ocarina-components.aadl and Board1.xml.
+RS485-SEDS-DRIVER-CONFIGURATION DEFINITIONS ::= BEGIN
+
+    RS485-SEDS-Device-T    ::= ENUMERATED {uart0, uart1, uart2, uart3, uart4}
+
+    RS485-SEDS-Baudrate-T  ::= ENUMERATED {b9600, b115200}
+
+    RS485-SEDS-Conf-T ::= SEQUENCE {
+        devname        RS485-SEDS-Device-T,
+        speed          RS485-SEDS-Baudrate-T OPTIONAL
+    }
+
+END

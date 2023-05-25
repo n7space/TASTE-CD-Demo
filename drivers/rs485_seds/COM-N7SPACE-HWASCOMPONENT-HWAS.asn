@@ -1,0 +1,4 @@
+-- Facade for the underlying microprocessor/microcontroller system.
+COM-N7SPACE-HWASCOMPONENT-HWAS DEFINITIONS ::= BEGIN
+END
+
