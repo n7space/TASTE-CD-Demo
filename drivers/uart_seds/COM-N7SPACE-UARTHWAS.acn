@@ -1,0 +1,51 @@
+COM-N7SPACE-UARTHWAS DEFINITIONS ::= BEGIN
+UartHwas-Instance [size 8, encoding pos-int, encode-values]
+UartHwas-Baudrate [size 8, encoding pos-int, encode-values]
+UartHwas []
+{
+    mInstanceAddress [],
+    mIrqNumber [],
+    mUartCrAddress [],
+    mUartMrAddress [],
+    mUartIerAddress [],
+    mUartIdrAddress [],
+    mUartImrAddress [],
+    mUartSrAddress [],
+    mUartRhrAddress [],
+    mUartThrAddress [],
+    mUartBrgrAddress []
+}
+UartHwasConfig []
+{
+    mInstance [],
+    mBaudrate []
+}
+PmcHwasUart []
+{
+    pMC-PCER0-OFFSET [],
+    pMC-PCER1-OFFSET [],
+    pMC-PCxR0-PID7-UART0-MASK [],
+    pMC-PCxR0-PID8-UART1-MASK [],
+    pMC-PCxR1-PID44-UART2-MASK [],
+    pMC-PCxR1-PID45-UART3-MASK [],
+    pMC-PCxR1-PID46-UART4-MASK []
+}
+UartHwasInterfaceType-ReadByteAsyncCmd-Type []
+{
+    uart []
+}
+UartHwasInterfaceType-ReadByteAsyncCmd-TypeNotify []
+{
+    byteToRead []
+}
+UartHwasInterfaceType-SendByteAsyncCmd-Type []
+{
+    uart [],
+    byteToSend []
+}
+UartHwasInterfaceType-SendByteAsyncCmd-TypeNotify []
+{
+    byteSentFlag []
+}
+END
+
