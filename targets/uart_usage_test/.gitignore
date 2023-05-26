@@ -1,4 +1,5 @@
 default_attributes.xml
+interfaceview.ui.xml
 
 .qtc_clangd/
 
