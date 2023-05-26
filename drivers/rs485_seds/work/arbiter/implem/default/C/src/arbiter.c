@@ -8,29 +8,56 @@
     !! file. The up-to-date signatures can be found in the header file. !!
 */
 #include "arbiter.h"
-//#include <stdio.h>
 
+#include <Utils/ByteFifo.h>
+
+#define OUTPUT_BUFFER_SIZE 1000
+__attribute__((section(".sdramMemorySection")))
+static uint8_t outputQueueBuffer[OUTPUT_BUFFER_SIZE];
+__attribute__((section(".sdramMemorySection")))
+ByteFlifo outputQueue;
 
 void arbiter_startup(void)
 {
-   // Write your initialisation code
-   // You may call sporadic required interfaces and start timers
-   // puts ("[Arbiter] Startup");
+   ByteFifo_init(&outputQueue, outputQueueBuffer, OUTPUT_BUFFER_SIZE);
+}
+
+bool arbiter_is_control_packet_received
+      (const uint8_t *message_data; size_t length)
+{
+   if (length == 1 && message_data[0] == 0xFF) {
+      return true;
+   }
+   return false;
+}
+
+void arbiter_deliver_from_queue()
+{
+   size_t count = ByteFifo_getCount(&outputQueue);
+   for (size_t i = 0; i < count; ++i) {
+      asn1SccDeliveredRequestData asn1SccInitRequestData;
+      uint8_t byte = ByteFifo_pull(&outputQueue);
+      asn1SccInitRequestData->message_data = &byte;
+      asn1SccInitRequestData->length = 1;
+      arbiter_RI_Deliver(&asn1SccInitRequestData);
+   }
 }
 
 void arbiter_PI_Deliver
       (const asn1SccDeliveredRequestData *IN_deliverreqseq)
-
 {
-   // Write your code here
+   for (size_t i = 0; i < IN_deliverreqseq->length; ++i) {
+      ByteFifo_push(&outputQueue, IN_deliverreqseq->message_data[i]);
+   }
 }
-
 
 void arbiter_PI_Receive
       (const asn1SccReceivedRequestData *IN_receivereqseq)
 
 {
-   // Write your code here
+   if (arbiter_is_control_packet_received(IN_receivereqseq->message_data, IN_receivereqseq->length)) {
+      arbiter_deliver_from_queue();
+   } else {
+      arbiter_RI_Receive(IN_receivereqseq);
+   }
 }
-
-
