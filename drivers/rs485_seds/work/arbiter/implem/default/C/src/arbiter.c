@@ -15,15 +15,23 @@
 __attribute__((section(".sdramMemorySection")))
 static uint8_t outputQueueBuffer[OUTPUT_BUFFER_SIZE];
 __attribute__((section(".sdramMemorySection")))
-ByteFlifo outputQueue;
+ByteFifo outputQueue;
+__attribute__((section(".sdramMemorySection")))
+asn1SccPioHwas pioHwas;
 
 void arbiter_startup(void)
 {
    ByteFifo_init(&outputQueue, outputQueueBuffer, OUTPUT_BUFFER_SIZE);
+   asn1SccPioHwasPinConfig pinConfig;
+   pinConfig.mPortConfig = asn1SccPioHwas_Port_pioHwas_Port_A;
+   pinConfig.mPinConfig = 2;
+   pinConfig.mDirectionConfig = asn1SccPioHwas_Direction_pioHwas_Direction_Output;
+   pinConfig.mControlConfig = asn1SccPioHwas_Control_pioHwas_Control_Pio;
+   arbiter_RI_PioHwas_InitPin_Pi(&pioHwas, &pinConfig);
 }
 
 bool arbiter_is_control_packet_received
-      (const uint8_t *message_data; size_t length)
+      (const uint8_t *message_data, size_t length)
 {
    if (length == 1 && message_data[0] == 0xFF) {
       return true;
@@ -33,27 +41,31 @@ bool arbiter_is_control_packet_received
 
 void arbiter_deliver_from_queue()
 {
+   arbiter_RI_PioHwas_SetPin_Pi(&pioHwas);
+
    size_t count = ByteFifo_getCount(&outputQueue);
+   uint8_t byte;
    for (size_t i = 0; i < count; ++i) {
       asn1SccDeliveredRequestData asn1SccInitRequestData;
-      uint8_t byte = ByteFifo_pull(&outputQueue);
-      asn1SccInitRequestData->message_data = &byte;
-      asn1SccInitRequestData->length = 1;
+      ByteFifo_pull(&outputQueue, &byte);
+      asn1SccInitRequestData.message_data = &byte;
+      asn1SccInitRequestData.length = 1;
       arbiter_RI_Deliver(&asn1SccInitRequestData);
    }
+   arbiter_RI_PioHwas_ResetPin_Pi(&pioHwas);
 }
 
 void arbiter_PI_Deliver
       (const asn1SccDeliveredRequestData *IN_deliverreqseq)
 {
+   const uint8_t *message_data = (const uint8_t *) IN_deliverreqseq->message_data;
    for (size_t i = 0; i < IN_deliverreqseq->length; ++i) {
-      ByteFifo_push(&outputQueue, IN_deliverreqseq->message_data[i]);
+      ByteFifo_push(&outputQueue, message_data[i]);
    }
 }
 
 void arbiter_PI_Receive
       (const asn1SccReceivedRequestData *IN_receivereqseq)
-
 {
    if (arbiter_is_control_packet_received(IN_receivereqseq->message_data, IN_receivereqseq->length)) {
       arbiter_deliver_from_queue();
