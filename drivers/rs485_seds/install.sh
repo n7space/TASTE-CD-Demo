@@ -67,7 +67,7 @@ sed -i "s/${PARTITION_NAME}_asn1SccUint/asn1SccUint/g" $CD_INSTALLATION_DIRECTOR
 sed -i "s/${PARTITION_NAME}_asn1SccUint/asn1SccUint/g" $CD_INSTALLATION_DIRECTORY/rs485_seds/dataview-uniq.c
 sed -i "s/${PARTITION_NAME}_asn1SccSint/asn1SccSint/g" $CD_INSTALLATION_DIRECTORY/rs485_seds/dataview-uniq.h
 sed -i "s/${PARTITION_NAME}_asn1SccSint/asn1SccSint/g" $CD_INSTALLATION_DIRECTORY/rs485_seds/dataview-uniq.c
-sed -i "/^} ${PARTITION_NAME}_asn1Sccrs485_seds_Private_Data;.*/a typedef ${PARTITION_NAME}_asn1Sccrs485_seds_Private_Data rs485_seds_private_data;" $CD_INSTALLATION_DIRECTORY/rs485_seds/dataview-uniq.h
+sed -i "/^} ${PARTITION_NAME}_asn1SccRS485_SEDS_Private_Data;.*/a typedef ${PARTITION_NAME}_asn1SccRS485_SEDS_Private_Data rs485_seds_private_data;" $CD_INSTALLATION_DIRECTORY/rs485_seds/dataview-uniq.h
 sed -i "s/GENERATED_ASN1SCC/GENERATED_${PARTITION_NAME}_ASN1SCC/g" $CD_INSTALLATION_DIRECTORY/rs485_seds/dataview-uniq.h
 sed -i '/^#include "asn1crt.h".*/a #include <drivers_config.h>' $CD_INSTALLATION_DIRECTORY/rs485_seds/dataview-uniq.h
 sed -i "s/put(sender_pid,/put((asn1SccPID)0,/g" $CD_INSTALLATION_DIRECTORY/rs485_seds/driver_transport.c
