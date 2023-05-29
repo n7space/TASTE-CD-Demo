@@ -1,6 +1,8 @@
 KAZOO?=kazoo
 SPACECREATOR?=spacecreator.AppImage
 
+export USER_CFLAGS=-I$(shell pwd)
+
 # Get the list of ASN.1 files from Space Creator project file:
 DISTFILES=$(shell qmake rs485_seds.pro -o /tmp/null 2>&1)
 ASN1_FILES=$(shell find ${DISTFILES} 2>/dev/null | egrep '.asn$$|.asn1$$')

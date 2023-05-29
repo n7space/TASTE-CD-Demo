@@ -29,12 +29,14 @@ THREAD_FILES=$(find work/build/**/${PARTITION_NAME} -name "thread_*" -a -not -na
 INTERFACE_FILES=$(find work/build/**/${PARTITION_NAME} -name "${PARTITION_NAME}_interface.h" -o -name "${PARTITION_NAME}_shared_interface.c")
 TRANSPORT_FILES=$(find work/build/**/${PARTITION_NAME} -name "driver_transport.*")
 ROUTING_FILES=$(find work/build/**/${PARTITION_NAME} -name "routing.*")
+PACKETIZER_ADAPTER_FILES=$(find work/build/packetizer_adapter -name "packetizer_adapter.*")
 REQUEST_SIZE_FILE=work/build/**/${PARTITION_NAME}/request_size.h
 SYSTEM_CONFIG_FILE=work/build/system_config.h
+CONFIG_FLAGS=config_flags.h
 
 ALL_SOURCE_FILES=( "${ASN1_TYPES_H_FILES} ${ASN1_TYPES_C_FILES} ${H_FILES} ${C_FILES} ${CC_FILES} ${ADS_FILES} \
 ${ADB_FILES} ${DRIVER_INTERFACE_FILES} ${THREAD_FILES} ${INTERFACE_FILES} ${TRANSPORT_FILES} ${ROUTING_FILES} \
-${REQUEST_SIZE_FILE} ${SYSTEM_CONFIG_FILE}" )
+${PACKETIZER_ADAPTER_FILES} ${REQUEST_SIZE_FILE} ${SYSTEM_CONFIG_FILE} ${CONFIG_FLAGS}" )
 
 for SOURCE_FILE_NAME in $ALL_SOURCE_FILES; do
     cp ${SOURCE_FILE_NAME} $CD_INSTALLATION_DIRECTORY/uart_seds/
