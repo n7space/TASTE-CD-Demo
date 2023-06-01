@@ -30,14 +30,15 @@ work/driver/implem/default/C/src/*
 # Except arbiter source
 !work/arbiter/
 work/arbiter/*
-!work/arbiter/C
+!work/arbiter/CPP
 !work/arbiter/implem
 !work/arbiter/implem/default
 work/arbiter/implem/default/*
-!work/arbiter/implem/default/C
-work/arbiter/implem/default/C/*
-!work/arbiter/implem/default/C/src
-work/arbiter/implem/default/C/src/*
-!work/arbiter/implem/default/C/src/arbiter.c
+!work/arbiter/implem/default/CPP
+work/arbiter/implem/default/CPP/*
+!work/arbiter/implem/default/CPP/src
+work/arbiter/implem/default/CPP/src/*
+!work/arbiter/implem/default/CPP/src/arbiter_state.h
+!work/arbiter/implem/default/CPP/src/arbiter.cc
 
 .gdb_history

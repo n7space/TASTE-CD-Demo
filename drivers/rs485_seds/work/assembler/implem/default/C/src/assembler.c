@@ -14,15 +14,11 @@
 #include <FreeRTOS.h>
 #include <semphr.h>
 
+#include <Utils/ByteFifo.h>
 #include <Escaper.h>
 
 __attribute__((section(".sdramMemorySection")))
 static asn1SccUartHwas uart;
-
-__attribute__((section(".sdramMemorySection")))
-static uint64_t sentBytes;
-__attribute__((section(".sdramMemorySection")))
-static uint64_t bytesToSend;
 
 __attribute__((section(".sdramMemorySection")))
 static Escaper escaper;
@@ -33,8 +29,14 @@ static uint8_t encodedPacketBuffer[ENCODED_PACKET_BUFFER_SIZE] = {""};
 __attribute__((section(".sdramMemorySection")))
 static uint8_t decodedPacketBuffer[DECODED_PACKET_BUFFER_SIZE] = {""};
 
+#define OUTPUT_BUFFER_SIZE 1000
 __attribute__((section(".sdramMemorySection")))
-static asn1SccSystemBus bus_id;
+static uint8_t outputQueueBuffer[OUTPUT_BUFFER_SIZE];
+__attribute__((section(".sdramMemorySection")))
+static ByteFifo outputQueue;
+
+__attribute__((section(".sdramMemorySection")))
+static asn1SccSystemBus busId;
 
 void assembler_startup(void)
 {
@@ -80,6 +82,21 @@ void assembler_invoke_broker_receive_packet
    assembler_RI_Receive(&request_data);
 }
 
+void assembler_send_single_byte_to_uarthwas()
+{
+   asn1SccUartHwasInterfaceType_SendByteAsyncCmd_Type sendByteStructure = {
+      .uart = uart
+   };
+
+   bool isBytePresent = ByteFifo_pull(&outputQueue, &sendByteStructure.byteToSend);
+   if (isBytePresent) {
+      assembler_RI_UartHwas_SendByteAsyncCmd_Pi(&sendByteStructure);
+   } else {
+      // No more bytes in queue, send acknowledgment to Arbiter.
+      assembler_RI_ControlAck();
+   }
+}
+
 void assembler_PI_Init
       (const asn1SccInitRequestData *IN_initreqseq)
 
@@ -90,8 +107,9 @@ void assembler_PI_Init
                 ENCODED_PACKET_BUFFER_SIZE,
                 decodedPacketBuffer,
                 DECODED_PACKET_BUFFER_SIZE);
+   ByteFifo_init(&outputQueue, outputQueueBuffer, OUTPUT_BUFFER_SIZE);
 
-   bus_id = IN_initreqseq->bus_id;
+   busId = IN_initreqseq->bus_id;
 
    asn1SccUartHwasConfig config;
    asn1SccRS485_SEDS_Conf_T *conf = (asn1SccRS485_SEDS_Conf_T *) IN_initreqseq->device_configuration;
@@ -106,20 +124,10 @@ void assembler_PI_Init
    assembler_RI_UartHwas_ReadByteAsyncCmd_Pi(&readByte);
 }
 
-void assembler_send_single_byte_to_uarthwas()
+void assembler_PI_Control
+      (void)
 {
-   if(sentBytes < bytesToSend) {
-      asn1SccUartHwasInterfaceType_SendByteAsyncCmd_Type sendByteStructure = {
-         .uart = uart,
-         .byteToSend = (asn1SccByte) encodedPacketBuffer[sentBytes]
-      };
-
-      sentBytes++;
-      assembler_RI_UartHwas_SendByteAsyncCmd_Pi(&sendByteStructure);
-   } else {
-      sentBytes = 0;
-      bytesToSend = 0;
-   }
+   assembler_send_single_byte_to_uarthwas();
 }
 
 void assembler_PI_Deliver
@@ -131,16 +139,18 @@ void assembler_PI_Deliver
    size_t index = 0;
 
    Escaper_start_encoder(&escaper);
-   sentBytes = 0;
-   bytesToSend = Escaper_encode_packet(&escaper, data, length, &index);
-   assembler_send_single_byte_to_uarthwas();
+   size_t encodedBytes = Escaper_encode_packet(&escaper, data, length, &index);
+   for (size_t i = 0; i < encodedBytes; ++i) {
+      bool result = ByteFifo_push(&outputQueue, encodedPacketBuffer[i]);
+      assert(result && "Assembler output queue exceeded");
+   }
 }
 
 void assembler_PI_UartHwas_ReadByteAsyncCmd_Ri
       (const asn1SccUartHwasInterfaceType_ReadByteAsyncCmd_TypeNotify *IN_inputparam)
 
 {
-   Escaper_decode_packet(&escaper, bus_id, &IN_inputparam->byteToRead, 1, &assembler_invoke_broker_receive_packet);
+   Escaper_decode_packet(&escaper, busId, &IN_inputparam->byteToRead, 1, &assembler_invoke_broker_receive_packet);
 }
 
 void assembler_PI_UartHwas_SendByteAsyncCmd_Ri
