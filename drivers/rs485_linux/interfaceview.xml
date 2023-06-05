@@ -1,0 +1,111 @@
+<InterfaceView version="1.2" projectName="rs485_linux" asn1file="rs485_linuxprivatedata.acn" UiFile="interfaceview.ui.xml">
+<Function id="{90595442-0cbd-498e-9479-73243e311ce2}" name="Arbiter" is_type="NO" language="C" default_implementation="default" fixed_system_element="NO" required_system_element="NO" instances_max="1" startup_priority="1" instances_min="1">
+<Provided_Interface id="{9ac97189-589c-42ff-9ea7-6f3fd7c251e4}" name="Deliver" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" stack_size="1024" queue_size="1" miat="0" wcet="0" priority="1">
+    <Input_Parameter name="deliverReqSeq" type="DeliveredRequestData" encoding="NATIVE"/>
+</Provided_Interface>
+
+<Provided_Interface id="{1ecb4a10-876e-4f6b-b4b4-23a919efb00d}" name="Receive" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" stack_size="1024" queue_size="1" miat="0" wcet="0" priority="1">
+    <Input_Parameter name="p1" type="ReceivedRequestData" encoding="NATIVE"/>
+</Provided_Interface>
+
+<Provided_Interface id="{e5adc40a-ce36-43a1-ac84-13ff98ccfe84}" name="Doorman" kind="Cyclic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" stack_size="1024" period="100" dispatch_offset="0" wcet="0" priority="1">
+</Provided_Interface>
+
+<Provided_Interface id="{ba842b84-382a-4997-a11e-a0cbec2bf154}" name="Init" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
+    <Input_Parameter name="initReqSeq" type="InitRequestData" encoding="NATIVE"/>
+</Provided_Interface>
+
+<Required_Interface id="{2e2bc338-09e7-4b82-a393-48e42d2848b4}" name="Receive" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" stack_size="1024" queue_size="1" miat="0" wcet="0" priority="1">
+    <Input_Parameter name="receiveReqSeq" type="ReceivedRequestData" encoding="NATIVE"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
+</Required_Interface>
+
+<Required_Interface id="{f83820dc-fdb1-4d32-bad3-8dc57c5ba7d7}" name="Deliver" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" stack_size="1024" queue_size="1" miat="0" wcet="0" priority="1">
+    <Input_Parameter name="p1" type="DeliveredRequestData" encoding="NATIVE"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
+</Required_Interface>
+
+    <Implementations>
+        <Implementation name="default" language="C"/>
+    </Implementations>
+</Function>
+
+<Function id="{948bfe70-0838-4be0-8fdc-1eab2b0d8c52}" name="rs485_linux_Broker_Adapter" is_type="NO" instance_of="" language="C" default_implementation="default" fixed_system_element="YES" required_system_element="NO" instances_max="1" startup_priority="1" FPGA_Configurations="" instances_min="1">
+<Provided_Interface id="{e581e04c-e62d-4209-b790-26f0c0cd0e14}" name="Receive" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" stack_size="1024" queue_size="1" miat="0" wcet="0" priority="1">
+    <Input_Parameter name="receiveReqSeq" type="ReceivedRequestData" encoding="NATIVE"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="false"/>
+</Provided_Interface>
+
+<Required_Interface id="{1e4faeec-cd52-4639-be25-b52c39e83405}" name="Init" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
+    <Input_Parameter name="initReqSeq" type="InitRequestData" encoding="NATIVE"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="false"/>
+</Required_Interface>
+
+<Required_Interface id="{1873af07-fed3-4436-a24a-96f69e52c355}" name="Deliver" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" stack_size="1024" queue_size="1" miat="0" wcet="0" priority="1">
+    <Input_Parameter name="deliverReqSeq" type="DeliveredRequestData" encoding="NATIVE"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="false"/>
+</Required_Interface>
+
+    <Implementations>
+        <Implementation name="default" language="C"/>
+    </Implementations>
+</Function>
+
+<Function id="{557e5f2d-198a-4303-ae94-783f41e9dad1}" name="Driver" is_type="NO" language="C" default_implementation="default" fixed_system_element="NO" required_system_element="NO" instances_max="1" startup_priority="1" instances_min="1">
+<Provided_Interface id="{5a57a509-71bd-4cfc-819f-4c590f388ebe}" name="Init" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
+    <Input_Parameter name="initReqSeq" type="InitRequestData" encoding="NATIVE"/>
+</Provided_Interface>
+
+<Provided_Interface id="{db51ce69-2081-42fd-8d6a-75d6f90456cd}" name="Deliver" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" stack_size="1024" queue_size="1" miat="0" wcet="0" priority="1">
+    <Input_Parameter name="p1" type="DeliveredRequestData" encoding="NATIVE"/>
+</Provided_Interface>
+
+<Required_Interface id="{141b6d21-845a-42eb-b542-82385a2f59d4}" name="Receive" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" stack_size="1024" queue_size="1" miat="0" wcet="0" priority="1">
+    <Input_Parameter name="p1" type="ReceivedRequestData" encoding="NATIVE"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
+</Required_Interface>
+
+    <Implementations>
+        <Implementation name="default" language="C"/>
+    </Implementations>
+</Function>
+
+<Connection id="{d06adbbe-a938-4ada-9fbc-33edb3822e6d}" name="Driver_Receive____Arbiter_Receive" required_system_element="NO">
+    <Source func_name="Driver" ri_name="Receive" />
+    <Target func_name="Arbiter" pi_name="Receive" />
+</Connection>
+
+<Connection id="{5e5df156-574c-4d70-85ef-b4229ab551ad}" required_system_element="NO">
+    <Source func_name="rs485_linux_Broker_Adapter" ri_name="Init" />
+    <Target func_name="Arbiter" pi_name="Init" />
+</Connection>
+
+<Connection id="{abd47d21-3436-46af-96ef-e8f746671e45}" name="Arbiter_Deliver____Driver_Deliver" required_system_element="NO">
+    <Source func_name="Arbiter" ri_name="Deliver" />
+    <Target func_name="Driver" pi_name="Deliver" />
+</Connection>
+
+<Connection id="{4e4c9a77-4513-415f-8950-ddd8a9180c8b}" required_system_element="NO">
+    <Source func_name="Arbiter" ri_name="Receive" />
+    <Target func_name="rs485_linux_Broker_Adapter" pi_name="Receive" />
+</Connection>
+
+<Connection id="{fa9809dd-a4fa-4dad-8b55-791e98edb7e2}" required_system_element="NO">
+    <Source func_name="rs485_linux_Broker_Adapter" ri_name="Deliver" />
+    <Target func_name="Arbiter" pi_name="Deliver" />
+</Connection>
+
+<Connection id="{b207de47-2ba4-4c6c-92bf-65661c6d1cd8}" required_system_element="NO">
+    <Source func_name="rs485_linux_Broker_Adapter" ri_name="Init" />
+    <Target func_name="Driver" pi_name="Init" />
+</Connection>
+
+<Layer name="default" is_visible="true"/>
+
+</InterfaceView>

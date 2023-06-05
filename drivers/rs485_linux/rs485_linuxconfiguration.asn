@@ -1,0 +1,18 @@
+-- DRIVER CONFIGURATION MODEL [user-editable]
+-- Shall contain definition of Driver Configuration.
+-- This file will be used by ocarina-components.aadl and Board1.xml.
+RS485-LINUX-DRIVER-CONFIGURATION DEFINITIONS ::= BEGIN
+
+    RS485-LINUX-Baudrate-T  ::= ENUMERATED {b9600, b115200}
+
+    RS485-LINUX-Parity-T    ::= ENUMERATED {even, odd}
+
+    RS485-LINUX-Conf-T ::= SEQUENCE {
+        devname        IA5String (SIZE (1..24)),
+        speed          RS485-LINUX-Baudrate-T OPTIONAL,
+        parity         RS485-LINUX-Parity-T OPTIONAL,
+        bits           INTEGER (7 .. 8) OPTIONAL,
+        use-paritybit  BOOLEAN  OPTIONAL
+    }
+
+END
