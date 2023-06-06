@@ -1,0 +1,157 @@
+/* CIF PROCESS (250, 150), (150, 75) */
+process Modemanager;
+    /* CIF Keep Specific Geode Partition 'default' */
+    /* CIF TEXT (913, 100), (316, 140) */
+    dcl tcInput Tc_Data;
+    dcl tmOutput TM_Data;
+    dcl actuatorControlOutput actuatorControl_Data;
+    dcl sensorControlOutput sensorControl_Data;
+    /* CIF ENDTEXT */
+    /* CIF START (320, 10), (70, 35) */
+    START;
+        /* CIF NEXTSTATE (320, 60), (70, 35) */
+        NEXTSTATE Off;
+    /* CIF state (571, 108), (70, 35) */
+    /* CIF Keep Specific Geode Partition 'default' */
+    state Off;
+        /* CIF input (561, 163), (84, 35) */
+        input tc(tcinput);
+            /* CIF decision (526, 217), (154, 50) */
+            decision tcInput.mode_request;
+                /* CIF ANSWER (284, 287), (70, 23) */
+                (off):
+                    /* CIF task (183, 330), (272, 35) */
+                    task tmOutput.mode_confirmation := accepted;
+                    /* CIF output (265, 385), (107, 35) */
+                    output tm(tmOutput);
+                    /* CIF NEXTSTATE (284, 440), (70, 35) */
+                    NEXTSTATE Off;
+                /* CIF ANSWER (843, 287), (70, 23) */
+                (On):
+                    /* CIF task (754, 330), (248, 35) */
+                    task tmOutput.mode_confirmation := error;
+                    /* CIF output (824, 385), (107, 35) */
+                    output tm(tmOutput);
+                    /* CIF NEXTSTATE (843, 440), (70, 35) */
+                    NEXTSTATE Off;
+                /* CIF ANSWER (569, 288), (70, 23) */
+                (Idle):
+                    /* CIF task (465, 330), (276, 35) */
+                    task actuatorcontroloutput.state_request := off;
+                    /* CIF output (474, 385), (258, 35) */
+                    output actuatorControl(actuatorcontroloutput);
+                    /* CIF task (472, 440), (262, 35) */
+                    task sensorcontroloutput.state_request := on;
+                    /* CIF output (485, 495), (236, 35) */
+                    output sensorControl(sensorcontroloutput);
+                    /* CIF task (469, 550), (269, 35) */
+                    task tmoutput.mode_confirmation := accepted;
+                    /* CIF output (551, 605), (104, 35) */
+                    output tm(tmoutput);
+                    /* CIF NEXTSTATE (569, 660), (70, 35) */
+                    NEXTSTATE Idle;
+            enddecision;
+    endstate;
+    /* CIF state (566, 759), (70, 35) */
+    /* CIF Keep Specific Geode Partition 'default' */
+    state Idle;
+        /* CIF input (556, 814), (84, 35) */
+        input tc(tcinput);
+            /* CIF decision (521, 868), (154, 50) */
+            decision tcInput.mode_request;
+                /* CIF ANSWER (564, 939), (70, 23) */
+                (Idle):
+                    /* CIF task (464, 981), (269, 35) */
+                    task tmoutput.mode_confirmation := accepted;
+                    /* CIF output (546, 1036), (104, 35) */
+                    output tm(tmoutput);
+                    /* CIF NEXTSTATE (564, 1091), (70, 35) */
+                    NEXTSTATE Idle;
+                /* CIF ANSWER (256, 938), (70, 23) */
+                (off):
+                    /* CIF task (152, 981), (276, 35) */
+                    task actuatorcontroloutput.state_request := off;
+                    /* CIF output (161, 1036), (258, 35) */
+                    output actuatorControl(actuatorcontroloutput);
+                    /* CIF task (158, 1091), (265, 35) */
+                    task sensorcontroloutput.state_request := off;
+                    /* CIF output (172, 1146), (236, 35) */
+                    output sensorControl(sensorcontroloutput);
+                    /* CIF task (156, 1201), (269, 35) */
+                    task tmoutput.mode_confirmation := accepted;
+                    /* CIF output (238, 1256), (104, 35) */
+                    output tm(tmoutput);
+                    /* CIF NEXTSTATE (256, 1311), (70, 35) */
+                    NEXTSTATE Off;
+                /* CIF ANSWER (851, 938), (70, 23) */
+                (On):
+                    /* CIF task (749, 981), (273, 35) */
+                    task actuatorcontroloutput.state_request := on;
+                    /* CIF output (756, 1036), (258, 35) */
+                    output actuatorControl(actuatorcontroloutput);
+                    /* CIF task (755, 1091), (262, 35) */
+                    task sensorcontroloutput.state_request := on;
+                    /* CIF output (767, 1146), (236, 35) */
+                    output sensorControl(sensorcontroloutput);
+                    /* CIF task (751, 1201), (269, 35) */
+                    task tmoutput.mode_confirmation := accepted;
+                    /* CIF output (833, 1255), (104, 35) */
+                    output tm(tmoutput);
+                    /* CIF NEXTSTATE (851, 1310), (70, 35) */
+                    NEXTSTATE On;
+            enddecision;
+    endstate;
+    /* CIF state (562, 1391), (70, 35) */
+    /* CIF Keep Specific Geode Partition 'default' */
+    state On;
+        /* CIF input (552, 1446), (84, 35) */
+        input tc(tcinput);
+            /* CIF decision (517, 1500), (154, 50) */
+            decision tcInput.mode_request;
+                /* CIF ANSWER (559, 1571), (70, 23) */
+                (Idle):
+                    /* CIF task (455, 1613), (276, 35) */
+                    task actuatorcontroloutput.state_request := off;
+                    /* CIF output (464, 1668), (258, 35) */
+                    output actuatorControl(actuatorcontroloutput);
+                    /* CIF task (463, 1723), (262, 35) */
+                    task sensorcontroloutput.state_request := on;
+                    /* CIF output (475, 1778), (236, 35) */
+                    output sensorControl(sensorcontroloutput);
+                    /* CIF task (459, 1833), (269, 35) */
+                    task tmoutput.mode_confirmation := accepted;
+                    /* CIF output (541, 1888), (104, 35) */
+                    output tm(tmoutput);
+                    /* CIF NEXTSTATE (559, 1943), (70, 35) */
+                    NEXTSTATE Idle;
+                /* CIF ANSWER (275, 1570), (70, 23) */
+                (off):
+                    /* CIF task (186, 1613), (248, 35) */
+                    task tmOutput.mode_confirmation := error;
+                    /* CIF output (256, 1668), (107, 35) */
+                    output tm(tmOutput);
+                    /* CIF NEXTSTATE (275, 1723), (70, 35) */
+                    NEXTSTATE On;
+                /* CIF ANSWER (854, 1570), (70, 23) */
+                (On):
+                    /* CIF task (753, 1613), (272, 35) */
+                    task tmOutput.mode_confirmation := accepted;
+                    /* CIF output (835, 1668), (107, 35) */
+                    output tm(tmOutput);
+                    /* CIF NEXTSTATE (854, 1723), (70, 35) */
+                    NEXTSTATE On;
+            enddecision;
+    endstate;
+    /* CIF state (450, 10), (70, 35) */
+    /* CIF Keep Specific Geode Partition 'default' */
+    state Off;
+    endstate;
+    /* CIF state (691, 11), (70, 35) */
+    /* CIF Keep Specific Geode Partition 'default' */
+    state On;
+    endstate;
+    /* CIF state (565, 9), (70, 35) */
+    /* CIF Keep Specific Geode Partition 'default' */
+    state Idle;
+    endstate;
+endprocess Modemanager;

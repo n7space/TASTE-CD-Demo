@@ -1,0 +1,22 @@
+Modemanager-Datamodel DEFINITIONS ::=
+BEGIN
+--  This file was generated automatically by OpenGEODE
+IMPORTS
+   MyInteger, SystemMode, DeviceState, Response, TC-Data, TM-Data, SensorControl-Data, ActuatorControl-Data, StatusUpdate-Data FROM ETD-DEMO-DATAVIEW
+   T-Int32, T-UInt32, T-Int8, T-UInt8, T-Boolean, T-Null-Record FROM TASTE-BasicTypes
+   PID-Range, PID FROM System-Dataview;
+
+Modemanager-States ::= ENUMERATED {idle, on, off}
+
+Modemanager-Context ::= SEQUENCE {
+   state Modemanager-States,
+   init-done BOOLEAN,
+   sender PID,
+   offspring PID,
+   tcinput TC-Data,
+   tmoutput TM-Data,
+   actuatorcontroloutput ActuatorControl-Data,
+   sensorcontroloutput SensorControl-Data
+}
+
+END
