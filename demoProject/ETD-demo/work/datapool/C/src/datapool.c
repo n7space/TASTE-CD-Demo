@@ -8,21 +8,23 @@
     !! file. The up-to-date signatures can be found in the header file. !!
 */
 #include "datapool.h"
-//#include <stdio.h>
+#include <stdio.h>
+
+asn1SccActuatorStatusUpdate_Data actuatorStatus;
+asn1SccSensorStatusUpdate_Data sensorStatus;
 
 
 void datapool_startup(void)
 {
-   // Write your initialisation code
-   // You may call sporadic required interfaces and start timers
-   // puts ("[Datapool] Startup");
+
 }
 
 void datapool_PI_ActuatorStatusUpdate
       (const asn1SccActuatorStatusUpdate_Data *IN_actuatorstatusupdate)
 
 {
-   // Write your code here
+   actuatorStatus.device_state = IN_actuatorstatusupdate->device_state;
+   actuatorStatus.acceleration = IN_actuatorstatusupdate->acceleration;
 }
 
 
@@ -30,7 +32,9 @@ void datapool_PI_SensorStatusUpdate
       (const asn1SccSensorStatusUpdate_Data *IN_sensorstatusupdate)
 
 {
-   // Write your code here
+   sensorStatus.device_state = IN_sensorstatusupdate->device_state;
+   sensorStatus.system_phisic_attrs.velocity = IN_sensorstatusupdate->system_phisic_attrs.velocity;
+   sensorStatus.system_phisic_attrs.height = IN_sensorstatusupdate->system_phisic_attrs.height;
 }
 
 
@@ -38,7 +42,11 @@ void datapool_PI_SystemDataRequest
       (asn1SccSystemDataRequest_Data *OUT_systemdatarequest)
 
 {
-   // Write your code here
+   OUT_systemdatarequest->actuator_state = actuatorStatus.device_state;
+   OUT_systemdatarequest->sensor_state = sensorStatus.device_state;
+   OUT_systemdatarequest->acceleration = actuatorStatus.acceleration;
+   OUT_systemdatarequest->system_phisic_attrs.velocity = sensorStatus.system_phisic_attrs.velocity;
+   OUT_systemdatarequest->system_phisic_attrs.height = sensorStatus.system_phisic_attrs.height;
 }
 
 

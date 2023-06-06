@@ -1,98 +1,32 @@
 <InterfaceView version="1.2" asn1file="ETD-demo.acn" UiFile="interfaceview.ui.xml">
-<Function id="{873d541f-e6a0-4d93-b4b9-4298e78f2a00}" name="Actuator" is_type="NO" language="C" default_implementation="default" fixed_system_element="NO" required_system_element="NO" instances_min="1" instances_max="1" startup_priority="1">
-<Provided_Interface id="{ddb795d9-535a-4f18-aefc-9ed99b1d197f}" name="tick" kind="Cyclic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" priority="1" wcet="0" period="1000" stack_size="1024" dispatch_offset="0">
-</Provided_Interface>
-
-<Provided_Interface id="{acbbd4aa-3970-45f8-8f62-981e50e5abf0}" name="actuatorControl" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
-    <Input_Parameter name="actuatorControlData" type="ActuatorControl-Data" encoding="NATIVE"/>
-</Provided_Interface>
-
-<Required_Interface id="{3835728e-a11e-456c-b6cd-d93aec1583dd}" name="actuate" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
-    <Property name="Taste::InheritPI" value="true"/>
-    <Property name="Taste::Autonamed" value="true"/>
-</Required_Interface>
-
-<Required_Interface id="{fb92f7c5-1774-4d40-b06c-9d263b9af6a1}" name="ActuatorStatusUpdate" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
-    <Input_Parameter name="actuatorStatusUpdate" type="ActuatorStatusUpdate-Data" encoding="NATIVE"/>
-    <Property name="Taste::InheritPI" value="true"/>
-    <Property name="Taste::Autonamed" value="true"/>
-</Required_Interface>
-
-<Required_Interface id="{36c74a5e-8fe4-4a87-a65a-8f12e5d52e78}" name="SystemDataRequest" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
-    <Output_Parameter name="systemDataRequest" type="SystemDataRequest-Data" encoding="NATIVE"/>
-    <Property name="Taste::InheritPI" value="true"/>
-    <Property name="Taste::Autonamed" value="true"/>
-</Required_Interface>
-
-    <Implementations>
-        <Implementation name="default" language="C"/>
-    </Implementations>
-</Function>
-
-<Function id="{1c239582-f270-4281-b4e8-14bf2d58c260}" name="ScienceGUI" is_type="NO" language="GUI" default_implementation="default" fixed_system_element="NO" required_system_element="NO" instances_min="1" instances_max="1" startup_priority="1">
-<Provided_Interface id="{644a4af9-f1a7-49c3-a26e-c9877b5c5d49}" name="dataStream" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" priority="1" wcet="0" queue_size="1" stack_size="1024" miat="0">
-</Provided_Interface>
-
-    <Implementations>
-        <Implementation name="default" language="GUI"/>
-    </Implementations>
-</Function>
-
-<Function id="{56af5e43-3c0d-48a1-aadc-7ec2de8cb99d}" name="Sensor" is_type="NO" language="C" default_implementation="default" fixed_system_element="NO" required_system_element="NO" instances_min="1" instances_max="1" startup_priority="1">
-<Provided_Interface id="{c376dd79-6e3f-4d86-a653-1daec965154f}" name="tick" kind="Cyclic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" priority="1" wcet="0" period="1000" stack_size="1024" dispatch_offset="0">
-</Provided_Interface>
-
-<Provided_Interface id="{d6eda529-c634-41b4-827b-35e8aa13ad01}" name="sensorControl" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
-    <Input_Parameter name="sensorControlData" type="SensorControl-Data" encoding="NATIVE"/>
-</Provided_Interface>
-
-<Required_Interface id="{5db48c7b-6cc9-418d-a37e-b6c71cda4415}" name="dataStream" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" priority="1" wcet="0" queue_size="1" stack_size="1024" miat="0">
-    <Property name="Taste::InheritPI" value="true"/>
-    <Property name="Taste::Autonamed" value="true"/>
-</Required_Interface>
-
-<Required_Interface id="{99f4d54f-749c-4b24-95c1-195e3210b4e5}" name="sense" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
-    <Output_Parameter name="senseData" type="Sense-Data" encoding="NATIVE"/>
-    <Property name="Taste::InheritPI" value="true"/>
-    <Property name="Taste::Autonamed" value="true"/>
-</Required_Interface>
-
-<Required_Interface id="{f7e69804-5767-48d7-bbad-159f7c662a9c}" name="SensorStatusUpdate" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
+<Function id="{59496793-3c0f-47a0-b9ad-84ae988f8e6a}" name="Datapool" is_type="NO" language="C" default_implementation="default" fixed_system_element="NO" required_system_element="NO" startup_priority="1" instances_min="1" instances_max="1">
+<Provided_Interface id="{315ab50a-5287-4433-98ef-121d17bfe655}" name="SensorStatusUpdate" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
     <Input_Parameter name="sensorStatusUpdate" type="SensorStatusUpdate-Data" encoding="NATIVE"/>
-    <Property name="Taste::InheritPI" value="true"/>
-    <Property name="Taste::Autonamed" value="true"/>
-</Required_Interface>
+</Provided_Interface>
+
+<Provided_Interface id="{46d8143e-117f-498b-b5a2-859cd27b307e}" name="ActuatorStatusUpdate" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
+    <Input_Parameter name="actuatorStatusUpdate" type="ActuatorStatusUpdate-Data" encoding="NATIVE"/>
+</Provided_Interface>
+
+<Provided_Interface id="{df37ec57-f323-4388-93c2-4774974ad05b}" name="SystemDataRequest" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
+    <Output_Parameter name="systemDataRequest" type="SystemDataRequest-Data" encoding="NATIVE"/>
+</Provided_Interface>
 
     <Implementations>
         <Implementation name="default" language="C"/>
     </Implementations>
 </Function>
 
-<Function id="{27decc15-4e3b-44ea-9797-c19a71945f3b}" name="MCGUI" is_type="NO" language="GUI" default_implementation="default" fixed_system_element="NO" required_system_element="NO" instances_min="1" instances_max="1" startup_priority="1">
-<Provided_Interface id="{0bb41f2b-3c92-4b37-b50e-848b4c5232bf}" name="tm" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" priority="1" wcet="0" queue_size="1" stack_size="1024" miat="0">
-    <Input_Parameter name="tmData" type="TM-Data" encoding="NATIVE"/>
-</Provided_Interface>
-
-<Required_Interface id="{7ef4a463-6ac5-482f-8de2-d0885799fe18}" name="tc" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" priority="1" wcet="0" queue_size="1" stack_size="1024" miat="0">
-    <Input_Parameter name="tcData" type="TC-Data" encoding="NATIVE"/>
-    <Property name="Taste::InheritPI" value="true"/>
-    <Property name="Taste::Autonamed" value="true"/>
-</Required_Interface>
-
-    <Implementations>
-        <Implementation name="default" language="GUI"/>
-    </Implementations>
-</Function>
-
-<Function id="{9fd826a0-ea73-4563-b577-588bcf935028}" name="PhysicSimulation" is_type="NO" language="C" default_implementation="default" fixed_system_element="NO" required_system_element="NO" instances_min="1" instances_max="1" startup_priority="1">
+<Function id="{9fd826a0-ea73-4563-b577-588bcf935028}" name="PhysicSimulation" is_type="NO" language="C" default_implementation="default" fixed_system_element="NO" required_system_element="NO" startup_priority="1" instances_min="1" instances_max="1">
 <Provided_Interface id="{3e16a698-8e4c-4d77-bf84-b6714a1e19ea}" name="actuate" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
+    <Input_Parameter name="acceleration" type="PhisicValType" encoding="NATIVE"/>
 </Provided_Interface>
 
 <Provided_Interface id="{b615c05e-85d5-4841-9bc0-0b2d5ee0c610}" name="sense" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
     <Output_Parameter name="senseData" type="Sense-Data" encoding="NATIVE"/>
 </Provided_Interface>
 
-<Provided_Interface id="{4f23ac2c-dcbd-4e86-af08-a726df4de87d}" name="tick" kind="Cyclic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" priority="1" wcet="0" period="1000" stack_size="1024" dispatch_offset="0">
+<Provided_Interface id="{4f23ac2c-dcbd-4e86-af08-a726df4de87d}" name="tick" kind="Cyclic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" dispatch_offset="0" priority="1" stack_size="1024" wcet="0" period="490">
 </Provided_Interface>
 
     <Implementations>
@@ -100,12 +34,12 @@
     </Implementations>
 </Function>
 
-<Function id="{e3ad91d8-bcc8-4c5a-b955-f5a551c2275e}" name="ModeManager" is_type="NO" language="SDL" default_implementation="default" fixed_system_element="NO" required_system_element="NO" instances_min="1" instances_max="1" startup_priority="1">
-<Provided_Interface id="{0fd7ebae-2318-42c2-b925-0854a90b4141}" name="tc" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" priority="1" wcet="0" queue_size="1" stack_size="1024" miat="0">
+<Function id="{e3ad91d8-bcc8-4c5a-b955-f5a551c2275e}" name="ModeManager" is_type="NO" language="SDL" default_implementation="default" fixed_system_element="NO" required_system_element="NO" startup_priority="1" instances_min="1" instances_max="1">
+<Provided_Interface id="{0fd7ebae-2318-42c2-b925-0854a90b4141}" name="tc" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" priority="1" stack_size="1024" miat="0" wcet="0" queue_size="1">
     <Input_Parameter name="tcData" type="TC-Data" encoding="NATIVE"/>
 </Provided_Interface>
 
-<Required_Interface id="{6302bf50-4397-4da7-baf7-e5b08afe5f42}" name="tm" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" priority="1" wcet="0" queue_size="1" stack_size="1024" miat="0">
+<Required_Interface id="{6302bf50-4397-4da7-baf7-e5b08afe5f42}" name="tm" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" priority="1" stack_size="1024" miat="0" wcet="0" queue_size="1">
     <Input_Parameter name="tmData" type="TM-Data" encoding="NATIVE"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="true"/>
@@ -134,48 +68,91 @@
     </Implementations>
 </Function>
 
-<Function id="{59496793-3c0f-47a0-b9ad-84ae988f8e6a}" name="Datapool" is_type="NO" language="C" default_implementation="default" fixed_system_element="NO" required_system_element="NO" instances_min="1" instances_max="1" startup_priority="1">
-<Provided_Interface id="{315ab50a-5287-4433-98ef-121d17bfe655}" name="SensorStatusUpdate" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
+<Function id="{56af5e43-3c0d-48a1-aadc-7ec2de8cb99d}" name="Sensor" is_type="NO" language="C" default_implementation="default" fixed_system_element="NO" required_system_element="NO" startup_priority="1" instances_min="1" instances_max="1">
+<Provided_Interface id="{c376dd79-6e3f-4d86-a653-1daec965154f}" name="tick" kind="Cyclic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" dispatch_offset="0" priority="1" stack_size="1024" wcet="0" period="500">
+</Provided_Interface>
+
+<Provided_Interface id="{d6eda529-c634-41b4-827b-35e8aa13ad01}" name="sensorControl" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
+    <Input_Parameter name="sensorControlData" type="SensorControl-Data" encoding="NATIVE"/>
+</Provided_Interface>
+
+<Required_Interface id="{5db48c7b-6cc9-418d-a37e-b6c71cda4415}" name="dataStream" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" priority="1" stack_size="1024" miat="0" wcet="0" queue_size="1">
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
+</Required_Interface>
+
+<Required_Interface id="{99f4d54f-749c-4b24-95c1-195e3210b4e5}" name="sense" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
+    <Output_Parameter name="senseData" type="Sense-Data" encoding="NATIVE"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
+</Required_Interface>
+
+<Required_Interface id="{f7e69804-5767-48d7-bbad-159f7c662a9c}" name="SensorStatusUpdate" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
     <Input_Parameter name="sensorStatusUpdate" type="SensorStatusUpdate-Data" encoding="NATIVE"/>
-</Provided_Interface>
-
-<Provided_Interface id="{46d8143e-117f-498b-b5a2-859cd27b307e}" name="ActuatorStatusUpdate" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
-    <Input_Parameter name="actuatorStatusUpdate" type="ActuatorStatusUpdate-Data" encoding="NATIVE"/>
-</Provided_Interface>
-
-<Provided_Interface id="{df37ec57-f323-4388-93c2-4774974ad05b}" name="SystemDataRequest" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
-    <Output_Parameter name="systemDataRequest" type="SystemDataRequest-Data" encoding="NATIVE"/>
-</Provided_Interface>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
+</Required_Interface>
 
     <Implementations>
         <Implementation name="default" language="C"/>
     </Implementations>
 </Function>
 
-<Connection id="{e3bca253-263b-4749-9989-81997c381955}" name="Actuator_SystemDataRequest____Datapool_SystemDataRequest" required_system_element="NO">
-    <Source func_name="Actuator" ri_name="SystemDataRequest" />
-    <Target func_name="Datapool" pi_name="SystemDataRequest" />
-</Connection>
+<Function id="{27decc15-4e3b-44ea-9797-c19a71945f3b}" name="MCGUI" is_type="NO" language="GUI" default_implementation="default" fixed_system_element="NO" required_system_element="NO" startup_priority="1" instances_min="1" instances_max="1">
+<Provided_Interface id="{0bb41f2b-3c92-4b37-b50e-848b4c5232bf}" name="tm" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" priority="1" stack_size="1024" miat="0" wcet="0" queue_size="1">
+    <Input_Parameter name="tmData" type="TM-Data" encoding="NATIVE"/>
+</Provided_Interface>
 
-<Connection id="{e5711ad1-f6da-4dc2-b619-650f361ff27f}" name="ModeManager_sensorControl____Sensor_sensorControl" required_system_element="NO">
-    <Source func_name="ModeManager" ri_name="sensorControl" />
-    <Target func_name="Sensor" pi_name="sensorControl" />
-</Connection>
+<Required_Interface id="{7ef4a463-6ac5-482f-8de2-d0885799fe18}" name="tc" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" priority="1" stack_size="1024" miat="0" wcet="0" queue_size="1">
+    <Input_Parameter name="tcData" type="TC-Data" encoding="NATIVE"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
+</Required_Interface>
 
-<Connection id="{3fccac4b-8844-4243-8637-96f99b503c16}" name="Sensor_sense____PhysicSimulation_sense" required_system_element="NO">
-    <Source func_name="Sensor" ri_name="sense" />
-    <Target func_name="PhysicSimulation" pi_name="sense" />
-</Connection>
+    <Implementations>
+        <Implementation name="default" language="GUI"/>
+    </Implementations>
+</Function>
 
-<Connection id="{913a2a0e-ceea-4129-b917-464949eee649}" name="ModeManager_actuatorControl____Actuator_actuatorControl" required_system_element="NO">
-    <Source func_name="ModeManager" ri_name="actuatorControl" />
-    <Target func_name="Actuator" pi_name="actuatorControl" />
-</Connection>
+<Function id="{873d541f-e6a0-4d93-b4b9-4298e78f2a00}" name="Actuator" is_type="NO" language="C" default_implementation="default" fixed_system_element="NO" required_system_element="NO" startup_priority="1" instances_min="1" instances_max="1">
+<Provided_Interface id="{ddb795d9-535a-4f18-aefc-9ed99b1d197f}" name="tick" kind="Cyclic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" dispatch_offset="0" priority="1" stack_size="1024" wcet="0" period="490">
+</Provided_Interface>
 
-<Connection id="{5517c07c-6fee-44a6-95b7-f88524306371}" name="Actuator_actuate____PhysicSimulation_actuate" required_system_element="NO">
-    <Source func_name="Actuator" ri_name="actuate" />
-    <Target func_name="PhysicSimulation" pi_name="actuate" />
-</Connection>
+<Provided_Interface id="{acbbd4aa-3970-45f8-8f62-981e50e5abf0}" name="actuatorControl" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
+    <Input_Parameter name="actuatorControlData" type="ActuatorControl-Data" encoding="NATIVE"/>
+</Provided_Interface>
+
+<Required_Interface id="{3835728e-a11e-456c-b6cd-d93aec1583dd}" name="actuate" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
+    <Input_Parameter name="acceleration" type="PhisicValType" encoding="NATIVE"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
+</Required_Interface>
+
+<Required_Interface id="{fb92f7c5-1774-4d40-b06c-9d263b9af6a1}" name="ActuatorStatusUpdate" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
+    <Input_Parameter name="actuatorStatusUpdate" type="ActuatorStatusUpdate-Data" encoding="NATIVE"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
+</Required_Interface>
+
+<Required_Interface id="{36c74a5e-8fe4-4a87-a65a-8f12e5d52e78}" name="SystemDataRequest" kind="Protected" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" wcet="0">
+    <Output_Parameter name="systemDataRequest" type="SystemDataRequest-Data" encoding="NATIVE"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
+</Required_Interface>
+
+    <Implementations>
+        <Implementation name="default" language="C"/>
+    </Implementations>
+</Function>
+
+<Function id="{1c239582-f270-4281-b4e8-14bf2d58c260}" name="ScienceGUI" is_type="NO" language="GUI" default_implementation="default" fixed_system_element="NO" required_system_element="NO" startup_priority="1" instances_min="1" instances_max="1">
+<Provided_Interface id="{644a4af9-f1a7-49c3-a26e-c9877b5c5d49}" name="dataStream" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" priority="1" stack_size="1024" miat="0" wcet="0" queue_size="1">
+</Provided_Interface>
+
+    <Implementations>
+        <Implementation name="default" language="GUI"/>
+    </Implementations>
+</Function>
 
 <Connection id="{d77d2041-dc4c-4fb0-9d3c-e03bf6699869}" name="Sensor_SensorStatusUpdate____Datapool_SensorStatusUpdate" required_system_element="NO">
     <Source func_name="Sensor" ri_name="SensorStatusUpdate" />
@@ -205,6 +182,31 @@
 <Connection id="{ff015e68-eb18-404d-b70a-1a30569ea00b}" name="MCGUI_tc____ModeManager_tc" required_system_element="NO">
     <Source func_name="MCGUI" ri_name="tc" />
     <Target func_name="ModeManager" pi_name="tc" />
+</Connection>
+
+<Connection id="{e5711ad1-f6da-4dc2-b619-650f361ff27f}" name="ModeManager_sensorControl____Sensor_sensorControl" required_system_element="NO">
+    <Source func_name="ModeManager" ri_name="sensorControl" />
+    <Target func_name="Sensor" pi_name="sensorControl" />
+</Connection>
+
+<Connection id="{3fccac4b-8844-4243-8637-96f99b503c16}" name="Sensor_sense____PhysicSimulation_sense" required_system_element="NO">
+    <Source func_name="Sensor" ri_name="sense" />
+    <Target func_name="PhysicSimulation" pi_name="sense" />
+</Connection>
+
+<Connection id="{913a2a0e-ceea-4129-b917-464949eee649}" name="ModeManager_actuatorControl____Actuator_actuatorControl" required_system_element="NO">
+    <Source func_name="ModeManager" ri_name="actuatorControl" />
+    <Target func_name="Actuator" pi_name="actuatorControl" />
+</Connection>
+
+<Connection id="{5517c07c-6fee-44a6-95b7-f88524306371}" name="Actuator_actuate____PhysicSimulation_actuate" required_system_element="NO">
+    <Source func_name="Actuator" ri_name="actuate" />
+    <Target func_name="PhysicSimulation" pi_name="actuate" />
+</Connection>
+
+<Connection id="{e3bca253-263b-4749-9989-81997c381955}" name="Actuator_SystemDataRequest____Datapool_SystemDataRequest" required_system_element="NO">
+    <Source func_name="Actuator" ri_name="SystemDataRequest" />
+    <Target func_name="Datapool" pi_name="SystemDataRequest" />
 </Connection>
 
 <Layer name="default" is_visible="true"/>

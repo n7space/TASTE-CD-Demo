@@ -8,27 +8,40 @@
     !! file. The up-to-date signatures can be found in the header file. !!
 */
 #include "sensor.h"
-//#include <stdio.h>
+#include <stdio.h>
 
+asn1SccDeviceState sensorState;
 
 void sensor_startup(void)
 {
-   // Write your initialisation code
-   // You may call sporadic required interfaces and start timers
-   // puts ("[Sensor] Startup");
+    sensorState = DeviceState_off;
 }
 
 void sensor_PI_sensorControl
       (const asn1SccSensorControl_Data *IN_sensorcontroldata)
 
 {
-   // Write your code here
+   sensorState = IN_sensorcontroldata->state_request;
 }
 
 
 void sensor_PI_tick(void)
 {
-   // Write your code here
+   if(sensorState == DeviceState_on)
+   {
+       asn1SccSense_Data senseData;
+       sensor_RI_sense(&senseData);
+       
+       asn1SccSensorStatusUpdate_Data sensorStatusUpdate;
+       sensorStatusUpdate.device_state = sensorState;
+       sensorStatusUpdate.system_phisic_attrs.height = senseData.system_phisic_attrs.height;
+       sensorStatusUpdate.system_phisic_attrs.velocity = senseData.system_phisic_attrs.velocity;
+       sensor_RI_SensorStatusUpdate(&sensorStatusUpdate);
+
+       printf("HEIGHT %f\n", senseData.system_phisic_attrs.height);
+       printf("VELOCITY %f\n", senseData.system_phisic_attrs.velocity);
+       printf("ACCELERATION %f\n\n", senseData.acceleration);
+   }
 }
 
 

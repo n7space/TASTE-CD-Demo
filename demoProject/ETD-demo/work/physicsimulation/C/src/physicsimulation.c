@@ -8,30 +8,41 @@
     !! file. The up-to-date signatures can be found in the header file. !!
 */
 #include "physicsimulation.h"
-//#include <stdio.h>
 
+#define GRAVITY_ACCELERATION -0.05
+
+static int phisicTick;
+static asn1SccSystemPhisicAttrs systemPhisicAttrs;
+static asn1Real acceleration;
 
 void physicsimulation_startup(void)
 {
-   // Write your initialisation code
-   // You may call sporadic required interfaces and start timers
-   // puts ("[PhysicSimulation] Startup");
+   phisicTick = 0;
+   systemPhisicAttrs.height = 0.0;
+   systemPhisicAttrs.velocity = 0.0;
+   acceleration = 0.0;
 }
 
-void physicsimulation_PI_actuate(void)
+void physicsimulation_PI_actuate(const asn1SccPhisicValType * IN_acceleration)
 {
-   // Write your code here
+   acceleration = *IN_acceleration;
 }
 
 
 void physicsimulation_PI_sense( asn1SccSense_Data * OUT_sensedata)
 {
-   // Write your code here
+   OUT_sensedata->phisic_tick = phisicTick;
+   OUT_sensedata->system_phisic_attrs.height = systemPhisicAttrs.height;
+   OUT_sensedata->system_phisic_attrs.velocity = systemPhisicAttrs.velocity;
+   OUT_sensedata->acceleration = acceleration;
 }
 
 void physicsimulation_PI_tick(void)
 {
-   // Write your code here
+   systemPhisicAttrs.height = systemPhisicAttrs.height + systemPhisicAttrs.velocity;
+   systemPhisicAttrs.velocity = systemPhisicAttrs.velocity + acceleration + GRAVITY_ACCELERATION;
+
+   phisicTick++;
 }
 
 

@@ -119,7 +119,7 @@ DataView.aadl: ${ASN1_FILES}
 	taste-update-data-view $^
 
 clean:
-	rm -rf work/build work/dataview work/glue_simu
+	rm -rf work/build work/dataview work/glue_simu work/binaries work/dump
 	rm -f *.aadl  # Interface and Deployment views in AADL are generated
 	rm -f work/glue_release work/glue_debug work/glue_coverage work/skeletons_built
 	find work -type d -name "wrappers" -exec rm -rf {} + || :

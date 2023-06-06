@@ -17,13 +17,15 @@ BEGIN
 
 -- Complex types:
 
+PhisicValType ::= REAL (-10000.0 .. 10000.0)
+
 SystemMode ::= ENUMERATED { off, idle, on }
 DeviceState ::= ENUMERATED { off, on }
 Response ::= ENUMERATED { accepted, error }
 
 SystemPhisicAttrs  ::= SEQUENCE {
-    velocity  INTEGER (0..4294967296),
-    height INTEGER (0..4294967296)
+    velocity  PhisicValType,
+    height PhisicValType
 }
 
 TC-Data  ::= SEQUENCE {
@@ -49,19 +51,20 @@ SensorStatusUpdate-Data  ::= SEQUENCE {
 
 ActuatorStatusUpdate-Data  ::= SEQUENCE {
     device-state  DeviceState,
-    acceleration INTEGER (0..4294967296)
+    acceleration PhisicValType
 }
 
 SystemDataRequest-Data  ::= SEQUENCE {
     actuator-state  DeviceState,
     sensor-state  DeviceState,
-    acceleration INTEGER (0..4294967296),
+    acceleration PhisicValType,
     system-phisic-attrs SystemPhisicAttrs
 }
 
 Sense-Data  ::= SEQUENCE {
     phisic-tick  INTEGER (0..4294967296),
-    system-phisic-attrs SystemPhisicAttrs
+    system-phisic-attrs SystemPhisicAttrs,
+    acceleration PhisicValType
 }
 --
 --  MyChoice    ::= CHOICE {
