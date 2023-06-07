@@ -2,11 +2,11 @@ Modemanager-Datamodel DEFINITIONS ::=
 BEGIN
 --  This file was generated automatically by OpenGEODE
 IMPORTS
-   MyInteger, SystemMode, DeviceState, Response, TC-Data, TM-Data, SensorControl-Data, ActuatorControl-Data, StatusUpdate-Data FROM ETD-DEMO-DATAVIEW
+   PhisicValType, SystemMode, DeviceState, Response, SystemPhisicAttrs, TC-Mode-Data, TC-Config-Data, TC-Data, TM-Data, SensorControl-Data, ActuatorControl-Data, ActuatorConfig-Data, SensorStatusUpdate-Data, ActuatorStatusUpdate-Data, SystemDataRequest-Data, Sense-Data FROM ETD-DEMO-DATAVIEW
    T-Int32, T-UInt32, T-Int8, T-UInt8, T-Boolean, T-Null-Record FROM TASTE-BasicTypes
    PID-Range, PID FROM System-Dataview;
 
-Modemanager-States ::= ENUMERATED {idle, on, off}
+Modemanager-States ::= ENUMERATED {on, idle, off}
 
 Modemanager-Context ::= SEQUENCE {
    state Modemanager-States,
@@ -15,8 +15,10 @@ Modemanager-Context ::= SEQUENCE {
    offspring PID,
    tcinput TC-Data,
    tmoutput TM-Data,
+   actuatorconfigoutput ActuatorConfig-Data,
    actuatorcontroloutput ActuatorControl-Data,
    sensorcontroloutput SensorControl-Data
 }
 
+Modemanager-Tc-Data-Selection ::= ENUMERATED {mode-request-present(1), config-request-present(2)}
 END

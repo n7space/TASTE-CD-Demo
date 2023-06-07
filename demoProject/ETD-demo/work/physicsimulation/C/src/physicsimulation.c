@@ -34,7 +34,7 @@ void physicsimulation_PI_sense( asn1SccSense_Data * OUT_sensedata)
    OUT_sensedata->phisic_tick = phisicTick;
    OUT_sensedata->system_phisic_attrs.height = systemPhisicAttrs.height;
    OUT_sensedata->system_phisic_attrs.velocity = systemPhisicAttrs.velocity;
-   OUT_sensedata->acceleration = acceleration;
+   OUT_sensedata->control_acceleration = acceleration;
 }
 
 void physicsimulation_PI_tick(void)

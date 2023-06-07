@@ -11,7 +11,7 @@
 #include <stdio.h>
 
 #define GRAVITY_ACCELERATION -0.01f
-#define TARGET_HEIGHT 10.0f
+#define DEFAULT_TARGET_HEIGHT 10.0f
 #define MAX_ACCELERATION 5.0f
 
 #define PROPORTONAL_GAIN 0.01f
@@ -22,6 +22,7 @@
 #define MAX_INTEGRATOR 0.5f
 
 static asn1SccDeviceState actuatorState;
+static asn1Real targetHeight;
 
 static asn1Real prevHeight;
 static asn1Real prevError;
@@ -38,6 +39,13 @@ void actuator_startup(void)
    prevError = 0.0f;
    integrator = 0.0f;
    differentiator = 0.0f;
+   targetHeight = DEFAULT_TARGET_HEIGHT;
+}
+
+void actuator_PI_actuatorConfig
+      (const asn1SccActuatorConfig_Data *IN_actuatorconfigdata)
+{
+   targetHeight = IN_actuatorconfigdata->target_height;
 }
 
 void actuator_PI_actuatorControl
@@ -68,6 +76,7 @@ void actuator_PI_tick(void)
        asn1SccActuatorStatusUpdate_Data actuatorStatusUpdate;
        actuatorStatusUpdate.device_state = actuatorState;
        actuatorStatusUpdate.acceleration = acceleration;
+       actuatorStatusUpdate.target_height = targetHeight;
        actuator_RI_ActuatorStatusUpdate(&actuatorStatusUpdate);
 
        asn1SccPhisicValType actuation = acceleration;
@@ -82,7 +91,7 @@ void actuator_PI_tick(void)
 
 asn1Real calculateAcceleration(asn1Real height)
 {
-    asn1Real error = TARGET_HEIGHT - height;
+    asn1Real error = targetHeight - height;
 
     asn1Real proportional = PROPORTONAL_GAIN * error;
 
@@ -100,10 +109,6 @@ asn1Real calculateAcceleration(asn1Real height)
     differentiator = -(2.0f * DERIVATIVE_GAIN * (height - prevHeight) +
                      (2.0f * TAU - TIME_SAMPLE) * differentiator) /
                      (2.0f * TAU + TIME_SAMPLE);
-
-    printf("    PROPRTIONAL %f\n", proportional);
-    printf("    INTEGRATOR %f\n", integrator);
-    printf("    DIFFERENTIATOR %f\n\n", differentiator);
 
     asn1Real acceleration = proportional + integrator + differentiator - GRAVITY_ACCELERATION;
 

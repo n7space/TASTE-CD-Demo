@@ -38,11 +38,17 @@ void sensor_PI_tick(void)
        sensorStatusUpdate.system_phisic_attrs.velocity = senseData.system_phisic_attrs.velocity;
        sensor_RI_SensorStatusUpdate(&sensorStatusUpdate);
 
-       printf("HEIGHT %f\n", senseData.system_phisic_attrs.height);
-       printf("VELOCITY %f\n", senseData.system_phisic_attrs.velocity);
-       printf("ACCELERATION %f\n\n", senseData.acceleration);
+       asn1SccSystemDataRequest_Data systemStatusUpdate;
+       sensor_RI_SystemDataRequest(&systemStatusUpdate);
 
-       sensor_RI_dataStream(&senseData);
+       asn1SccDataStream_Data dataStreamData;
+       dataStreamData.phisic_tick = senseData.phisic_tick;
+       dataStreamData.target_height = systemStatusUpdate.target_height;
+       dataStreamData.system_phisic_attrs.height = senseData.system_phisic_attrs.height;
+       dataStreamData.system_phisic_attrs.velocity = senseData.system_phisic_attrs.velocity;
+       dataStreamData.control_acceleration = senseData.control_acceleration;
+
+       sensor_RI_dataStream(&dataStreamData);
    }
 }
 

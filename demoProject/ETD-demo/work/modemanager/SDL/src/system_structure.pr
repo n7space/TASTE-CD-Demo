@@ -15,6 +15,13 @@ system Modemanager;
       external;
    
    
+   procedure actuatorConfig;
+      fpar
+            in     Actuatorconfigdata ActuatorConfig_Data;
+   
+      external;
+   
+   
    procedure actuatorControl;
       fpar
             in     Actuatorcontroldata ActuatorControl_Data;

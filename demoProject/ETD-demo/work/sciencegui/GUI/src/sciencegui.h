@@ -17,7 +17,7 @@ extern "C" {
 void sciencegui_startup(void);
 
 /* Provided interfaces */
-void sciencegui_PI_dataStream( const asn1SccSense_Data * );
+void sciencegui_PI_dataStream( const asn1SccDataStream_Data * );
 
 /* Required interfaces */
 

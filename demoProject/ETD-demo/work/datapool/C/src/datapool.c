@@ -25,6 +25,7 @@ void datapool_PI_ActuatorStatusUpdate
 {
    actuatorStatus.device_state = IN_actuatorstatusupdate->device_state;
    actuatorStatus.acceleration = IN_actuatorstatusupdate->acceleration;
+   actuatorStatus.target_height = IN_actuatorstatusupdate->target_height;
 }
 
 
@@ -44,6 +45,7 @@ void datapool_PI_SystemDataRequest
 {
    OUT_systemdatarequest->actuator_state = actuatorStatus.device_state;
    OUT_systemdatarequest->sensor_state = sensorStatus.device_state;
+   OUT_systemdatarequest->target_height = actuatorStatus.target_height;
    OUT_systemdatarequest->acceleration = actuatorStatus.acceleration;
    OUT_systemdatarequest->system_phisic_attrs.velocity = sensorStatus.system_phisic_attrs.velocity;
    OUT_systemdatarequest->system_phisic_attrs.height = sensorStatus.system_phisic_attrs.height;
