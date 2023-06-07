@@ -10,15 +10,34 @@
 #include "actuator.h"
 #include <stdio.h>
 
-#define TARGET_HEIGHT 0.0
-#define MAX_ACCELERATION 2.0
+#define GRAVITY_ACCELERATION -0.01f
+#define TARGET_HEIGHT 10.0f
+#define MAX_ACCELERATION 5.0f
+
+#define PROPORTONAL_GAIN 0.01f
+#define INTEGRATOR_GAIN 0.0f
+#define DERIVATIVE_GAIN 0.2f
+#define TAU 1.0f
+#define TIME_SAMPLE 0.5f
+#define MAX_INTEGRATOR 0.5f
 
 static asn1SccDeviceState actuatorState;
-static asn1Real acceleration;
+
+static asn1Real prevHeight;
+static asn1Real prevError;
+static asn1Real integrator;
+static asn1Real differentiator;
+
+asn1Real calculateAcceleration(asn1Real height);
 
 void actuator_startup(void)
 {
    actuatorState = DeviceState_off;
+
+   prevHeight = 0.0f;
+   prevError = 0.0f;
+   integrator = 0.0f;
+   differentiator = 0.0f;
 }
 
 void actuator_PI_actuatorControl
@@ -26,6 +45,14 @@ void actuator_PI_actuatorControl
 
 {
    actuatorState = IN_actuatorcontroldata->state_request;
+
+   if(actuatorState == DeviceState_off)
+   {
+       prevHeight = 0.0f;
+       prevError = 0.0f;
+       integrator = 0.0f;
+       differentiator = 0.0f;
+   }
 }
 
 
@@ -36,29 +63,7 @@ void actuator_PI_tick(void)
        asn1SccSystemDataRequest_Data systemDataRequest;
        actuator_RI_SystemDataRequest(&systemDataRequest);
 
-       asn1Real heightDifference = TARGET_HEIGHT - systemDataRequest.system_phisic_attrs.height;
-
-       acceleration = heightDifference * heightDifference * heightDifference / 10000.0;
-
-       if(heightDifference > 0.0)
-       {
-         heightDifference = heightDifference - 4.0;
-         acceleration = heightDifference * heightDifference * heightDifference / 10000.0;
-       }
-       else
-       {
-         heightDifference = heightDifference + 4.0;
-         acceleration = heightDifference * heightDifference * heightDifference / 10000.0;
-       }
-
-       if(acceleration > MAX_ACCELERATION)
-       {
-           acceleration = MAX_ACCELERATION;
-       }
-       if(acceleration < -MAX_ACCELERATION)
-       {
-           acceleration = -MAX_ACCELERATION;
-       }
+       asn1Real acceleration = calculateAcceleration(systemDataRequest.system_phisic_attrs.height);
 
        asn1SccActuatorStatusUpdate_Data actuatorStatusUpdate;
        actuatorStatusUpdate.device_state = actuatorState;
@@ -73,4 +78,46 @@ void actuator_PI_tick(void)
        asn1SccPhisicValType actuation = 0.0;
        actuator_RI_actuate(&actuation);
    }
+}
+
+asn1Real calculateAcceleration(asn1Real height)
+{
+    asn1Real error = TARGET_HEIGHT - height;
+
+    asn1Real proportional = PROPORTONAL_GAIN * error;
+
+    integrator = integrator + 0.5f * INTEGRATOR_GAIN * TIME_SAMPLE * (error + prevError);
+
+    if(integrator > MAX_INTEGRATOR)
+    {
+        integrator = MAX_INTEGRATOR;
+    }
+    if(integrator < -MAX_INTEGRATOR)
+    {
+        integrator = -MAX_INTEGRATOR;
+    }
+
+    differentiator = -(2.0f * DERIVATIVE_GAIN * (height - prevHeight) +
+                     (2.0f * TAU - TIME_SAMPLE) * differentiator) /
+                     (2.0f * TAU + TIME_SAMPLE);
+
+    printf("    PROPRTIONAL %f\n", proportional);
+    printf("    INTEGRATOR %f\n", integrator);
+    printf("    DIFFERENTIATOR %f\n\n", differentiator);
+
+    asn1Real acceleration = proportional + integrator + differentiator - GRAVITY_ACCELERATION;
+
+    if(acceleration > MAX_ACCELERATION)
+    {
+        acceleration = MAX_ACCELERATION;
+    }
+    if(acceleration < -MAX_ACCELERATION)
+    {
+        acceleration = -MAX_ACCELERATION;
+    }
+
+    prevHeight = height;
+    prevError = error;
+
+    return acceleration;
 }

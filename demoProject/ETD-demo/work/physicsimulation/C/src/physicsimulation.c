@@ -9,7 +9,7 @@
 */
 #include "physicsimulation.h"
 
-#define GRAVITY_ACCELERATION -0.05
+#define GRAVITY_ACCELERATION -0.01f
 
 static int phisicTick;
 static asn1SccSystemPhisicAttrs systemPhisicAttrs;

@@ -41,6 +41,8 @@ void sensor_PI_tick(void)
        printf("HEIGHT %f\n", senseData.system_phisic_attrs.height);
        printf("VELOCITY %f\n", senseData.system_phisic_attrs.velocity);
        printf("ACCELERATION %f\n\n", senseData.acceleration);
+
+       sensor_RI_dataStream(&senseData);
    }
 }
 

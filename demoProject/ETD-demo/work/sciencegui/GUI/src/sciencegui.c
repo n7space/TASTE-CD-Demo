@@ -12,6 +12,7 @@
 typedef struct _PI_Messages {
    T_sciencegui_PI_list msg_id;
    union {
+      asn1SccSense_Data datastream_param;
    } msg_data;
 } PI_Messages;
 
@@ -70,18 +71,20 @@ void sciencegui_startup(void)
 }
 
 
-void sciencegui_PI_dataStream(void)
+void sciencegui_PI_dataStream
+      (const asn1SccSense_Data *IN_datastream)
+
 {
    write_message_to_queue
       (sciencegui_PI_queue_id,
-       0,      // Message parameter size is 0 since there is no parameter
-       NULL,   // Pointer to message content is null for the same reason
+       sizeof(asn1SccSense_Data),
+       (void*)IN_datastream,
        i_dataStream);
 
    write_message_to_queue
       (sciencegui_PI_Python_queue_id,
-       0,
-       NULL,
+       sizeof(asn1SccSense_Data),
+       (void*)IN_datastream,
        i_dataStream);
 }
 
