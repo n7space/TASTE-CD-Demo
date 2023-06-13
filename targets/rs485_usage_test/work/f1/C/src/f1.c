@@ -26,9 +26,7 @@ void f1_PI_response
 
 void f1_PI_trigger(void)
 {
-  // if (myStaticInt <= 5) {
-  //   printf("Sending ping: %d\n", (int)myStaticInt);
-  //   f1_RI_query(&myStaticInt);
-  // }
+  printf("Sending ping: %d\n", (int)myStaticInt);
+  f1_RI_query(&myStaticInt);
 }
 

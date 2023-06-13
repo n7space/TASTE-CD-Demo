@@ -26,8 +26,5 @@ void f2_PI_query
 
 void f2_PI_trigger( void )
 {
-  static asn1SccMyInteger arg = 0;
-  f2_RI_response(&arg);
-  ++arg;
 }
 
