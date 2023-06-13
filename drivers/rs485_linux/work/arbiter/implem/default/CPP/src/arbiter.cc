@@ -27,10 +27,10 @@ void arbiter_enqueue_packet
    size_t packet_size = IN_deliverreqseq->length;
    uint8_t *data = reinterpret_cast<uint8_t *>(IN_deliverreqseq->message_data);
    size_t new_all_packets_size = ctxt_arbiter.queue_all_packets_size + packet_size;
-   printf("Enqueue packet_size = %ld, queue_packets_count = %ld, queue_all_packets_size = %ld\n",
+   printf("\tEnqueue packet_size = %ld, queue_packets_count = %ld, queue_all_packets_size = %ld\n",
          packet_size, ctxt_arbiter.queue_packets_count, ctxt_arbiter.queue_all_packets_size);
    if (new_all_packets_size >= QUEUE_SIZE || ctxt_arbiter.queue_packets_count + 1 >= QUEUE_PACKETS_MAX_COUNT) {
-      printf("Output buffer exceeded - dropped\n");
+      printf("\tOutput buffer exceeded - dropped\n");
       return;
    }
 
@@ -88,18 +88,20 @@ void arbiter_PI_Receive
 
 void arbiter_PI_Doorman( void )
 {
-   asn1SccDeliveredRequestData data;
-   data.private_data = ctxt_arbiter.private_data;
-   data.message_data = reinterpret_cast<asn1SccPlatformSpecificPointer>(
-         arbiter_state::open_listening_window_message);
-   data.length = sizeof(arbiter_state::open_listening_window_message);
-   arbiter_RI_Deliver(&data);
+   static uint64_t interval = 0;
+   if (interval++ % 2 == 1) {
+      printf("\tReceiving window\n");
+      ctxt_arbiter.is_receiving = true;
 
-   ctxt_arbiter.is_receiving = true;
-
-   auto wakeup_time = std::chrono::steady_clock::now() + arbiter_state::listening_window_time;
-   std::this_thread::sleep_until(wakeup_time);
-   ctxt_arbiter.is_receiving = false;
-
-   arbiter_send_queued_packets();
+      asn1SccDeliveredRequestData data;
+      data.private_data = ctxt_arbiter.private_data;
+      data.message_data = reinterpret_cast<asn1SccPlatformSpecificPointer>(
+            arbiter_state::open_listening_window_message);
+      data.length = sizeof(arbiter_state::open_listening_window_message);
+      arbiter_RI_Deliver(&data);
+   } else {
+      printf("\tSending window\n");
+      ctxt_arbiter.is_receiving = false;
+      arbiter_send_queued_packets();
+   }
 }
