@@ -24,7 +24,3 @@ void f2_PI_query
   f2_RI_response(&arg);
 }
 
-void f2_PI_trigger( void )
-{
-}
-

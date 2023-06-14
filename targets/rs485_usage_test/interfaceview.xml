@@ -1,32 +1,13 @@
 <InterfaceView version="1.2" asn1file="rs485_usage_test.acn" UiFile="interfaceview.ui.xml">
-<Function id="{4bfca1ee-742c-4dad-aa04-dbdf423659bb}" name="f2" is_type="NO" language="C" default_implementation="default" fixed_system_element="NO" required_system_element="NO" startup_priority="1" instances_max="1" instances_min="1">
-<Provided_Interface id="{6c42713c-7ff8-45f7-b8ca-676f3d3c4a96}" name="query" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" stack_size="16384" priority="1" wcet="0" queue_size="10" miat="0">
+<Function id="{697d9395-eeb7-4344-9878-86b87c0aee57}" name="f1" is_type="NO" language="C" default_implementation="default" fixed_system_element="NO" required_system_element="NO" instances_min="1" instances_max="1" startup_priority="1">
+<Provided_Interface id="{3c613865-12dc-4dcc-bf46-4be14177cfb6}" name="response" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" miat="0" queue_size="10" priority="1" stack_size="16384" wcet="0">
     <Input_Parameter name="p1" type="MyInteger" encoding="NATIVE"/>
 </Provided_Interface>
 
-<Provided_Interface id="{d96c4221-4d9a-49a1-95cb-73f17b261ae7}" name="trigger" kind="Cyclic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" period="1000" stack_size="16384" priority="1" wcet="0" dispatch_offset="0">
+<Provided_Interface id="{051f8e92-0e1d-4047-8a17-23bc15723ca0}" name="trigger" kind="Cyclic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" dispatch_offset="0" period="1000" priority="1" stack_size="16384" wcet="0">
 </Provided_Interface>
 
-<Required_Interface id="{5eb0709c-abaf-4fc5-b2fe-6187915e14e4}" name="response" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" stack_size="16384" priority="1" wcet="0" queue_size="10" miat="0">
-    <Input_Parameter name="p1" type="MyInteger" encoding="NATIVE"/>
-    <Property name="Taste::InheritPI" value="true"/>
-    <Property name="Taste::Autonamed" value="true"/>
-</Required_Interface>
-
-    <Implementations>
-        <Implementation name="default" language="C"/>
-    </Implementations>
-</Function>
-
-<Function id="{697d9395-eeb7-4344-9878-86b87c0aee57}" name="f1" is_type="NO" language="C" default_implementation="default" fixed_system_element="NO" required_system_element="NO" startup_priority="1" instances_max="1" instances_min="1">
-<Provided_Interface id="{3c613865-12dc-4dcc-bf46-4be14177cfb6}" name="response" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" stack_size="16384" priority="1" wcet="0" queue_size="10" miat="0">
-    <Input_Parameter name="p1" type="MyInteger" encoding="NATIVE"/>
-</Provided_Interface>
-
-<Provided_Interface id="{051f8e92-0e1d-4047-8a17-23bc15723ca0}" name="trigger" kind="Cyclic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" period="1000" stack_size="16384" priority="1" wcet="0" dispatch_offset="0">
-</Provided_Interface>
-
-<Required_Interface id="{61f3779a-ac5c-44dc-81c7-cc5d19746d8d}" name="query" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" stack_size="16384" priority="1" wcet="0" queue_size="10" miat="0">
+<Required_Interface id="{61f3779a-ac5c-44dc-81c7-cc5d19746d8d}" name="query" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" miat="0" queue_size="10" priority="1" stack_size="16384" wcet="0">
     <Input_Parameter name="p1" type="MyInteger" encoding="NATIVE"/>
     <Property name="Taste::InheritPI" value="true"/>
     <Property name="Taste::Autonamed" value="true"/>
@@ -37,14 +18,30 @@
     </Implementations>
 </Function>
 
-<Connection id="{515fc2fb-f616-483b-ae4c-6a2801c83c7b}" required_system_element="NO">
-    <Source func_name="f2" ri_name="response" />
-    <Target func_name="f1" pi_name="response" />
-</Connection>
+<Function id="{4bfca1ee-742c-4dad-aa04-dbdf423659bb}" name="f2" is_type="NO" language="C" default_implementation="default" fixed_system_element="NO" required_system_element="NO" instances_min="1" instances_max="1" startup_priority="1">
+<Provided_Interface id="{6c42713c-7ff8-45f7-b8ca-676f3d3c4a96}" name="query" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" miat="0" queue_size="10" priority="1" stack_size="16384" wcet="0">
+    <Input_Parameter name="p1" type="MyInteger" encoding="NATIVE"/>
+</Provided_Interface>
+
+<Required_Interface id="{5eb0709c-abaf-4fc5-b2fe-6187915e14e4}" name="response" kind="Sporadic" enable_multicast="true" layer="default" required_system_element="NO" is_simulink_interface="false" miat="0" queue_size="10" priority="1" stack_size="16384" wcet="0">
+    <Input_Parameter name="p1" type="MyInteger" encoding="NATIVE"/>
+    <Property name="Taste::InheritPI" value="true"/>
+    <Property name="Taste::Autonamed" value="true"/>
+</Required_Interface>
+
+    <Implementations>
+        <Implementation name="default" language="C"/>
+    </Implementations>
+</Function>
 
 <Connection id="{dac3e57c-ecca-4fca-8dfe-f9f99bf39716}" required_system_element="NO">
     <Source func_name="f1" ri_name="query" />
     <Target func_name="f2" pi_name="query" />
+</Connection>
+
+<Connection id="{515fc2fb-f616-483b-ae4c-6a2801c83c7b}" required_system_element="NO">
+    <Source func_name="f2" ri_name="response" />
+    <Target func_name="f1" pi_name="response" />
 </Connection>
 
 <Layer name="default" is_visible="true"/>
