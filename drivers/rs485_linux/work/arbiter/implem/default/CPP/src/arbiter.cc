@@ -89,7 +89,7 @@ void arbiter_PI_Receive
 void arbiter_PI_Doorman( void )
 {
    static uint64_t interval = 0;
-   if (interval++ % 2 == 1) {
+   if (interval++ % arbiter_state::listening_interval == 1) {
       printf("\tReceiving window\n");
       ctxt_arbiter.is_receiving = true;
 

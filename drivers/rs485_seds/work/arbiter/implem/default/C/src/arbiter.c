@@ -11,7 +11,9 @@
 
 #include <assert.h>
 
-#define OUTPUT_BUFFER_SIZE 1000
+#define TOKEN_LENGTH 13
+#define TOKEN_PAYLOAD_POSITION 8
+#define TOKEN_PAYLOAD 0xFF
 
 __attribute__((section(".sdramMemorySection")))
 static asn1SccPioHwas pioHwas;
@@ -29,7 +31,7 @@ void arbiter_startup(void)
 bool arbiter_is_control_packet_received
       (const uint8_t *message_data, size_t length)
 {
-   if (length == 13 && message_data[8] == 0xFF) {
+   if (length == TOKEN_LENGTH && message_data[TOKEN_PAYLOAD_POSITION] == TOKEN_PAYLOAD) {
       return true;
    }
    return false;
