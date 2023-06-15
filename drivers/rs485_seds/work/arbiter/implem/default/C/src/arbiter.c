@@ -20,12 +20,6 @@ static asn1SccPioHwas pioHwas;
 
 void arbiter_startup(void)
 {
-   asn1SccPioHwasPinConfig pinConfig;
-   pinConfig.mPortConfig = asn1SccPioHwas_Port_pioHwas_Port_A;
-   pinConfig.mPinConfig = 2;
-   pinConfig.mDirectionConfig = asn1SccPioHwas_Direction_pioHwas_Direction_Output;
-   pinConfig.mControlConfig = asn1SccPioHwas_Control_pioHwas_Control_Pio;
-   arbiter_RI_PioHwas_InitPin_Pi(&pioHwas, &pinConfig);
 }
 
 bool arbiter_is_control_packet_received
@@ -35,6 +29,19 @@ bool arbiter_is_control_packet_received
       return true;
    }
    return false;
+}
+
+void arbiter_PI_Init
+      (const asn1SccInitRequestData *IN_initreqseq)
+{
+   asn1SccPioHwasPinConfig pinConfig;
+   asn1SccRS485_SEDS_Conf_T *conf = (asn1SccRS485_SEDS_Conf_T *) IN_initreqseq->device_configuration;
+   assert(conf && "Device config is empty");
+   pinConfig.mPortConfig = conf->pio.mPortConfig;
+   pinConfig.mPinConfig = conf->pio.mPinConfig;
+   pinConfig.mDirectionConfig = asn1SccPioHwas_Direction_pioHwas_Direction_Output;
+   pinConfig.mControlConfig = asn1SccPioHwas_Control_pioHwas_Control_Pio;
+   arbiter_RI_PioHwas_InitPin_Pi(&pioHwas, &pinConfig);
 }
 
 void arbiter_PI_Deliver
