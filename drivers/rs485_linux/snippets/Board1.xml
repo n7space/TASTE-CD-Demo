@@ -23,7 +23,7 @@ Generated XML element <Port> shall be put into <Board> named x86 Linux C++.
               asn1file="/home/taste/tool-inst/include/TASTE-Linux-Drivers/configurations/rs485_linuxconfiguration.asn"
               asn1module="RS485-LINUX-DRIVER-CONFIGURATION"
               asn1type="RS485-LINUX-Conf-T"
-              requiresBusAccess="ocarina_buses::ip.generic"/>
+              requiresBusAccess="ocarina_buses::serial.ccsds"/>
         <!-- COPY TILL HERE -->
     </Board>
 
