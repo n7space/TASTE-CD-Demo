@@ -26,6 +26,8 @@ work/driver/implem/default/C/*
 !work/driver/implem/default/C/src
 work/driver/implem/default/C/src/*
 !work/driver/implem/default/C/src/driver.c
+!work/driver/implem/default/C/src/linux_serial_ccsds.h
+!work/driver/implem/default/C/src/linux_serial_ccsds.cc
 
 # Except arbiter source
 !work/arbiter/
