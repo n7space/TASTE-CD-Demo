@@ -15,55 +15,55 @@ interfaceview.ui.xml
 work/*
 
 # Except assembler source
-!work/assembler/
-work/assembler/*
-!work/assembler/C
-!work/assembler/implem
-!work/assembler/implem/default
-work/assembler/implem/default/*
-!work/assembler/implem/default/C
-work/assembler/implem/default/C/*
-!work/assembler/implem/default/C/src
-work/assembler/implem/default/C/src/*
-!work/assembler/implem/default/C/src/assembler.c
+!work/uart_assembler/
+work/uart_assembler/*
+!work/uart_assembler/C
+!work/uart_assembler/implem
+!work/uart_assembler/implem/default
+work/uart_assembler/implem/default/*
+!work/uart_assembler/implem/default/C
+work/uart_assembler/implem/default/C/*
+!work/uart_assembler/implem/default/C/src
+work/uart_assembler/implem/default/C/src/*
+!work/uart_assembler/implem/default/C/src/uart_assembler.c
 
 # Except hwas source
-!work/hwas/
-work/hwas/*
-!work/hwas/C
-!work/hwas/implem
-!work/hwas/implem/default
-work/hwas/implem/default/*
-!work/hwas/implem/default/C
-work/hwas/implem/default/C/*
-!work/hwas/implem/default/C/src
-work/hwas/implem/default/C/src/*
-!work/hwas/implem/default/C/src/hwas.c
+!work/uart_hwas/
+work/uart_hwas/*
+!work/uart_hwas/C
+!work/uart_hwas/implem
+!work/uart_hwas/implem/default
+work/uart_hwas/implem/default/*
+!work/uart_hwas/implem/default/C
+work/uart_hwas/implem/default/C/*
+!work/uart_hwas/implem/default/C/src
+work/uart_hwas/implem/default/C/src/*
+!work/uart_hwas/implem/default/C/src/uart_hwas.c
 
 # Except piohwasdriver source
-!work/piohwasdriver/
-work/piohwasdriver/*
-!work/piohwasdriver/SEDS
-!work/piohwasdriver/implem
-!work/piohwasdriver/implem/default
-work/piohwasdriver/implem/default/*
-!work/piohwasdriver/implem/default/SEDS
-work/piohwasdriver/implem/default/SEDS/*
-!work/piohwasdriver/implem/default/SEDS/src
-work/piohwasdriver/implem/default/SEDS/src/*
-!work/piohwasdriver/implem/default/SEDS/src/piohwasdriver.xml
+!work/uart_piohwasdriver/
+work/uart_piohwasdriver/*
+!work/uart_piohwasdriver/SEDS
+!work/uart_piohwasdriver/implem
+!work/uart_piohwasdriver/implem/default
+work/uart_piohwasdriver/implem/default/*
+!work/uart_piohwasdriver/implem/default/SEDS
+work/uart_piohwasdriver/implem/default/SEDS/*
+!work/uart_piohwasdriver/implem/default/SEDS/src
+work/uart_piohwasdriver/implem/default/SEDS/src/*
+!work/uart_piohwasdriver/implem/default/SEDS/src/uart_piohwasdriver.xml
 
 # Except uarthwasdriver source
-!work/uarthwasdriver/
-work/uarthwasdriver/*
-!work/uarthwasdriver/SEDS
-!work/uarthwasdriver/implem
-!work/uarthwasdriver/implem/default
-work/uarthwasdriver/implem/default/*
-!work/uarthwasdriver/implem/default/SEDS
-work/uarthwasdriver/implem/default/SEDS/*
-!work/uarthwasdriver/implem/default/SEDS/src
-work/uarthwasdriver/implem/default/SEDS/src/*
-!work/uarthwasdriver/implem/default/SEDS/src/uarthwasdriver.xml
+!work/uart_uarthwasdriver/
+work/uart_uarthwasdriver/*
+!work/uart_uarthwasdriver/SEDS
+!work/uart_uarthwasdriver/implem
+!work/uart_uarthwasdriver/implem/default
+work/uart_uarthwasdriver/implem/default/*
+!work/uart_uarthwasdriver/implem/default/SEDS
+work/uart_uarthwasdriver/implem/default/SEDS/*
+!work/uart_uarthwasdriver/implem/default/SEDS/src
+work/uart_uarthwasdriver/implem/default/SEDS/src/*
+!work/uart_uarthwasdriver/implem/default/SEDS/src/uart_uarthwasdriver.xml
 
 .gdb_history
