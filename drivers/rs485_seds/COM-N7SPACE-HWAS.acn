@@ -1,0 +1,9 @@
+COM-N7SPACE-HWAS DEFINITIONS ::= BEGIN
+DestinationAddress [size 32, encoding pos-int, endianness little]
+SourceAddress [size 32, encoding pos-int, endianness little]
+Word [size 32, encoding pos-int, endianness little]
+WordMask [size 32, encoding pos-int, endianness little]
+InterruptNumber [size 8, encoding pos-int]
+Byte [size 8, encoding pos-int]
+END
+

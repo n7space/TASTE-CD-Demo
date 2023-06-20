@@ -1,0 +1,12 @@
+-- DRIVER DATA MODEL [user-editable]
+-- Shall contain definition of Private Data structure.
+-- This type will be used in main.c[pp] to indicate the type of the variable that is passed as a private pointer to the driver.
+RS485-SEDS-DRIVER-PRIVATE-DATAVIEW DEFINITIONS ::= BEGIN
+IMPORTS
+PlatformSpecificPointer FROM RS485-SEDS-DATAVIEW;
+
+    RS485-SEDS-Private-Data ::= SEQUENCE {
+        buffer PlatformSpecificPointer
+    }
+
+END

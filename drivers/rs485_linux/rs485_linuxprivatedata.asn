@@ -1,0 +1,10 @@
+-- DRIVER DATA MODEL [user-editable]
+-- Shall contain definition of Private Data structure.
+-- This type will be used in main.c[pp] to indicate the type of the variable that is passed as a private pointer to the driver.
+RS485-LINUX-DRIVER-PRIVATE-DATAVIEW DEFINITIONS ::= BEGIN
+
+    RS485-LINUX-Private-Data ::= SEQUENCE {
+        content     OCTET STRING (SIZE (4096))
+    }
+
+END

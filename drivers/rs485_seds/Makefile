@@ -4,20 +4,20 @@ SPACECREATOR?=spacecreator.AppImage
 export USER_CFLAGS=-I$(shell pwd)
 
 # Get the list of ASN.1 files from Space Creator project file:
-DISTFILES=$(shell qmake uart_seds.pro -o /tmp/null 2>&1)
+DISTFILES=$(shell qmake rs485_seds.pro -o /tmp/null 2>&1)
 ASN1_FILES=$(shell find ${DISTFILES} 2>/dev/null | egrep '.asn$$|.asn1$$')
 
 # Explicit configuration support
-ASN1_DRV_CONFIG=uart_sedsconfiguration.asn
-ASN1_DRV_PRIVATE=uart_sedsprivatedata.asn
+ASN1_DRV_CONFIG=rs485_sedsconfiguration.asn
+ASN1_DRV_PRIVATE=rs485_sedsprivatedata.asn
 ASN1_DRIVER_EXPLICIT_CONFIG=$(ASN1_DRV_CONFIG) $(ASN1_DRV_PRIVATE)
 
 PARTITION_NAME=demo
 
-CD_INSTALLATION_DIRECTORY=$(COMMUNICATION_DEVICE_PATH)/SAMV71/port_uart_seds
+CD_INSTALLATION_DIRECTORY=$(COMMUNICATION_DEVICE_PATH)/SAMV71/port_rs485_seds
 COMMUNICATION_DEVICE_INSTALLATOR=install_communication_devices.py
 TASTE_DRIVER_REPO=$(shell taste-config --prefix)/include/$(subst X86,,TASTE-SAMV71-Drivers)
-SOURCE_INSTALLATION_DIRECTORY=$(shell find $(TASTE_DRIVER_REPO) -name "uart_seds")
+SOURCE_INSTALLATION_DIRECTORY=$(shell find $(TASTE_DRIVER_REPO) -name "rs485_seds")
 
 all:	release
 
@@ -41,8 +41,8 @@ install:
 
 uninstall:
 	rm -r $(CD_INSTALLATION_DIRECTORY)
-	rm $(TASTE_DRIVER_REPO)/configurations/uart_sedsconfiguration.asn
-	rm $(TASTE_DRIVER_REPO)/configurations/uart_sedsconfiguration.acn
+	rm $(TASTE_DRIVER_REPO)/configurations/rs485_sedsconfiguration.asn
+	rm $(TASTE_DRIVER_REPO)/configurations/rs485_sedsconfiguration.acn
 	rm -r $(SOURCE_INSTALLATION_DIRECTORY)
 	$(COMMUNICATION_DEVICE_INSTALLATOR) -c ${COMMUNICATION_DEVICE_PATH}
 

@@ -1,0 +1,15 @@
+COM-N7SPACE-HWAS DEFINITIONS ::= BEGIN
+-- Type for a memory destination address.
+DestinationAddress ::= INTEGER(0 .. 4294967295)
+-- Type for a memory source address.
+SourceAddress ::= INTEGER(0 .. 4294967295)
+-- Machine word.
+Word ::= INTEGER(0 .. 4294967295)
+-- Mask for a machine word.
+WordMask ::= INTEGER(0 .. 4294967295)
+-- Interrupt number for NVIC.
+InterruptNumber ::= INTEGER(0 .. 255)
+-- Byte.
+Byte ::= INTEGER(0 .. 255)
+END
+

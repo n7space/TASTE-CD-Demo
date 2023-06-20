@@ -4,20 +4,20 @@ SPACECREATOR?=spacecreator.AppImage
 export USER_CFLAGS=-I$(shell pwd)
 
 # Get the list of ASN.1 files from Space Creator project file:
-DISTFILES=$(shell qmake uart_seds.pro -o /tmp/null 2>&1)
+DISTFILES=$(shell qmake rs485_linux.pro -o /tmp/null 2>&1)
 ASN1_FILES=$(shell find ${DISTFILES} 2>/dev/null | egrep '.asn$$|.asn1$$')
 
 # Explicit configuration support
-ASN1_DRV_CONFIG=uart_sedsconfiguration.asn
-ASN1_DRV_PRIVATE=uart_sedsprivatedata.asn
+ASN1_DRV_CONFIG=rs485_linuxconfiguration.asn
+ASN1_DRV_PRIVATE=rs485_linuxprivatedata.asn
 ASN1_DRIVER_EXPLICIT_CONFIG=$(ASN1_DRV_CONFIG) $(ASN1_DRV_PRIVATE)
 
 PARTITION_NAME=demo
 
-CD_INSTALLATION_DIRECTORY=$(COMMUNICATION_DEVICE_PATH)/SAMV71/port_uart_seds
+CD_INSTALLATION_DIRECTORY=$(COMMUNICATION_DEVICE_PATH)/X86Linux/port_rs485_linux
 COMMUNICATION_DEVICE_INSTALLATOR=install_communication_devices.py
-TASTE_DRIVER_REPO=$(shell taste-config --prefix)/include/$(subst X86,,TASTE-SAMV71-Drivers)
-SOURCE_INSTALLATION_DIRECTORY=$(shell find $(TASTE_DRIVER_REPO) -name "uart_seds")
+TASTE_DRIVER_REPO=$(shell taste-config --prefix)/include/$(subst X86,,TASTE-X86Linux-Drivers)
+SOURCE_INSTALLATION_DIRECTORY=$(shell find $(TASTE_DRIVER_REPO) -name "rs485_linux")
 
 all:	release
 
@@ -41,8 +41,8 @@ install:
 
 uninstall:
 	rm -r $(CD_INSTALLATION_DIRECTORY)
-	rm $(TASTE_DRIVER_REPO)/configurations/uart_sedsconfiguration.asn
-	rm $(TASTE_DRIVER_REPO)/configurations/uart_sedsconfiguration.acn
+	rm $(TASTE_DRIVER_REPO)/configurations/rs485_linuxconfiguration.asn
+	rm $(TASTE_DRIVER_REPO)/configurations/rs485_linuxconfiguration.acn
 	rm -r $(SOURCE_INSTALLATION_DIRECTORY)
 	$(COMMUNICATION_DEVICE_INSTALLATOR) -c ${COMMUNICATION_DEVICE_PATH}
 
@@ -79,7 +79,7 @@ InterfaceView.aadl:	interfaceview.xml
 
 Default_Deployment.aadl:	interfaceview.xml
 	# Create/update a default deployment view for Linux target, if none other is provided
-	$(SPACECREATOR) --aadlconverter  -o $^ -t $(shell taste-config --prefix)/share/xml2dv/interfaceview-SAMV71.tmplt -x $@ || exit 1
+	$(SPACECREATOR) --aadlconverter  -o $^ -t $(shell taste-config --prefix)/share/xml2dv/interfaceview-X86Linux.tmplt -x $@ || exit 1
 	rsync --checksum $@ DeploymentView.aadl
 
 DeploymentView.aadl:	Default_Deployment.aadl

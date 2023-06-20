@@ -1,0 +1,24 @@
+<DeploymentView version="1.2" UiFile="deploymentview.ui.xml">
+    <Node id="{7a6a21d5-ec5e-4782-b026-a9468da05801}" name="SAM V71 FreeRTOS N7S_1" type="ocarina_processors_arm::samv71.freertos" node_label="Node_2" namespace="ocarina_processors_arm">
+        <Partition id="{006303ce-35f7-4467-a601-d5044f85fef7}" name="Partition_2">
+            <Function id="{47f00f27-a9cc-46d5-a725-8fc77f9f859c}" name="f2" path="f2"/>
+        </Partition>
+        <Device id="{6d448509-7d46-49be-8ffb-cc99be75f823}" name="uart0" requires_bus_access="ocarina_buses::serial.ccsds" port="uart0" asn1file="/home/taste/tool-inst/include/TASTE-SAMV71-Drivers/configurations/samv71-serial-ccsds-driver.asn" asn1type="Serial-CCSDS-SamV71-Conf-T" asn1module="SAMV71-SERIAL-CCSDS-DRIVER" namespace="ocarina_drivers" bus_namespace="ocarina_buses" extends="ocarina_drivers::serial_ccsds" impl_extends="ocarina_drivers::serial_ccsds.samv71">
+        </Device>
+        <Device id="{9727009d-c9fb-46cd-81ba-99ff96c90556}" name="port_rs485_seds" requires_bus_access="ocarina_buses::serial.ccsds" config="{ devname  uart4, speed  b9600, pio  { mPortID  pioHwas-Port-A, mPinID  2 } }" port="port_rs485_seds" asn1file="/home/taste/tool-inst/include/TASTE-SAMV71-Drivers/configurations/rs485_sedsconfiguration.asn" asn1type="RS485-SEDS-Conf-T" asn1module="RS485-SEDS-DRIVER-CONFIGURATION" namespace="ocarina_drivers" bus_namespace="ocarina_buses" extends="ocarina_drivers::device_rs485_seds" impl_extends="ocarina_drivers::device_rs485_seds.samv71">
+        </Device>
+    </Node>
+    <Node id="{9a3168d9-4ee9-49d3-8447-f802169f80e7}" name="x86 Linux C++_1" type="ocarina_processors_x86::x86.generic_linux" node_label="Node_1" namespace="ocarina_processors_x86">
+        <Partition id="{a116c5af-7768-49de-bbee-e835c70f716e}" name="Partition_1">
+            <Function id="{439c230b-0d8c-4979-9f5f-5191d986c3d9}" name="f1" path="f1"/>
+        </Partition>
+        <Device id="{2f033a1a-477d-4acd-9c5f-b2bb0d78a703}" name="uart0" requires_bus_access="ocarina_buses::serial.ccsds" config="{ devname  &quot;uart0&quot;, speed  b9600, parity  even, bits  8, use-paritybit  FALSE }" port="uart0" asn1file="/home/taste/tool-inst/include/TASTE-Linux-Drivers/configurations/linux-serial-ccsds-driver.asn" asn1type="Serial-CCSDS-Linux-Conf-T" asn1module="LINUX-SERIAL-CCSDS-DRIVER" namespace="ocarina_drivers" bus_namespace="ocarina_buses" extends="ocarina_drivers::serial_ccsds" impl_extends="ocarina_drivers::serial_ccsds.linux">
+        </Device>
+        <Device id="{11b1235c-a854-4e56-b5d9-1e8c1498f856}" name="port_rs485_linux" requires_bus_access="ocarina_buses::serial.ccsds" config="{ devname  &quot;uart0&quot;, speed  b9600 }" port="port_rs485_linux" asn1file="/home/taste/tool-inst/include/TASTE-Linux-Drivers/configurations/rs485_linuxconfiguration.asn" asn1type="RS485-LINUX-Conf-T" asn1module="RS485-LINUX-DRIVER-CONFIGURATION" namespace="ocarina_drivers" bus_namespace="ocarina_buses" extends="ocarina_drivers::device_rs485_linux" impl_extends="ocarina_drivers::device_rs485_linux.linux">
+        </Device>
+    </Node>
+    <Connection id="{5bc5578c-fbae-4bc7-b7fe-a7a3dc5b895d}" name="Connection_1" from_node="x86 Linux C++_1" from_port="port_rs485_linux" to_bus="ocarina_buses::serial.ccsds" to_node="SAM V71 FreeRTOS N7S_1" to_port="port_rs485_seds">
+            <Message id="{d948e31f-a13f-4a1f-9e74-2267ba5ea81e}" name="Message_3" from_function="f1" from_interface="query" to_function="f2" to_interface="query"/>
+            <Message id="{ee134eb3-0a2a-4731-a292-bc55cad32d65}" name="Message_4" from_function="f2" from_interface="response" to_function="f1" to_interface="response"/>
+    </Connection>
+</DeploymentView>

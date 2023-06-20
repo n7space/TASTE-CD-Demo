@@ -1,0 +1,46 @@
+default_attributes.xml
+interfaceview.ui.xml
+
+.qtc_clangd/
+
+*.aadl
+!snippets/*.aadl
+.cache/
+*.pro.user
+*.pro.user*
+*.pro.shared
+*.msc
+
+# Ignore whole work directory
+work/*
+
+# Except driver source
+!work/driver/
+work/driver/*
+!work/driver/C
+!work/driver/implem
+!work/driver/implem/default
+work/driver/implem/default/*
+!work/driver/implem/default/C
+work/driver/implem/default/C/*
+!work/driver/implem/default/C/src
+work/driver/implem/default/C/src/*
+!work/driver/implem/default/C/src/driver.c
+!work/driver/implem/default/C/src/linux_serial_ccsds.h
+!work/driver/implem/default/C/src/linux_serial_ccsds.cc
+
+# Except arbiter source
+!work/arbiter/
+work/arbiter/*
+!work/arbiter/CPP
+!work/arbiter/implem
+!work/arbiter/implem/default
+work/arbiter/implem/default/*
+!work/arbiter/implem/default/CPP
+work/arbiter/implem/default/CPP/*
+!work/arbiter/implem/default/CPP/src
+work/arbiter/implem/default/CPP/src/*
+!work/arbiter/implem/default/CPP/src/arbiter_state.h
+!work/arbiter/implem/default/CPP/src/arbiter.cc
+
+.gdb_history
