@@ -67,44 +67,13 @@ linux_serial_ccsds_private_data::driver_init_baudrate(const asn1SccRS485_LINUX_C
 inline void
 linux_serial_ccsds_private_data::driver_init_character_size(const asn1SccRS485_LINUX_Conf_T* const device, int* cflags)
 {
-    switch(device->bits) {
-        case 5:
-            *cflags |= CS5;
-            break;
-        case 6:
-            *cflags |= CS6;
-            break;
-        case 7:
-            *cflags |= CS7;
-            break;
-        case 8:
-            *cflags |= CS8;
-            break;
-        default:
-            *cflags |= CS8;
-            std::cerr << "Not supported character size, defaulting to 8 bits\r\n";
-    }
+    *cflags |= CS8;
 }
 
 inline void
 linux_serial_ccsds_private_data::driver_init_parity(const asn1SccRS485_LINUX_Conf_T* const device, int* cflags)
 {
-    if(device->use_paritybit) {
-        *cflags |= PARENB;
-        switch(device->parity) {
-            case RS485_LINUX_Parity_T_odd:
-                *cflags |= PARODD;
-                break;
-            case RS485_LINUX_Parity_T_even:
-                *cflags &= ~PARODD;
-                break;
-            default:
-                *cflags &= ~PARENB;
-                std::cerr << "Not supported parity type deaulting to no parity";
-        }
-    } else {
-        *cflags &= ~PARENB;
-    }
+    *cflags &= ~PARENB;
 }
 
 void

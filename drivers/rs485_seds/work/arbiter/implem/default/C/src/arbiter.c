@@ -37,8 +37,8 @@ void arbiter_PI_Init
    asn1SccPioHwasPinConfig pinConfig;
    asn1SccRS485_SEDS_Conf_T *conf = (asn1SccRS485_SEDS_Conf_T *) IN_initreqseq->device_configuration;
    assert(conf && "Device config is empty");
-   pinConfig.mPortConfig = conf->pio.mPortConfig;
-   pinConfig.mPinConfig = conf->pio.mPinConfig;
+   pinConfig.mPortConfig = conf->pio.mPortID;
+   pinConfig.mPinConfig = conf->pio.mPinID;
    pinConfig.mDirectionConfig = asn1SccPioHwas_Direction_pioHwas_Direction_Output;
    pinConfig.mControlConfig = asn1SccPioHwas_Control_pioHwas_Control_Pio;
    arbiter_RI_PioHwas_InitPin_Pi(&pioHwas, &pinConfig);
@@ -55,13 +55,13 @@ void arbiter_PI_Receive
 {
    if (arbiter_is_control_packet_received(IN_receivereqseq->message_data, IN_receivereqseq->length)) {
       arbiter_RI_PioHwas_SetPin_Pi(&pioHwas);
-      arbiter_RI_Control();
+      arbiter_RI_EnableTransmission();
    } else {
       arbiter_RI_Receive(IN_receivereqseq);
    }
 }
 
-void arbiter_PI_ControlAck
+void arbiter_PI_TransmissionEnded
       (void)
 {
    arbiter_RI_PioHwas_ResetPin_Pi(&pioHwas);

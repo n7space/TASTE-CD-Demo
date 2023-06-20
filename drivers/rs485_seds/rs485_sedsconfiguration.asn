@@ -18,8 +18,8 @@ RS485-SEDS-DRIVER-CONFIGURATION DEFINITIONS ::= BEGIN
     RS485-SEDS-PioHwas-Pin-T ::= INTEGER(0 .. 31)
 
     RS485-SEDS-PioHwas-T ::= SEQUENCE {
-        mPortConfig RS485-SEDS-PioHwas-Port-T,
-        mPinConfig RS485-SEDS-PioHwas-Pin-T
+        mPortID RS485-SEDS-PioHwas-Port-T,
+        mPinID RS485-SEDS-PioHwas-Pin-T
     }
 
     RS485-SEDS-Conf-T ::= SEQUENCE {

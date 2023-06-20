@@ -22,14 +22,14 @@ static asn1SccUartHwas uart;
 
 __attribute__((section(".sdramMemorySection")))
 static Escaper escaper;
-#define ENCODED_PACKET_BUFFER_SIZE 100
+#define ENCODED_PACKET_BUFFER_SIZE 65536
 __attribute__((section(".sdramMemorySection")))
 static uint8_t encodedPacketBuffer[ENCODED_PACKET_BUFFER_SIZE] = {""};
-#define DECODED_PACKET_BUFFER_SIZE 100
+#define DECODED_PACKET_BUFFER_SIZE 65536
 __attribute__((section(".sdramMemorySection")))
 static uint8_t decodedPacketBuffer[DECODED_PACKET_BUFFER_SIZE] = {""};
 
-#define OUTPUT_BUFFER_SIZE 1000
+#define OUTPUT_BUFFER_SIZE 65536
 __attribute__((section(".sdramMemorySection")))
 static uint8_t outputQueueBuffer[OUTPUT_BUFFER_SIZE];
 __attribute__((section(".sdramMemorySection")))
@@ -93,7 +93,7 @@ void assembler_send_single_byte_to_uarthwas()
       assembler_RI_UartHwas_SendByteAsyncCmd_Pi(&sendByteStructure);
    } else {
       // No more bytes in queue, send acknowledgment to Arbiter.
-      assembler_RI_ControlAck();
+      assembler_RI_TransmissionEnded();
    }
 }
 
@@ -124,7 +124,7 @@ void assembler_PI_Init
    assembler_RI_UartHwas_ReadByteAsyncCmd_Pi(&readByte);
 }
 
-void assembler_PI_Control
+void assembler_PI_EnableTransmission
       (void)
 {
    assembler_send_single_byte_to_uarthwas();

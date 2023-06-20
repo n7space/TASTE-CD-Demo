@@ -9,10 +9,7 @@ RS485-LINUX-DRIVER-CONFIGURATION DEFINITIONS ::= BEGIN
 
     RS485-LINUX-Conf-T ::= SEQUENCE {
         devname        IA5String (SIZE (1..24)),
-        speed          RS485-LINUX-Baudrate-T OPTIONAL,
-        parity         RS485-LINUX-Parity-T OPTIONAL,
-        bits           INTEGER (7 .. 8) OPTIONAL,
-        use-paritybit  BOOLEAN  OPTIONAL
+        speed          RS485-LINUX-Baudrate-T
     }
 
 END

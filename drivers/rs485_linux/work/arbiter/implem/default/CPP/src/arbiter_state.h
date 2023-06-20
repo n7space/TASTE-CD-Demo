@@ -3,8 +3,8 @@
 #include <atomic>
 #include <chrono>
 
-#define QUEUE_SIZE 1000
-#define QUEUE_PACKETS_MAX_COUNT 10
+#define QUEUE_SIZE 65536
+#define QUEUE_PACKETS_MAX_COUNT 50
 
 using namespace std::chrono_literals;
 
