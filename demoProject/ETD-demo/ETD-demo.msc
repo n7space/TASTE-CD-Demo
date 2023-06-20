@@ -1,0 +1,12 @@
+mscdocument ETD-demo /* MSC AND */;
+    language ASN.1;
+    data ETD-demo.asn;
+
+/* CIF MSCDOCUMENT (0, 0) (4200, 2300) */
+
+mscdocument Nominal /* MSC LEAF */;
+
+msc ETD-demo;
+endmsc;
+endmscdocument;
+endmscdocument;
