@@ -23,9 +23,7 @@ public:
      * 1000ms (250s * 4).
      */
     inline static const uint8_t listening_interval = 2;
-    inline static const uint8_t open_listening_window_message[] = {
-        0x18, 0xbb, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0x00, 0xaa, 0xc9, 0xf3
-    };
+    inline static const uint8_t open_listening_window_message[] = { 0xef };
 
     asn1SccPlatformSpecificPointer private_data;
     std::atomic_bool is_receiving;

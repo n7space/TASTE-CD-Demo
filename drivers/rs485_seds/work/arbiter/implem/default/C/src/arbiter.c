@@ -11,9 +11,9 @@
 
 #include <assert.h>
 
-#define TOKEN_LENGTH 13
-#define TOKEN_PAYLOAD_POSITION 8
-#define TOKEN_PAYLOAD 0xFF
+#define TOKEN_LENGTH 1
+#define TOKEN_PAYLOAD_POSITION 0
+#define TOKEN_PAYLOAD 0xEF
 
 __attribute__((section(".sdramMemorySection")))
 static asn1SccPioHwas pioHwas;
