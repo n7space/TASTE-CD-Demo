@@ -16,6 +16,11 @@
 
 #include <Utils/ByteFifo.h>
 #include <Escaper.h>
+#include <Broker.h>
+
+#ifndef BROKER_BUFFER_SIZE
+#define BROKER_BUFFER_SIZE 256
+#endif
 
 __attribute__((section(".sdramMemorySection")))
 static asn1SccUartHwas uart;
@@ -25,7 +30,7 @@ static Escaper escaper;
 #define ENCODED_PACKET_BUFFER_SIZE 256
 __attribute__((section(".sdramMemorySection")))
 static uint8_t encodedPacketBuffer[ENCODED_PACKET_BUFFER_SIZE] = {""};
-#define DECODED_PACKET_BUFFER_SIZE 256
+#define DECODED_PACKET_BUFFER_SIZE BROKER_BUFFER_SIZE
 __attribute__((section(".sdramMemorySection")))
 static uint8_t decodedPacketBuffer[DECODED_PACKET_BUFFER_SIZE] = {""};
 
