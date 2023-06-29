@@ -22,10 +22,10 @@ static asn1SccUartHwas uart;
 
 __attribute__((section(".sdramMemorySection")))
 static Escaper escaper;
-#define ENCODED_PACKET_BUFFER_SIZE 65536
+#define ENCODED_PACKET_BUFFER_SIZE 256
 __attribute__((section(".sdramMemorySection")))
 static uint8_t encodedPacketBuffer[ENCODED_PACKET_BUFFER_SIZE] = {""};
-#define DECODED_PACKET_BUFFER_SIZE 65536
+#define DECODED_PACKET_BUFFER_SIZE 256
 __attribute__((section(".sdramMemorySection")))
 static uint8_t decodedPacketBuffer[DECODED_PACKET_BUFFER_SIZE] = {""};
 
@@ -82,13 +82,13 @@ void assembler_invoke_broker_receive_packet
    assembler_RI_Receive(&request_data);
 }
 
-void assembler_send_single_byte_to_uarthwas()
+void assembler_send_single_byte_to_uarthwas(void)
 {
    asn1SccUartHwasInterfaceType_SendByteAsyncCmd_Type sendByteStructure = {
       .uart = uart
    };
 
-   bool isBytePresent = ByteFifo_pull(&outputQueue, &sendByteStructure.byteToSend);
+   bool isBytePresent = ByteFifo_pull(&outputQueue, (uint8_t *) &sendByteStructure.byteToSend);
    if (isBytePresent) {
       assembler_RI_UartHwas_SendByteAsyncCmd_Pi(&sendByteStructure);
    } else {
@@ -111,6 +111,7 @@ void assembler_PI_Init
 
    busId = IN_initreqseq->bus_id;
 
+   /* Initialize UART */
    asn1SccUartHwasConfig config;
    asn1SccRS485_SEDS_Conf_T *conf = (asn1SccRS485_SEDS_Conf_T *) IN_initreqseq->device_configuration;
    config.mInstance = assembler_convert_conf_asn_devname_to_hwas(conf->devname);
@@ -124,8 +125,7 @@ void assembler_PI_Init
    assembler_RI_UartHwas_ReadByteAsyncCmd_Pi(&readByte);
 }
 
-void assembler_PI_EnableTransmission
-      (void)
+void assembler_PI_EnableTransmission(void)
 {
    assembler_send_single_byte_to_uarthwas();
 }
@@ -135,7 +135,7 @@ void assembler_PI_Deliver
 
 {
    uint64_t length = (uint64_t) IN_deliverreqseq->length;
-   uint8_t *data = IN_deliverreqseq->message_data;
+   uint8_t *data = (uint8_t *) IN_deliverreqseq->message_data;
    size_t index = 0;
 
    Escaper_start_encoder(&escaper);
@@ -150,17 +150,17 @@ void assembler_PI_UartHwas_ReadByteAsyncCmd_Ri
       (const asn1SccUartHwasInterfaceType_ReadByteAsyncCmd_TypeNotify *IN_inputparam)
 
 {
-   Escaper_decode_packet(&escaper, busId, &IN_inputparam->byteToRead, 1, &assembler_invoke_broker_receive_packet);
+   Escaper_decode_packet(&escaper, busId, (uint8_t *) &IN_inputparam->byteToRead, 1, &assembler_invoke_broker_receive_packet);
 }
 
 void assembler_PI_UartHwas_SendByteAsyncCmd_Ri
       (const asn1SccUartHwasInterfaceType_SendByteAsyncCmd_TypeNotify *IN_inputparam)
 
 {
+   (void)IN_inputparam;
    assembler_send_single_byte_to_uarthwas();
 }
 
-void assembler_PI_UartErrorReporting_OverrunError_Ri
-      ( void )
+void assembler_PI_UartErrorReporting_OverrunError_Ri(void)
 {
 }

@@ -10,15 +10,10 @@
 #include <chrono>
 #include <thread>
 
-// Define and use function state inside this context structure
-// avoid defining global/static variable elsewhere
 arbiter_state ctxt_arbiter;
 
 void arbiter_startup(void)
 {
-   // Write your initialisation code
-   // You may call sporadic interfaces and start timers
-   // std::cout << "[Arbiter] Startup" << std::endl;
 }
 
 void arbiter_enqueue_packet
@@ -27,9 +22,13 @@ void arbiter_enqueue_packet
    size_t packet_size = IN_deliverreqseq->length;
    uint8_t *data = reinterpret_cast<uint8_t *>(IN_deliverreqseq->message_data);
    size_t new_all_packets_size = ctxt_arbiter.queue_all_packets_size + packet_size;
+
    printf("\tEnqueue packet_size = %ld, queue_packets_count = %ld, queue_all_packets_size = %ld\n",
          packet_size, ctxt_arbiter.queue_packets_count, ctxt_arbiter.queue_all_packets_size);
-   if (new_all_packets_size >= QUEUE_SIZE || ctxt_arbiter.queue_packets_count + 1 >= QUEUE_PACKETS_MAX_COUNT) {
+
+   if (new_all_packets_size >= ctxt_arbiter.queue_size ||
+       ctxt_arbiter.queue_packets_count + 1 >= ctxt_arbiter.queue_packets_max_count
+      ) {
       printf("\tOutput buffer exceeded - dropped\n");
       return;
    }
@@ -40,8 +39,7 @@ void arbiter_enqueue_packet
    ++ctxt_arbiter.queue_packets_count;
 }
 
-void arbiter_send_queued_packets
-      ()
+void arbiter_send_queued_packets(void)
 {
    if (ctxt_arbiter.queue_packets_count > 0) {
       printf("Sending %ld enqueued packets\n", ctxt_arbiter.queue_packets_count);
@@ -86,22 +84,36 @@ void arbiter_PI_Receive
    arbiter_RI_Receive(IN_receivedreqseq);
 }
 
-void arbiter_PI_Doorman( void )
+void arbiter_send_token(void)
+{
+   asn1SccDeliveredRequestData data;
+   data.private_data = ctxt_arbiter.private_data;
+   data.message_data = reinterpret_cast<asn1SccPlatformSpecificPointer>(
+         arbiter_state::open_listening_window_message);
+   data.length = sizeof(arbiter_state::open_listening_window_message);
+   arbiter_RI_Deliver(&data);
+}
+
+void arbiter_open_receiving_window(void)
+{
+   printf("\tReceiving window\n");
+   ctxt_arbiter.is_receiving = true;
+   arbiter_send_token();
+}
+
+void arbiter_open_sending_window(void)
+{
+   printf("\tSending window\n");
+   ctxt_arbiter.is_receiving = false;
+   arbiter_send_queued_packets();
+}
+
+void arbiter_PI_Doorman(void)
 {
    static uint64_t interval = 0;
    if (interval++ % arbiter_state::listening_interval == 1) {
-      printf("\tReceiving window\n");
-      ctxt_arbiter.is_receiving = true;
-
-      asn1SccDeliveredRequestData data;
-      data.private_data = ctxt_arbiter.private_data;
-      data.message_data = reinterpret_cast<asn1SccPlatformSpecificPointer>(
-            arbiter_state::open_listening_window_message);
-      data.length = sizeof(arbiter_state::open_listening_window_message);
-      arbiter_RI_Deliver(&data);
+      arbiter_open_receiving_window();
    } else {
-      printf("\tSending window\n");
-      ctxt_arbiter.is_receiving = false;
-      arbiter_send_queued_packets();
+      arbiter_open_sending_window();
    }
 }

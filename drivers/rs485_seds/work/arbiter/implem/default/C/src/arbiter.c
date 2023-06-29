@@ -34,9 +34,10 @@ bool arbiter_is_control_packet_received
 void arbiter_PI_Init
       (const asn1SccInitRequestData *IN_initreqseq)
 {
-   asn1SccPioHwasPinConfig pinConfig;
    asn1SccRS485_SEDS_Conf_T *conf = (asn1SccRS485_SEDS_Conf_T *) IN_initreqseq->device_configuration;
    assert(conf && "Device config is empty");
+
+   asn1SccPioHwasPinConfig pinConfig;
    pinConfig.mPortConfig = conf->pio.mPortID;
    pinConfig.mPinConfig = conf->pio.mPinID;
    pinConfig.mDirectionConfig = asn1SccPioHwas_Direction_pioHwas_Direction_Output;

@@ -3,9 +3,6 @@
 #include <atomic>
 #include <chrono>
 
-#define QUEUE_SIZE 65536
-#define QUEUE_PACKETS_MAX_COUNT 50
-
 using namespace std::chrono_literals;
 
 class arbiter_state {
@@ -24,12 +21,14 @@ public:
      */
     inline static const uint8_t listening_interval = 2;
     inline static const uint8_t open_listening_window_message[] = { 0xef };
+    inline static const uint32_t queue_size = 65536;
+    inline static const uint8_t queue_packets_max_count = 50;
 
     asn1SccPlatformSpecificPointer private_data;
     std::atomic_bool is_receiving;
 
-    uint8_t queue_buffer[QUEUE_SIZE];
-    size_t queue_packets_size[QUEUE_PACKETS_MAX_COUNT];
+    uint8_t queue_buffer[queue_size];
+    size_t queue_packets_size[queue_packets_max_count];
     size_t queue_packets_count;
     size_t queue_all_packets_size;
 };
