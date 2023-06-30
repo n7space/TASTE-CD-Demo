@@ -27,7 +27,7 @@ ADB_FILES=$(find work -name "*.adb" -not -path 'work/build/*' -a -not -path 'wor
 DRIVER_INTERFACE_FILES=$(find work/build/**/${PARTITION_NAME} -name "${PARTITION_NAME}.*")
 THREAD_FILES=$(find work/build/**/${PARTITION_NAME} -name "thread_*" -a -not -name "thread_rs485_seds_broker_adapter_receive.*" -a -not -name "thread_packetizer_trigger.*")
 INTERFACE_FILES=$(find work/build/**/${PARTITION_NAME} -name "${PARTITION_NAME}_interface.h" -o -name "${PARTITION_NAME}_shared_interface.c")
-TRANSPORT_FILES=$(find work/build/**/${PARTITION_NAME} -name "driver_transport.*")
+TRANSPORT_FILES=$(find work/build/**/${PARTITION_NAME} -name "${PARTITION_NAME}_driver_transport.*")
 ROUTING_FILES=$(find work/build/**/${PARTITION_NAME} -name "routing.*")
 PACKETIZER_ADAPTER_FILES=$(find work/build/packetizer_adapter -name "packetizer_adapter.*")
 REQUEST_SIZE_FILE=work/build/**/${PARTITION_NAME}/request_size.h
@@ -61,6 +61,9 @@ done
 find $CD_INSTALLATION_DIRECTORY/rs485_seds -type f | xargs sed -i "s/asn1Scc/${PARTITION_NAME}_asn1Scc/gi"
 find $CD_INSTALLATION_DIRECTORY/rs485_seds -type f | xargs sed -i "s/request_size.h/${PARTITION_NAME}_request_size.h/g"
 find $CD_INSTALLATION_DIRECTORY/rs485_seds -type f | xargs sed -i "s/routing.h/${PARTITION_NAME}_routing.h/g"
+find $CD_INSTALLATION_DIRECTORY/rs485_seds -type f | xargs sed -i "s/C_ASN1_Types.h/${PARTITION_NAME}_C_ASN1_Types.h/g"
+find $CD_INSTALLATION_DIRECTORY/rs485_seds -type f | xargs sed -i "s/dataview-uniq.h/${PARTITION_NAME}_dataview-uniq.h/g"
+find $CD_INSTALLATION_DIRECTORY/rs485_seds -type f | xargs sed -i "s/System_Dataview/${PARTITION_NAME}_System_Dataview/g"
 sed -i "s/GENERIC_PARTITION_BUFFER_SIZE/${PARTITION_NAME}_GENERIC_PARTITION_BUFFER_SIZE/g" $CD_INSTALLATION_DIRECTORY/rs485_seds/request_size.h
 sed -i "s/..\/..\/system_config.h/system_config.h/g" $CD_INSTALLATION_DIRECTORY/rs485_seds/C_ASN1_Types.h
 sed -i "s/${PARTITION_NAME}_asn1SccUint/asn1SccUint/g" $CD_INSTALLATION_DIRECTORY/rs485_seds/dataview-uniq.h
@@ -70,7 +73,7 @@ sed -i "s/${PARTITION_NAME}_asn1SccSint/asn1SccSint/g" $CD_INSTALLATION_DIRECTOR
 sed -i "/^} ${PARTITION_NAME}_asn1SccRS485_SEDS_Private_Data;.*/a typedef ${PARTITION_NAME}_asn1SccRS485_SEDS_Private_Data rs485_seds_private_data;" $CD_INSTALLATION_DIRECTORY/rs485_seds/dataview-uniq.h
 sed -i "s/GENERATED_ASN1SCC/GENERATED_${PARTITION_NAME}_ASN1SCC/g" $CD_INSTALLATION_DIRECTORY/rs485_seds/dataview-uniq.h
 sed -i '/^#include "asn1crt.h".*/a #include <drivers_config.h>' $CD_INSTALLATION_DIRECTORY/rs485_seds/dataview-uniq.h
-sed -i "s/put(sender_pid,/put((asn1SccPID)0,/g" $CD_INSTALLATION_DIRECTORY/rs485_seds/driver_transport.c
+sed -i "s/put(sender_pid,/put((asn1SccPID)0,/g" $CD_INSTALLATION_DIRECTORY/rs485_seds/${PARTITION_NAME}_driver_transport.c
 
 for name in $FUNCTION_NAMES; do
     FUNCTION_PID=$(echo ${name,,} | sed -e "s/name=/PID_/g" | sed -e "s/\"//g")
@@ -86,4 +89,11 @@ pushd $CD_INSTALLATION_DIRECTORY/rs485_seds
 mv request_size.h "${PARTITION_NAME}_request_size.h"
 mv routing.h "${PARTITION_NAME}_routing.h"
 mv routing.c "${PARTITION_NAME}_routing.c"
+mv C_ASN1_Types.h "${PARTITION_NAME}_C_ASN1_Types.h"
+mv C_ASN1_Types.c "${PARTITION_NAME}_C_ASN1_Types.c"
+mv dataview-uniq.h "${PARTITION_NAME}_dataview-uniq.h"
+mv dataview-uniq.c "${PARTITION_NAME}_dataview-uniq.c"
+mv system_dataview.ads "${PARTITION_NAME}_system_dataview.ads" 2>/dev/null; true
+mv system_dataview.adb "${PARTITION_NAME}_system_dataview.adb" 2>/dev/null; true
 popd
+
