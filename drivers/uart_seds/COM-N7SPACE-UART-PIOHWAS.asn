@@ -1,0 +1,75 @@
+COM-N7SPACE-UART-PIOHWAS DEFINITIONS ::= BEGIN
+IMPORTS
+DestinationAddress FROM COM-N7SPACE-UART-HWAS
+Word FROM COM-N7SPACE-UART-HWAS
+WordMask FROM COM-N7SPACE-UART-HWAS
+;
+PinNumber ::= INTEGER(0 .. 31)
+-- Definitions of PIO ports
+PioHwas-Port ::= ENUMERATED
+{
+    uart-pioHwas-Port-A(0),
+    uart-pioHwas-Port-B(1),
+    uart-pioHwas-Port-C(2),
+    uart-pioHwas-Port-D(3),
+    uart-pioHwas-Port-E(4)
+}
+-- I/O line flow direction
+PioHwas-Direction ::= ENUMERATED
+{
+    uart-pioHwas-Direction-Input(0),
+    uart-pioHwas-Direction-Output(1)
+}
+-- Possible I/O line assignment to peripherals.
+PioHwas-Control ::= ENUMERATED
+{
+    uart-pioHwas-Control-Pio(0),
+    uart-pioHwas-Control-PeripheralA(1),
+    uart-pioHwas-Control-PeripheralB(2),
+    uart-pioHwas-Control-PeripheralC(3),
+    uart-pioHwas-Control-PeripheralD(4)
+}
+-- Pio descriptor
+PioHwas ::= SEQUENCE 
+{ 
+    mPortAddress DestinationAddress, 
+    mPin Word, 
+    mPortPerAddress DestinationAddress, 
+    mPortPdrAddress DestinationAddress, 
+    mPortOerAddress DestinationAddress, 
+    mPortOdrAddress DestinationAddress, 
+    mPortIfdrAddress DestinationAddress, 
+    mPortSodrAddress DestinationAddress, 
+    mPortCodrAddress DestinationAddress, 
+    mPortPdsrAddress DestinationAddress, 
+    mPortMddrAddress DestinationAddress, 
+    mPortPuerAddress DestinationAddress, 
+    mPortPudrAddress DestinationAddress, 
+    mPortOwerAddress DestinationAddress, 
+    mPortOwdrAddress DestinationAddress, 
+    mPortIfscdrAddress DestinationAddress, 
+    mPortAbcdsr0Address DestinationAddress, 
+    mPortAbcdsr1Address DestinationAddress, 
+    mPortPpddrAddress DestinationAddress, 
+    mPortSchmittAddress DestinationAddress
+} 
+-- Pin configuration container
+PioHwasPinConfig ::= SEQUENCE 
+{ 
+    mPortConfig PioHwas-Port, 
+    mPinConfig PinNumber, 
+    mDirectionConfig PioHwas-Direction, 
+    mControlConfig PioHwas-Control
+} 
+-- Pmc descriptor
+PmcHwas ::= SEQUENCE 
+{ 
+    pMC-PCER0-OFFSET DestinationAddress, 
+    pMC-PCxR0-PID10-PIOA-MASK WordMask, 
+    pMC-PCxR0-PID11-PIOB-MASK WordMask, 
+    pMC-PCxR0-PID12-PIOC-MASK WordMask, 
+    pMC-PCxR0-PID16-PIOD-MASK WordMask, 
+    pMC-PCxR0-PID17-PIOE-MASK WordMask
+} 
+END
+
